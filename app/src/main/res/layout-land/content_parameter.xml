@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondaryColor"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollViewParameter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingBottom="@dimen/padding_xxlarge"
+
+        app:layout_constraintBottom_toTopOf="@+id/btnConfirmData"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_large"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:text="@string/hint_name"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_xlarge"
+                android:typeface="sans">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/round_corner_edittext"
+                android:padding="10dp">
+
+            </EditText>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_large"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tvSex"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:text="@string/parameter_sex"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_xlarge"
+                android:typeface="sans">
+
+            </TextView>
+
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:buttonTint="@color/fbutton_color_midnight_blue"
+                    android:checked="true"
+                    android:onClick="onClickCheckSex"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="@string/rb_sex_male"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textsize_xlarge"
+                    android:typeface="sans" />
+
+                <RadioButton
+
+                    android:id="@+id/rbFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/fbutton_color_midnight_blue"
+                    android:onClick="onClickCheckSex"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="@string/rb_sex_female"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textsize_xlarge"
+                    android:typeface="sans" />
+
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_large"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvAge"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="@android:color/black"
+
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:text="@string/parameter_age"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_xlarge"
+                android:typeface="sans">
+
+            </TextView>
+
+
+            <EditText
+                android:hint="@string/age_measure_unit"
+                android:id="@+id/etAge"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/round_corner_edittext"
+                android:inputType="number"
+                android:padding="@dimen/padding_small">
+
+            </EditText>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_large"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvWeight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:text="@string/parameter_weight"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_xlarge"
+                android:typeface="sans">
+
+            </TextView>
+
+
+            <EditText
+                android:id="@+id/etWeight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/round_corner_edittext"
+                android:inputType="number"
+                android:hint="@string/weight_measure_unit"
+                android:padding="@dimen/padding_small">
+
+            </EditText>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_large"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tvHeight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:text="@string/parameter_height"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_xlarge"
+                android:typeface="sans">
+
+            </TextView>
+
+
+            <EditText
+                android:id="@+id/etHeight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/round_corner_edittext"
+                android:inputType="number"
+                android:hint="@string/height_measure_unit"
+                android:padding="@dimen/padding_small">
+
+            </EditText>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_large"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tvActivityLevel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:text="@string/parameter_activity_level"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_xlarge"
+                android:typeface="sans">
+
+            </TextView>
+
+
+            <LinearLayout
+
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+
+                android:layout_weight="2"
+                android:background="@drawable/shape_rounded_filled_noborder"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinnerActivityLevel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="5"
+                    android:background="@android:color/transparent"
+
+                    android:entries="@array/activity_level_arrays"
+
+                    android:gravity="center"
+                    android:prompt="@string/activity_level_prompt"
+                    android:spinnerMode="dropdown"
+                    android:textSize="@dimen/textsize_xlarge" />
+
+                <ImageView
+                    android:id="@+id/ivSpinnerArrow"
+                    android:layout_width="wrap_content"
+                    android:contentDescription="@string/spinner_arrow_content_description"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_action_dropdown" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/btnConfirmData"
+
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:background="@color/primaryDarkColor"
+        android:shadowColor="@android:color/black"
+        android:text="@string/confirm_data"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textsize_xlarge"
+        android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

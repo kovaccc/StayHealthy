@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/imagesize_large"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="@dimen/margin_extrasmall"
+    android:layout_marginBottom="@dimen/margin_extrasmall">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/food_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/food_item"
+            android:scaleType="fitCenter"
+            android:src="@drawable/placeholder" />
+
+        <TextView
+            android:id="@+id/food_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:background="@color/secondaryDarkColor"
+            android:padding="@dimen/padding_small"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+
+            android:shadowRadius="2"
+            android:textColor="@color/primaryTextColor"
+
+            android:textSize="@dimen/textsize_xlarge"
+
+            android:typeface="sans"
+            app:layout_constraintBaseline_toBaselineOf="@+id/btnAddToOrder"
+            app:layout_constraintEnd_toStartOf="@+id/btnAddToOrder"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Food name" />
+
+        <TextView
+
+            android:id="@+id/food_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+
+            android:background="@color/secondaryDarkColor"
+
+            android:padding="@dimen/padding_small"
+
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+
+            android:textColor="@android:color/white"
+
+            android:textSize="@dimen/textsize_large"
+            android:typeface="sans"
+
+            app:layout_constraintBottom_toTopOf="@+id/food_calories"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Quantity" />
+
+        <TextView
+            android:id="@+id/food_calories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:background="@color/secondaryDarkColor"
+
+
+            android:padding="@dimen/padding_small"
+            android:shadowColor="@android:color/black"
+
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+
+            android:textColor="@color/primaryTextColor"
+
+
+            android:textSize="@dimen/textsize_large"
+            android:typeface="sans"
+
+            app:layout_constraintBottom_toTopOf="@+id/food_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Calories" />
+
+        <Button
+            android:id="@+id/btnAddToOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+
+            android:layout_marginEnd="@dimen/margin_large"
+
+            android:background="@drawable/round_corner_spinner"
+            android:shadowColor="@android:color/black"
+
+            android:shadowDx="1"
+            android:shadowDy="1"
+
+            android:shadowRadius="2"
+
+            android:text="@string/add"
+            android:textColor="@color/primaryTextColor"
+
+            android:textSize="@dimen/textsize_xlarge"
+            android:typeface="sans"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        </Button>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

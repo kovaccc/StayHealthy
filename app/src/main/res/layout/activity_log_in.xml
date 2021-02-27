@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondaryColor"
+    tools:context=".ui.LoginActivity">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+    <!--guideline_horizontal-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:id="@+id/iv_login_myplate"
+        android:layout_width="@dimen/imagesize_medium"
+        android:layout_height="@dimen/imagesize_medium"
+        android:layout_margin="@dimen/margin_large"
+        android:contentDescription="@string/image_my_plate"
+        android:scaleType="fitCenter"
+        android:src="@drawable/image_app"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/tv_login_welcomeback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="@android:color/black"
+
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="@string/welcome_back"
+        android:textColor="@color/primaryTextColor"
+
+        android:textSize="@dimen/textsize_xxlarge"
+        android:typeface="sans"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline_vertical"
+        app:layout_constraintRight_toRightOf="@+id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/iv_login_myplate" />
+
+    <!--til_login_email-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_login_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        app:errorEnabled="true"
+        app:hintEnabled="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_welcomeback">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_login_email"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corner_edittext"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="@dimen/margin_small"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/padding_small"
+            android:textSize="@dimen/textsize_large" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--til_login_password-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_login_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        app:errorEnabled="true"
+        app:hintEnabled="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_login_email"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorPrimary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_login_password"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corner_edittext"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="@dimen/margin_medium"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="@dimen/padding_small"
+            android:textSize="@dimen/textsize_large" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <TextView
+        android:id="@+id/tv_login_orloginwith"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+
+        android:gravity="center"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+
+        android:text="@string/or_log_in_with"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/textsize_large"
+        android:typeface="sans"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login_login" />
+
+    <ImageView
+        android:id="@+id/iv_login_facebook"
+        android:layout_width="@dimen/imagesize_small"
+        android:layout_height="@dimen/imagesize_small"
+        android:layout_marginTop="@dimen/margin_large"
+        android:contentDescription="@string/image_facebook_icon"
+        android:src="@drawable/ic_facebook"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_vertical"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_orloginwith" />
+
+    <ImageView
+        android:id="@+id/iv_login_google"
+        android:layout_width="@dimen/imagesize_small"
+        android:layout_height="@dimen/imagesize_small"
+        android:layout_marginTop="@dimen/margin_large"
+        android:contentDescription="@string/image_google_icon"
+        android:src="@drawable/ic_google"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_orloginwith" />
+
+    <TextView
+        android:id="@+id/tv_login_registernow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_3xlarge"
+        android:gravity="center"
+        android:shadowColor="@android:color/black"
+
+
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="@string/dont_have_an_account_yet_register_now"
+        android:textColor="@color/primaryTextColor"
+
+        android:textSize="@dimen/textsize_large"
+        android:typeface="sans"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_login_google" />
+
+    <ProgressBar
+        android:id="@+id/spinner_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/tv_login_registernow"
+        app:layout_constraintLeft_toRightOf="@id/iv_login_facebook"
+        app:layout_constraintRight_toLeftOf="@id/iv_login_google"
+        app:layout_constraintTop_toBottomOf="@id/tv_login_orloginwith" />
+
+    <TextView
+        android:id="@+id/tv_login_forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+
+        android:shadowColor="@android:color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="@string/forgot_password"
+
+        android:textColor="@color/colorPrimary"
+        android:typeface="sans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_login_password" />
+
+    <Button
+        android:id="@+id/btn_login_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_rounded_filled_noborder"
+        android:shadowColor="@android:color/black"
+        android:text="@string/button_sign_in"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textsize_xlarge"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_login_forgotPassword" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

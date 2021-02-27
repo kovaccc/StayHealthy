@@ -1,0 +1,134 @@
+{
+  "Category": [
+    {
+    "Grains&Pasta": [
+      {
+        "Name": "Sunflower Seeds",
+        "Image": "https://stamboulbazaar.com/image/cache/catalog/Product/kuruyemis/turkish-sunflower-seeds-salty-700x700.jpg",
+        "Quantity": "140",
+        "Calories": "818"
+      },
+      {
+        "Name": "Tortilla",
+        "Image": "https://images-na.ssl-images-amazon.com/images/I/81twa8KhIjL._AC_SX522_.jpg",
+        "Quantity": "197",
+        "Calories": "467"
+      },
+      {
+        "Name": "Brown Rice",
+        "Image": "https://www.melskitchencafe.com/wp-content/uploads/2013/02/brown-rice-plate-jpg1-480x270.jpg",
+        "Quantity": "195",
+        "Calories": "757"
+      },
+      {
+        "Name": "Fusilli",
+        "Image": "https://cdn.shopify.com/s/files/1/0106/1620/9504/products/fusilli-pasta-500g-by-martelli-11762735349856_544x544.jpg?v=1569491002",
+        "Quantity": "56",
+        "Calories": "197"
+      },
+      {
+        "Name": "Spaghetti",
+        "Image": "https://www.gimmesomeoven.com/wp-content/uploads/2016/06/Ultra-Garlicky-Spaghetti-1-1.jpg",
+        "Quantity": "56",
+        "Calories": "207"
+      }
+    ]},
+    {"Vegetables": [
+      {
+        "Name": "Spinach",
+        "Image": "https://cdn.mos.cms.futurecdn.net/atyrpYQoxdoTzmEgu8HMWE-320-80.jpg",
+        "Quantity": "340",
+        "Calories": "78"
+      },
+      {
+        "Name": "Carrot",
+        "Image": "https://i.ndtvimg.com/mt/cooks/2014-11/carrots.jpg",
+        "Quantity": "61",
+        "Calories": "25"
+      },
+      {
+        "Name": "Cucumber",
+        "Image": "https://images.heb.com/is/image/HEBGrocery/000319432",
+        "Quantity": "410",
+        "Calories": "66"
+      },
+      {
+        "Name": "Lettuce",
+        "Image": "https://cdn.britannica.com/77/170677-050-F7333D51/lettuce.jpg",
+        "Quantity": "600",
+        "Calories": "90"
+      },
+      {
+        "Name": "Capsicum",
+        "Image": "https://idealfruitful.com/wp-content/uploads/2018/05/3.jpg",
+        "Quantity": "45",
+        "Calories": "12"
+      }
+    ]},
+    {
+    "Fruits": [
+      {
+        "Name": "Apple",
+        "Image": "https://i2.wp.com/ceklog.kindel.com/wp-content/uploads/2013/02/firefox_2018-07-10_07-50-11.png",
+        "Quantity": "182",
+        "Calories": "95"
+      },
+      {
+        "Name": "Cranberries",
+        "Image": "https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/306/306498/cranberries.jpg?w=1155&h=1176",
+        "Quantity": "100",
+        "Calories": "46"
+      },
+      {
+        "Name": "Lemon",
+        "Image": "https://i5.walmartimages.ca/images/Large/094/504/6000200094504.jpg",
+        "Quantity": "58",
+        "Calories": "17"
+      },
+      {
+        "Name": "Kiwi",
+        "Image": "https://d17zv3ray5yxvp.cloudfront.net/variants/CDWoHMqUGu2A2dSKG84g6pn6/57ed05bea98bceae5f0eaada26b69cee6c61471d3030f7123d212844a35eba04",
+        "Quantity": "183",
+        "Calories": "112"
+      },
+      {
+        "Name": "Orange",
+        "Image": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Orange_and_cross_section.jpg",
+        "Quantity": "131",
+        "Calories": "62"
+      }
+    ]},
+    {"Proteins": [
+      {
+        "Name": "Chicken",
+        "Image": "https://images-gmi-pmc.edge-generalmills.com/7ed1e04a-7ac6-4ca2-aa74-6c0938069062.jpg",
+        "Quantity": "334",
+        "Calories": "731"
+      },
+      {
+        "Name": "Beef",
+        "Image": "https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/roast-beef-recipes.jpg",
+        "Quantity": "164",
+        "Calories": "407"
+      },
+      {
+        "Name": "Mozzarella",
+        "Image": "https://www.24sata.hr/media/img/cc/30/f41d082f416e4caa119b.jpeg",
+        "Quantity": "28",
+        "Calories": "78"
+      },
+      {
+        "Name": "Yogurt",
+        "Image": "https://d17zv3ray5yxvp.cloudfront.net/variants/CDWoHMqUGu2A2dSKG84g6pn6/57ed05bea98bceae5f0eaada26b69cee6c61471d3030f7123d212844a35eba04",
+        "Quantity": "227",
+        "Calories": "138"
+      },
+      {
+        "Name": "Egg",
+        "Image": "https://www.simplyrecipes.com/wp-content/uploads/2014/07/hard-boiled-eggs-horiz-800.jpg",
+        "Quantity": "60",
+        "Calories": "58"
+      }
+    ]}
+  ]
+}

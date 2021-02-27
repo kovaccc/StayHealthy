@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondaryColor"
+    tools:context=".ui.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/iv_main_myPlate"
+            android:layout_width="@dimen/imagesize_large"
+            android:layout_height="@dimen/imagesize_large"
+            android:layout_margin="@dimen/margin_large"
+            android:layout_weight="1"
+            android:contentDescription="@string/image_my_plate"
+            android:scaleType="fitCenter"
+            android:src="@drawable/image_app"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_main_app_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_large"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:text="@string/app_name"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/textsize_4xlarge"
+            android:typeface="sans"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_main_myPlate" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <Button
+            android:id="@+id/btnSignUp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_large"
+            android:layout_weight="1"
+            android:background="@drawable/shape_rounded_filled_noborder"
+            android:shadowColor="@android:color/black"
+            android:text="@string/sing_up"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/textsize_xlarge"
+            android:typeface="serif"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_main_app_name" />
+
+        <Button
+            android:id="@+id/btnSignIn"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_weight="1"
+            android:background="@drawable/shape_rounded_filled_noborder"
+            android:shadowColor="@android:color/black"
+            android:text="@string/button_sign_in"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/textsize_xlarge"
+            android:typeface="serif"
+            app:layout_constraintBaseline_toBaselineOf="@+id/btnSignUp"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </Button>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

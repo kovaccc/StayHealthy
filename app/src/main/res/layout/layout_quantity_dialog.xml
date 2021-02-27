@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.FoodMenuActivity"
+    android:background="@color/primaryColor"
+    android:padding="?attr/dialogPreferredPadding"
+    >
+
+
+    <Button
+        android:id="@+id/cancelButton"
+        style="?attr/buttonBarPositiveButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/okButton"
+        app:layout_constraintEnd_toStartOf="@+id/okButton" />
+
+    <Button
+        android:id="@+id/okButton"
+        style="?attr/buttonBarPositiveButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+
+        android:text="@string/add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <TextView
+        android:id="@+id/tvFoodItemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+
+        android:shadowRadius="2"
+        android:text="@string/hint_name"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/textsize_xlarge"
+        android:typeface="sans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFoodItemName">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tiet_add_quantity"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAddQuantity"
+            android:hint="@string/hint_food_quantity"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/round_corner_edittext"
+            android:inputType="number"
+            android:padding="@dimen/padding_small">
+
+        </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvQuantityMeasureUnit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+
+            android:shadowRadius="2"
+            android:text="@string/gram_measure_unit"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textsize_large"
+            android:typeface="sans"
+
+            />
+
+
+        <TextView
+            android:id="@+id/tvCalories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:shadowColor="@android:color/black"
+
+
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textsize_large"
+            android:typeface="sans"
+
+            />
+
+        <TextView
+            android:id="@+id/tvCaloriesMeasureUnit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+
+            android:shadowRadius="2"
+            android:text="@string/calories_measure_unit"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textsize_large"
+            android:typeface="sans"
+
+            />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

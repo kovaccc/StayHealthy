@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondaryColor"
+    tools:context=".ui.RegisterActivity"
+    >
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+    <!--guideline_horizontal-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:id="@+id/iv_signup_myplate"
+        android:contentDescription="@string/image_my_plate"
+        android:scaleType="fitCenter"
+        android:layout_width="@dimen/imagesize_medium"
+        android:layout_height="@dimen/imagesize_medium"
+        android:layout_margin="@dimen/margin_large"
+        android:src="@drawable/image_app"
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_horizontal"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tv_signup_create_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_account"
+        android:textColor="@color/primaryTextColor"
+
+
+        android:typeface="sans"
+        android:shadowColor="@android:color/black"
+        android:shadowRadius="2"
+        android:shadowDx="1"
+        android:shadowDy="1"
+
+        android:textSize="@dimen/textsize_xxlarge"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline_vertical"
+        app:layout_constraintRight_toRightOf="@+id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/iv_signup_myplate" />
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/til_signup_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        app:errorEnabled="true"
+        app:hintEnabled="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_signup_create_account">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:background="@drawable/round_corner_edittext"
+            android:padding="@dimen/padding_small"
+
+            android:id="@+id/tiet_signup_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="@dimen/margin_small"
+            android:inputType="text"
+            android:hint="@string/hint_name"
+            android:textSize="@dimen/textsize_large" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--til_register_email-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_signup_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        app:errorEnabled="true"
+        app:hintEnabled="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_signup_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:background="@drawable/round_corner_edittext"
+            android:padding="@dimen/padding_small"
+
+            android:id="@+id/tiet_singup_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="@dimen/margin_small"
+            android:inputType="textEmailAddress"
+            android:hint="@string/hint_email"
+            android:textSize="@dimen/textsize_large" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--til_register_password-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_signup_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        app:errorEnabled="true"
+        app:hintEnabled="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_signup_email"
+        app:passwordToggleEnabled="true"
+
+        app:passwordToggleTint="@color/colorPrimary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_signup_password"
+
+            android:background="@drawable/round_corner_edittext"
+            android:padding="@dimen/padding_small"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="@dimen/margin_medium"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textSize="@dimen/textsize_large" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_signup_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_xlarge"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:background="@drawable/shape_rounded_filled_noborder"
+        android:paddingBottom="1dp"
+        android:shadowColor="@android:color/black"
+        android:text="@string/sing_up"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/textsize_xlarge"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_signup_password" />
+
+    <TextView
+        android:id="@+id/tv_signup_orregisterwith"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+
+
+        android:shadowColor="@android:color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="@string/or_register_with"
+
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/textsize_large"
+        android:typeface="sans"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_signup_signup" />
+
+
+
+
+    <!--iv_register_facebook-->
+    <ImageView
+        android:id="@+id/iv_register_facebook"
+        android:layout_width="@dimen/imagesize_small"
+        android:layout_height="@dimen/imagesize_small"
+        android:layout_marginTop="@dimen/margin_large"
+        android:contentDescription="@string/image_facebook_icon"
+        android:src="@drawable/ic_facebook"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_vertical"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_signup_orregisterwith" />
+
+    <!--iv_register_google-->
+    <ImageView
+        android:id="@+id/iv_register_google"
+        android:layout_width="@dimen/imagesize_small"
+        android:layout_height="@dimen/imagesize_small"
+        android:layout_marginTop="@dimen/margin_large"
+        android:contentDescription="@string/image_google_icon"
+        android:src="@drawable/ic_google"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tv_signup_orregisterwith" />
+
+
+    <TextView
+        android:id="@+id/tvHaveAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_3xlarge"
+
+        android:shadowColor="@android:color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+
+
+        android:text="@string/already_have_acccount"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/textsize_large"
+        android:typeface="sans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_register_google" />
+
+
+    <ProgressBar
+        android:id="@+id/spinner_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/tvHaveAccount"
+        app:layout_constraintTop_toBottomOf="@id/tv_signup_orregisterwith"
+        app:layout_constraintLeft_toRightOf="@id/iv_register_facebook"
+        app:layout_constraintRight_toLeftOf="@id/iv_register_google" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/secondaryColor"
+    android:padding="@dimen/padding_small"
+    android:paddingBottom="@dimen/padding_large"
+    >
+
+    <LinearLayout
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+
+            android:layout_margin="@dimen/margin_small"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/primaryDarkColor"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:layout_margin="@dimen/margin_small"
+
+                android:contentDescription="@string/iv_tea_description"
+                android:src="@drawable/tea_cup"
+
+
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="@dimen/imageSizeKB"
+                android:id="@+id/ivDrinkWater">
+
+            </ImageView>
+
+            <TextView
+
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/descriptionTextSizeKB"
+                android:typeface="sans"
+
+
+                android:layout_margin="@dimen/margin_small"
+
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:id="@+id/tvWater"
+                android:text="@string/desrciptionWaterKB"
+                >
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@color/primaryDarkColor"
+
+            android:layout_margin="@dimen/margin_small"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+
+                android:contentDescription="@string/iv_oils_description"
+                android:src="@drawable/olive_oil"
+
+                android:layout_margin="@dimen/margin_small"
+
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="@dimen/imageSizeKB"
+                android:gravity="center"
+                android:id="@+id/ivOil">
+
+            </ImageView>
+
+            <TextView
+
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/descriptionTextSizeKB"
+                android:typeface="sans"
+
+
+                android:layout_margin="@dimen/margin_small"
+
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:id="@+id/tvOil"
+                android:text="@string/descriptionOilKB"
+                >
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+
+            android:background="@color/primaryDarkColor"
+
+            android:layout_margin="@dimen/margin_small"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:contentDescription="@string/iv_fish_description"
+
+                android:src="@drawable/fish"
+
+                android:layout_margin="@dimen/margin_small"
+
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="@dimen/imageSizeKB"
+                android:gravity="center"
+                android:id="@+id/ivFish">
+
+            </ImageView>
+
+            <TextView
+
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/descriptionTextSizeKB"
+                android:typeface="sans"
+
+                android:layout_margin="@dimen/margin_small"
+
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:id="@+id/tvFish"
+                android:text="@string/descriptionProteinsKB"
+                >
+
+            </TextView>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+
+            android:background="@color/primaryDarkColor"
+
+            android:layout_margin="@dimen/margin_small"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+
+                android:contentDescription="@string/iv_bread_description"
+                android:src="@drawable/bread"
+
+                android:layout_margin="@dimen/margin_small"
+
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="@dimen/imageSizeKB"
+                android:gravity="center"
+                android:id="@+id/ivBread">
+
+            </ImageView>
+
+            <TextView
+
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/descriptionTextSizeKB"
+                android:typeface="sans"
+
+                android:layout_margin="@dimen/margin_small"
+
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:id="@+id/tvBread"
+                android:text="@string/descriptionGrainsKB"
+                >
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:background="@color/primaryDarkColor"
+
+            android:layout_margin="@dimen/margin_small"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+
+                android:src="@drawable/running"
+
+                android:layout_margin="@dimen/margin_small"
+
+
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="@dimen/imageSizeKB"
+                android:gravity="center"
+                android:id="@+id/ivExercise"
+                android:contentDescription="@string/iv_running_description">
+
+            </ImageView>
+
+            <TextView
+
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/descriptionTextSizeKB"
+                android:typeface="sans"
+
+                android:layout_margin="@dimen/margin_small"
+
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:id="@+id/tvExercise"
+                android:text="@string/descriptionExerciseKB"
+                >
+
+            </TextView>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</ScrollView>

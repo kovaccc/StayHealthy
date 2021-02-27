@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "494322098307",
+    "firebase_url": "https://stayhealthy-a0622.firebaseio.com",
+    "project_id": "stayhealthy-a0622",
+    "storage_bucket": "stayhealthy-a0622.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494322098307:android:50670dddf8f6c60f09bbb6",
+        "android_client_info": {
+          "package_name": "com.example.stayhealthy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494322098307-4cbni92vhkgm6oq0c4dvbvbromdfjf21.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stayhealthy",
+            "certificate_hash": "22cd53c860ffecb3b9fce288999056958c0bbbc8"
+          }
+        },
+        {
+          "client_id": "494322098307-sl3m0761kr4q8fahk9rilg13l7mufi09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB38ekjPcCFc_GE5ZI6eBRFDLcqALj3OGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494322098307-sl3m0761kr4q8fahk9rilg13l7mufi09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

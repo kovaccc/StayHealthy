@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/margin_extrasmall"
+    android:layout_margin="@dimen/margin_small"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/secondaryDarkColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+
+
+        <TextView
+            android:id="@+id/tvMealPlanItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMealPlanItemCategory"
+            android:layout_margin="@dimen/margin_small"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+
+            android:shadowDy="1"
+
+            android:shadowRadius="2"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/textsize_xlarge"
+            android:typeface="sans"
+
+            app:layout_constraintEnd_toStartOf="@+id/tvMealPlanItemCalories"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMealPlanItemCategory"
+            tools:text="Name" />
+
+        <TextView
+
+
+            android:id="@+id/tvMealPlanItemCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_extrasmall"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+
+            android:textColor="@color/primaryTextColor"
+
+
+
+            android:textSize="@dimen/textsize_medium"
+
+            android:typeface="sans"
+
+            app:layout_constraintEnd_toStartOf="@+id/tvMealPlanItemQuantity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Category" />
+
+        <TextView
+
+            android:id="@+id/tvMealPlanItemQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+
+            android:textColor="@color/primaryTextColor"
+
+            android:typeface="sans"
+
+            android:textSize="@dimen/textsize_large"
+
+            android:layout_margin="@dimen/margin_small"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Quantity" />
+
+        <TextView
+            android:id="@+id/tvMealPlanItemCalories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_small"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+
+
+            android:textColor="@color/primaryTextColor"
+
+            android:textSize="@dimen/textsize_large"
+
+
+            android:typeface="sans"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMealPlanItemQuantity"
+            tools:text="Calories" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

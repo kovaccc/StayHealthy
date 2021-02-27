@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+
+            android:id="@+id/nav_food_planner"
+            android:icon="@drawable/ic_action_food_planner"
+            android:title="@string/menu_food_planner" />
+        <item
+            android:id="@+id/nav_my_profile"
+            android:icon="@drawable/ic_action_profile"
+            android:title="@string/menu_my_profile" />
+
+        <item
+            android:id="@+id/nav_knowledge_base"
+            android:icon="@drawable/ic_action_knowledge_base"
+            android:title="@string/menu_knowledge_base" />
+
+    </group>
+
+    <item android:title="">
+        <menu>
+
+            <item
+                android:id="@+id/nav_log_out"
+                android:icon="@drawable/ic_action_log_out"
+                android:title="@string/menu_log_out" />
+        </menu>
+    </item>
+
+</menu>

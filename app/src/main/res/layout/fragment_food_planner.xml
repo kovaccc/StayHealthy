@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondaryColor"
+    >
+
+
+ <EditText
+     android:id="@+id/etDayPick"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_centerHorizontal="true"
+     android:layout_margin="@dimen/margin_large"
+     android:background="@drawable/corner_date_edittext"
+     android:focusable="false"
+     android:gravity="center"
+     android:padding="@dimen/padding_small"
+     android:shadowColor="@android:color/black"
+     android:shadowDx="1"
+     android:shadowDy="1"
+     android:shadowRadius="2"
+
+     tools:text="Date"
+
+     android:textColor="@color/colorPrimaryDark"
+     android:textSize="@dimen/textsize_large"
+     android:typeface="sans"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toTopOf="parent">
+
+ </EditText>
+
+
+ <TextView
+     android:id="@+id/tvCalories"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+
+     android:layout_marginTop="@dimen/margin_large"
+     android:layout_marginEnd="@dimen/margin_large"
+     android:layout_marginStart="@dimen/margin_large"
+
+
+     android:gravity="center"
+     android:shadowColor="@android:color/black"
+     android:shadowDx="1"
+     android:shadowDy="1"
+     android:shadowRadius="2"
+     android:textColor="@color/primaryTextColor"
+
+     android:background="@drawable/corner_total_calories_textview"
+
+     android:padding="@dimen/padding_small"
+
+     android:textSize="@dimen/textsize_xlarge"
+     android:textStyle="bold"
+     android:typeface="sans"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/etDayPick"
+     android:text="@string/calories" />
+
+ <ImageView
+     android:id="@+id/ivMyPlate"
+     android:layout_width="@dimen/imagesize_large"
+     android:layout_height="@dimen/imagesize_large"
+
+
+     android:layout_marginBottom="@dimen/margin_small"
+     android:layout_marginStart="@dimen/margin_small"
+     android:layout_marginEnd="@dimen/margin_small"
+
+
+     android:contentDescription="@string/image_my_plate"
+     android:scaleType="fitCenter"
+     android:src="@drawable/image_app"
+
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/tvCalories" />
+
+
+ <TextView
+
+     android:id="@+id/tvFruitsPercentage"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginStart="@dimen/margin_small"
+     android:layout_marginTop="@dimen/margin_6xlarge"
+     android:layout_marginEnd="@dimen/margin_small"
+
+     android:background="@drawable/corner_fruit_textview"
+     android:padding="@dimen/padding_small"
+     android:shadowColor="@android:color/black"
+     android:shadowDx="1"
+     android:shadowDy="1"
+     android:shadowRadius="2"
+     android:text="@string/category_fruits"
+     android:textColor="@color/primaryTextColor"
+
+     android:textSize="@dimen/textsize_medium"
+
+     android:typeface="sans"
+     app:layout_constraintEnd_toStartOf="@+id/ivMyPlate"
+     app:layout_constraintHorizontal_bias="1.0"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/tvCalories" />
+
+
+ <TextView
+     android:id="@+id/tvVegetablesPercentage"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+
+     android:layout_marginStart="@dimen/margin_small"
+     android:layout_marginBottom="@dimen/margin_small"
+     android:layout_marginEnd="@dimen/margin_small"
+
+
+     android:layout_marginTop="@dimen/margin_6xlarge"
+
+
+     android:background="@drawable/corner_vegetables_textview"
+     android:padding="@dimen/padding_small"
+
+     android:shadowColor="@android:color/black"
+
+     android:shadowDx="1"
+     android:shadowDy="1"
+     android:shadowRadius="2"
+     android:text="@string/category_vegetables"
+     android:textColor="@color/primaryTextColor"
+     android:textSize="@dimen/textsize_medium"
+     android:typeface="sans"
+     app:layout_constraintEnd_toStartOf="@+id/ivMyPlate"
+     app:layout_constraintHorizontal_bias="1.0"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/tvFruitsPercentage" />
+
+
+ <TextView
+     android:id="@+id/tvGrainsPercentage"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginStart="@dimen/margin_small"
+     android:layout_marginTop="@dimen/margin_6xlarge"
+     android:layout_marginEnd="@dimen/margin_small"
+
+
+     android:background="@drawable/corner_grainspasta_textview"
+
+     android:padding="@dimen/padding_small"
+     android:shadowColor="@android:color/black"
+
+     android:shadowDx="1"
+
+     android:shadowDy="1"
+
+
+     android:shadowRadius="2"
+     android:text="@string/category_grains"
+
+     android:textColor="@color/primaryTextColor"
+     android:textSize="@dimen/textsize_medium"
+
+     android:typeface="sans"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintHorizontal_bias="0.0"
+     app:layout_constraintStart_toEndOf="@+id/ivMyPlate"
+     app:layout_constraintTop_toBottomOf="@+id/tvCalories" />
+
+
+ <TextView
+     android:id="@+id/tvProteinsPercentage"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginStart="@dimen/margin_small"
+     android:layout_marginBottom="8dp"
+     android:layout_marginEnd="@dimen/margin_small"
+
+
+     android:layout_marginTop="@dimen/margin_6xlarge"
+
+     android:background="@drawable/corner_proteins_textview"
+
+     android:padding="@dimen/padding_small"
+     android:shadowColor="@android:color/black"
+
+
+     android:shadowDx="1"
+     android:shadowDy="1"
+     android:shadowRadius="2"
+
+
+     android:text="@string/category_proteins"
+     android:textColor="@color/primaryTextColor"
+
+     android:textSize="@dimen/textsize_medium"
+     android:typeface="sans"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintHorizontal_bias="0.0"
+     app:layout_constraintStart_toEndOf="@+id/ivMyPlate"
+     app:layout_constraintTop_toBottomOf="@+id/tvGrainsPercentage" />
+
+
+ <androidx.recyclerview.widget.RecyclerView
+     android:id="@+id/recycler_meal_plan"
+
+
+     android:layout_width="0dp"
+     android:layout_height="0dp"
+     android:scrollbars="vertical"
+
+     android:layout_margin="@dimen/margin_medium"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/ivMyPlate"
+     tools:listitem="@layout/meal_plan_item" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
