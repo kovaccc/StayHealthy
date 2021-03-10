@@ -65,7 +65,6 @@ class ProfileFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 updateUser()
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
@@ -171,7 +170,7 @@ class ProfileFragment : Fragment() {
             if(currentUser != null) {
                 lifecycleScope.launchWhenResumed {
                     if((etName.text.isNotEmpty() && etAge.text.isNotEmpty() && etHeight.text.isNotEmpty() && etWeight.text.isNotEmpty())) {
-                        val user = userFromUi() // with lifecycle.launchWhenResumed it will only execute when it get in resume state so you fix crashing with etName = null
+                        val user = userFromUi() // with lifecycle.launchWhenResumed it will only execute when it get in resume state so you fix crashing with etName == null
                         if(user != currentUser) { // check if user is the same
 
                                 profileViewModel.updateUserInFirestore(user, requireActivity())

@@ -4,11 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.stayhealthy.model.Food
 import com.example.stayhealthy.repository.FoodRepository
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import kotlinx.coroutines.launch
 
 
 private const val TAG = "FoodMenuViewModel"

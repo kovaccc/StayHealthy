@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.FoodMenuActivity"
+    tools:context=".ui.foodPlanner.FoodPlannerFragment"
     android:background="@color/primaryColor"
     android:padding="?attr/dialogPreferredPadding"
     >
@@ -29,12 +30,12 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
 
-        android:text="@string/add"
+        android:text="@string/update"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
     <TextView
-        android:id="@+id/tvFoodItemName"
+        android:id="@+id/tvMealItemName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
@@ -43,7 +44,6 @@
         android:shadowDy="1"
 
         android:shadowRadius="2"
-        android:text="@string/hint_name"
         android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/textsize_xlarge"
         android:typeface="sans"
@@ -61,7 +61,7 @@
         android:weightSum="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFoodItemName">
+        app:layout_constraintTop_toBottomOf="@+id/tvMealItemName">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -72,19 +72,19 @@
             app:hintEnabled="false"
             app:errorEnabled="true">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etAddQuantity"
-            android:hint="@string/hint_food_quantity"
-            android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAddQuantity"
+                android:hint="@string/hint_food_quantity"
+                android:layout_width="match_parent"
 
-            android:layout_height="wrap_content"
+                android:layout_height="wrap_content"
 
-            android:background="@drawable/round_corner_edittext"
-            android:inputType="number"
-            android:maxLength="6"
-            android:padding="@dimen/padding_small">
+                android:background="@drawable/round_corner_edittext"
+                android:inputType="number"
+                android:maxLength="6"
+                android:padding="@dimen/padding_small">
 
-        </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputEditText>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,10 +139,10 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/textsize_large"
             android:typeface="sans"
-
             />
 
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

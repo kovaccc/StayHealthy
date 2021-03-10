@@ -1,4 +1,4 @@
-package com.example.stayhealthy
+package com.example.stayhealthy.dialogs
 
 
 import android.content.Context
@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
+import com.example.stayhealthy.R
 import com.example.stayhealthy.model.Food
 
 import kotlinx.android.synthetic.main.layout_quantity_dialog.*
@@ -18,9 +19,9 @@ import kotlinx.android.synthetic.main.layout_quantity_dialog.view.*
 
 private const val TAG = "ChangeFoodQuantity"
 
-const val CHANGE_QUANTITY_ID = "ID"
-const val CHANGE_QUANTITY_FOOD = "CHANGE FOOD"
-const val CHANGE_QUANTITY_FOOD_CATEGORY = "FOOD CATEGORY"
+const val CHANGE_QUANTITY_DIALOG_ID = "ID"
+const val CHANGE_QUANTITY_DIALOG_FOOD = "FOOD"
+const val CHANGE_QUANTITY_DIALOG_FOOD_CATEGORY = "FOOD CATEGORY"
 
 
 class ChangeFoodQuantityDialog : AppCompatDialogFragment() {
@@ -48,11 +49,11 @@ class ChangeFoodQuantityDialog : AppCompatDialogFragment() {
 
         if(arguments != null) {
 
-            dialogId = arguments.getInt(CHANGE_QUANTITY_ID)
+            dialogId = arguments.getInt(CHANGE_QUANTITY_DIALOG_ID)
 
-            foodItem = arguments.getParcelable(CHANGE_QUANTITY_FOOD) as Food?
+            foodItem = arguments.getParcelable(CHANGE_QUANTITY_DIALOG_FOOD) as Food?
 
-            foodCategory = arguments.getString(CHANGE_QUANTITY_FOOD_CATEGORY)
+            foodCategory = arguments.getString(CHANGE_QUANTITY_DIALOG_FOOD_CATEGORY)
 
         }
 
@@ -88,7 +89,7 @@ class ChangeFoodQuantityDialog : AppCompatDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(TAG, "onViewCreated: starts")
         super.onViewCreated(view, savedInstanceState)
-        dialog?.setTitle(R.string.action_change_quantity)
+        dialog?.setTitle(R.string.action_change_food_quantity)
 
         okButton.setOnClickListener {
 
@@ -100,8 +101,8 @@ class ChangeFoodQuantityDialog : AppCompatDialogFragment() {
             val changedFoodItem = Food(foodItem?.Name!!, foodItem?.Image!!, etAddQuantity.text.toString().toLong(), tvCalories.text.toString().toLong())
 
             val args = Bundle().apply {
-                putParcelable(CHANGE_QUANTITY_FOOD, changedFoodItem)
-                putString(CHANGE_QUANTITY_FOOD_CATEGORY, foodCategory)
+                putParcelable(CHANGE_QUANTITY_DIALOG_FOOD, changedFoodItem)
+                putString(CHANGE_QUANTITY_DIALOG_FOOD_CATEGORY, foodCategory)
             }
             Log.d(TAG, "setOnClickListener: starts with $args")
 

@@ -29,8 +29,11 @@ import org.koin.core.qualifier.named
 import java.util.*
 import android.view.Menu
 import android.widget.TextView
+import com.example.stayhealthy.dialogs.*
 
 import com.example.stayhealthy.model.User
+import com.example.stayhealthy.module.APP_START_FIRST_LOGIN
+import com.example.stayhealthy.module.DATE_MEAL_PLAN
 import kotlinx.android.synthetic.main.content_home.*
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 
@@ -41,11 +44,8 @@ private const val TAG = "HomeActivity"
 
 private const val DIALOG_FILTER = 1
 
-const val MEAL_DATE = "MealDate" // use for intent extras
-
-const val DATE_MEAL_PLAN = "MealPlanDate" // use for datePrefs
-
-const val CURRENT_USER_ID = "Current user id" // use for intent extras
+internal const val MEAL_DATE_TRANSFER = "MEAL_DATE_TRANSFER" // use for intent extras
+internal const val CURRENT_USER_ID_TRANSFER = "CURRENT_USER_ID_TRANSFER" // use for intent extras
 
 
 class HomeActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
@@ -79,8 +79,8 @@ class HomeActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
             val intent = Intent(this@HomeActivity, FoodMenuActivity::class.java)
-            intent.putExtra(MEAL_DATE, mDate)
-            intent.putExtra(CURRENT_USER_ID, currentUser?.id)
+            intent.putExtra(MEAL_DATE_TRANSFER, mDate)
+            intent.putExtra(CURRENT_USER_ID_TRANSFER, currentUser?.id)
             startActivity(intent)
         }
 
@@ -134,8 +134,8 @@ class HomeActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         })
 
 
-        if(appStartSharedPreferences.getBoolean(FIRST_LOGIN, false)) { // show instructions only first time user log in
-                    appStartSharedPreferences.edit().putBoolean(FIRST_LOGIN, false).apply()
+        if(appStartSharedPreferences.getBoolean(APP_START_FIRST_LOGIN, false)) { // show instructions only first time user log in
+                    appStartSharedPreferences.edit().putBoolean(APP_START_FIRST_LOGIN, false).apply()
                     showInstructions()
                 }
 

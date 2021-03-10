@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
 
+
 private const val TAG = "MealPlanRepositoryIm"
 class MealPlanRepositoryImpl : MealPlanRepository {
 
@@ -54,6 +55,17 @@ class MealPlanRepositoryImpl : MealPlanRepository {
         catch (exception: Exception)
         {
             return Result.Error(exception)
+        }
+    }
+
+    override suspend fun updateMealPlanItem(userId: String, mealPlanItem: MealPlanItem): Result<Void?> {
+        return try
+        {
+            firestoreInstance.collection(UsersContract.COLLECTION_NAME).document(userId).collection(MealPlanContract.COLLECTION_NAME).document(mealPlanItem.id).set(mealPlanItem).await()
+        }
+        catch (exception: java.lang.Exception)
+        {
+            Result.Error(exception)
         }
     }
 

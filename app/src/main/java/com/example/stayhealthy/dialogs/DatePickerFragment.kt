@@ -1,4 +1,4 @@
-package com.example.stayhealthy
+package com.example.stayhealthy.dialogs
 
 import android.app.DatePickerDialog
 import android.app.Dialog

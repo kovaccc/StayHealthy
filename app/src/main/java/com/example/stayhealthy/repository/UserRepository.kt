@@ -6,7 +6,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.example.stayhealthy.utils.Result
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
-
+import kotlinx.coroutines.flow.Flow
 
 
 interface UserRepository {
@@ -34,5 +34,7 @@ interface UserRepository {
     ): Result<AuthResult?>
 
     suspend fun updateUserInFirestore(user: User): Result<Void?>
+
+    suspend fun listenOnUserChanged(userId: String): Flow<Result<User>?>
 
 }

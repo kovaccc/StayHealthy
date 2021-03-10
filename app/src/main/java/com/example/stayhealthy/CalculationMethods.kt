@@ -5,11 +5,10 @@ import com.example.stayhealthy.repository.MenuContract
 import kotlin.math.pow
 
 
-const val VEGETABLE_CALORIE_NEEDS = 0.4
-const val FRUITS_CALORIE_NEEDS = 0.1
-const val PROTEINS_CALORIE_NEEDS = 0.2
-const val GRAINS_PASTA_CALORIE_NEEDS = 0.3
-
+private const val VEGETABLE_CALORIE_NEEDS = 0.4
+private const val FRUITS_CALORIE_NEEDS = 0.1
+private const val PROTEINS_CALORIE_NEEDS = 0.2
+private const val GRAINS_PASTA_CALORIE_NEEDS = 0.3
 
 
 class CalculationMethods(val user: User) {

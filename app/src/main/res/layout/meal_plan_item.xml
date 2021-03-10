@@ -1,110 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.chauthai.swipereveallayout.SwipeRevealLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="@dimen/margin_extrasmall"
     android:layout_margin="@dimen/margin_small"
-    >
+    app:dragEdge="right"
+    app:mode="same_level">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/secondaryDarkColor"
+    <!--Swipe Layout-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/tli_edit"
+            android:layout_width="@dimen/imagesize_medium"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_edit_white_24dp"
+            android:gravity="center"
+            android:background="@color/swipe_brown"
+            android:contentDescription="@string/edit_button_description"
+
+           />
+
+        <ImageButton
+            android:id="@+id/tli_delete"
+            android:src="@drawable/ic_delete_white_24dp"
+            android:layout_width="@dimen/imagesize_medium"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@color/swipe_red"
+            android:contentDescription="@string/delete_button_description"
+            />
+
+    </LinearLayout>
+
+
+    <!-- Main Layout -->
+    <androidx.cardview.widget.CardView
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       >
+        app:cardElevation="@dimen/margin_extrasmall">
 
-
-        <TextView
-            android:id="@+id/tvMealPlanItemName"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvMealPlanItemCategory"
-            android:layout_margin="@dimen/margin_small"
-            android:shadowColor="@android:color/black"
-            android:shadowDx="1"
-
-            android:shadowDy="1"
-
-            android:shadowRadius="2"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/textsize_xlarge"
-            android:typeface="sans"
-
-            app:layout_constraintEnd_toStartOf="@+id/tvMealPlanItemCalories"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMealPlanItemCategory"
-            tools:text="Name" />
-
-        <TextView
+            android:background="@color/secondaryDarkColor">
 
 
-            android:id="@+id/tvMealPlanItemCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_extrasmall"
-            android:shadowColor="@android:color/black"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2"
+            <TextView
+                android:id="@+id/tvMealPlanItemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvMealPlanItemCategory"
+                android:layout_margin="@dimen/margin_small"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
 
-            android:textColor="@color/primaryTextColor"
+                android:shadowDy="1"
 
+                android:shadowRadius="2"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/textsize_xlarge"
+                android:typeface="sans"
 
+                app:layout_constraintEnd_toStartOf="@+id/tvMealPlanItemCalories"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMealPlanItemCategory"
+                tools:text="Name" />
 
-            android:textSize="@dimen/textsize_medium"
-
-            android:typeface="sans"
-
-            app:layout_constraintEnd_toStartOf="@+id/tvMealPlanItemQuantity"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Category" />
-
-        <TextView
-
-            android:id="@+id/tvMealPlanItemQuantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:shadowColor="@android:color/black"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2"
-
-            android:textColor="@color/primaryTextColor"
-
-            android:typeface="sans"
-
-            android:textSize="@dimen/textsize_large"
-
-            android:layout_margin="@dimen/margin_small"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Quantity" />
-
-        <TextView
-            android:id="@+id/tvMealPlanItemCalories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_small"
-            android:shadowColor="@android:color/black"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2"
+            <TextView
 
 
-            android:textColor="@color/primaryTextColor"
+                android:id="@+id/tvMealPlanItemCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_extrasmall"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
 
-            android:textSize="@dimen/textsize_large"
+                android:textColor="@color/primaryTextColor"
 
 
-            android:typeface="sans"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMealPlanItemQuantity"
-            tools:text="Calories" />
+                android:textSize="@dimen/textsize_medium"
+
+                android:typeface="sans"
+
+                app:layout_constraintEnd_toStartOf="@+id/tvMealPlanItemQuantity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Category" />
+
+            <TextView
+
+                android:id="@+id/tvMealPlanItemQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+
+                android:shadowRadius="2"
+
+                android:textColor="@color/primaryTextColor"
+
+                android:textSize="@dimen/textsize_large"
+
+                android:typeface="sans"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Quantity" />
+
+            <TextView
+                android:id="@+id/tvMealPlanItemCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:textColor="@color/primaryTextColor"
 
-</androidx.cardview.widget.CardView>
+                android:textSize="@dimen/textsize_large"
+
+
+                android:typeface="sans"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMealPlanItemQuantity"
+                tools:text="Calories" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</com.chauthai.swipereveallayout.SwipeRevealLayout>

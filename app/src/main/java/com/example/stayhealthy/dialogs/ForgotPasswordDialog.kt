@@ -1,4 +1,4 @@
-package com.example.stayhealthy
+package com.example.stayhealthy.dialogs
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
+import com.example.stayhealthy.R
 import com.example.stayhealthy.ui.UserViewModel
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.dialog_forgot_password.*

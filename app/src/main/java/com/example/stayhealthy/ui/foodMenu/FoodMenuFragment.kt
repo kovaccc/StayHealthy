@@ -18,7 +18,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 
 private const val TAG = "FoodMenuFragment"
-private const val ARG_FOOD_CATEGORY = "category"
+private const val ARG_FOOD_CATEGORY = "foodCategory"
 
 class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
 

@@ -28,6 +28,8 @@ import com.example.stayhealthy.utils.Result
 import com.example.stayhealthy.R
 import com.example.stayhealthy.createLoadingDialog
 import com.example.stayhealthy.repository.UserRepository
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 
@@ -213,8 +215,8 @@ class UserViewModel(var userRepository: UserRepository): ViewModel()
 
     fun updateUserInFirestore(user: User, activity: Activity) {
         Log.d(TAG, "updateUserInFirestore starts with - $user")
-        viewModelScope.launch {
-            when (val result = userRepository.updateUserInFirestore(user)) {
+        viewModelScope.launch { //main dispatcher
+            when (val result = withContext(IO){userRepository.updateUserInFirestore(user)}) { //for network operation switch dispatcher
                 is Result.Success -> {
                     Log.d(TAG, activity::class.java.simpleName)
 

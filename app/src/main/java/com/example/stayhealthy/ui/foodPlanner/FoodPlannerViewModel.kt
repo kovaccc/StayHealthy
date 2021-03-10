@@ -4,15 +4,15 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.stayhealthy.CalculationMethods
-import com.example.stayhealthy.DATE_DEFAULT
+import com.example.stayhealthy.dialogs.DATE_DEFAULT
 import com.example.stayhealthy.model.MealPlanItem
 import com.example.stayhealthy.model.User
+import com.example.stayhealthy.module.DATE_MEAL_PLAN
 import com.example.stayhealthy.repository.*
 import com.example.stayhealthy.utils.Result
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.DocumentSnapshot
 import com.example.stayhealthy.repository.MenuContract
-import com.example.stayhealthy.ui.DATE_MEAL_PLAN
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Default
@@ -77,12 +77,14 @@ class FoodPlannerViewModel(private val dateSharedPreferences: SharedPreferences,
         DATE_MEAL_PLAN -> {
                 val date = Date()
                 date.time = sharedPreferences.getLong(key, DATE_DEFAULT)
-                _selectedDateMLD.value = date.time
 
+                Log.d(TAG, "dateListener: new date is ${date.time} and old date is ${_selectedDateMLD.value}")
+
+                _selectedDateMLD.value = date.time
                 getMealPlanOptionsFromFirestore()
                 updateCalories()
 
-                Log.d(TAG, "dateListener: now date is $_selectedDateMLD")
+                Log.d(TAG, "dateListener: now date is ${_selectedDateMLD.value}")
             }
         }
     }
@@ -122,7 +124,9 @@ class FoodPlannerViewModel(private val dateSharedPreferences: SharedPreferences,
                     .setQuery(query, MealPlanItem::class.java).build() // creating configurations for firestore adapter
 
             Log.d(TAG, "getMealPlanOptionsFromFirestore: ends with $options")
+
             _currentMealPlanMLD.value = options
+
         }
     }
 
@@ -161,7 +165,7 @@ class FoodPlannerViewModel(private val dateSharedPreferences: SharedPreferences,
         Log.d(TAG, "getUserFromFirestore: starts with $userId")
 
         var mUser : User? = null
-        when (val result = userRepository.getUserFromFirestore(userId)) {
+        when (val result = withContext(IO){userRepository.getUserFromFirestore(userId)}) { // best practice is to put withContext(IO) in repository class but it looks clean in this app's ViewModels
             is Result.Success -> {
 
                 mUser = result.data
@@ -185,7 +189,7 @@ class FoodPlannerViewModel(private val dateSharedPreferences: SharedPreferences,
     private suspend fun checkUserLoggedIn(): FirebaseUser?
     {
         Log.d(TAG, "checkUserLoggedIn: starts")
-        val firebaseUser = userRepository.checkUserLoggedIn()
+        val firebaseUser = withContext(IO){userRepository.checkUserLoggedIn()}
         Log.d(TAG, "checkUserLoggedIn: ends, user is ${firebaseUser?.uid}")
         return firebaseUser
     }

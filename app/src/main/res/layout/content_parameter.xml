@@ -166,6 +166,7 @@
                     android:layout_weight="3"
                     android:background="@drawable/round_corner_edittext"
                     android:inputType="number"
+                    android:maxLength="3"
                     android:padding="@dimen/padding_small">
 
                 </EditText>
@@ -207,6 +208,7 @@
                     android:layout_weight="3"
                     android:background="@drawable/round_corner_edittext"
                     android:inputType="number"
+                    android:maxLength="4"
                     android:padding="@dimen/padding_small">
 
                 </EditText>
@@ -251,6 +253,7 @@
                     android:layout_weight="3"
                     android:background="@drawable/round_corner_edittext"
                     android:inputType="number"
+                    android:maxLength="3"
                     android:padding="@dimen/padding_small">
 
                 </EditText>

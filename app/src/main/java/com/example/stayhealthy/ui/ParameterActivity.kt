@@ -10,6 +10,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.stayhealthy.R
 import com.example.stayhealthy.model.User
+import com.example.stayhealthy.module.APP_START_FIRST_LOGIN
 
 import kotlinx.android.synthetic.main.activity_parameter.*
 import kotlinx.android.synthetic.main.content_parameter.*
@@ -21,8 +22,6 @@ import org.koin.core.qualifier.named
 
 
 private const val TAG = "ParameterActivity"
-
-const val FIRST_LOGIN = "FirstLogin"
 
 class ParameterActivity : AppCompatActivity() {
 
@@ -37,7 +36,7 @@ class ParameterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_parameter)
         setSupportActionBar(toolbar)
 
-        appStartSharedPreferences.edit().putBoolean(FIRST_LOGIN, true).apply()
+        appStartSharedPreferences.edit().putBoolean(APP_START_FIRST_LOGIN, true).apply()
 
         userViewModel.currentUserLD.observe(this, { user ->
             Log.d(TAG, "onCreate: observing user with $user")
@@ -69,7 +68,7 @@ class ParameterActivity : AppCompatActivity() {
                 val user = User(id!!, etName.text.toString(), mGender, etAge.text.toString().toLong(),
                             etHeight.text.toString().toLong(), etWeight.text.toString().toLong(), spinnerActivityLevel.selectedItem.toString())
 
-                userViewModel.updateUserInFirestore(user, this)
+                userViewModel.updateUserInFirestore(user, this) // userViewModel is singleton / coroutines inside won't be cancelled until onCleared() is called
                 startActivity(HomeActivity())
             }
         }

@@ -14,4 +14,6 @@ interface MealPlanRepository {
 
     suspend fun getMealPlanQuery(userId: String, startDate: Long, endDate: Long) : Result<List<DocumentSnapshot>>
 
+    suspend fun updateMealPlanItem(userId: String, mealPlanItem: MealPlanItem): Result<Void?>
+
 }

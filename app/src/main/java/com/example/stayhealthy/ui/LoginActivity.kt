@@ -7,8 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.stayhealthy.ForgotPasswordDialog
 import com.example.stayhealthy.R
+import com.example.stayhealthy.dialogs.ForgotPasswordDialog
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_log_in.*
 import kotlinx.android.synthetic.main.activity_register.*

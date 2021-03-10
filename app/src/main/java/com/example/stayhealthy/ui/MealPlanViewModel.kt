@@ -10,7 +10,9 @@ import com.example.stayhealthy.R
 import com.example.stayhealthy.model.MealPlanItem
 import com.example.stayhealthy.repository.MealPlanRepository
 import com.example.stayhealthy.utils.Result
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 private const val TAG = "MealPlanViewModel"
@@ -27,7 +29,7 @@ class MealPlanViewModel(var mealPlanRepository: MealPlanRepository) : ViewModel(
         Log.d(TAG, "createMealPlanItemInFirestore starts with  - ${userId}, mealPlanItem $mealPlanItem")
 
         viewModelScope.launch {
-            when (val result = mealPlanRepository.addMealPlanItem(userId, mealPlanItem)) {
+            when (val result = withContext(IO){mealPlanRepository.addMealPlanItem(userId, mealPlanItem)}) { //switch to IO dispatcher for network call
                 is Result.Success -> {
                     Log.d(TAG, "createMealPlanItemInFirestore is Result.Success - $mealPlanItem")
 

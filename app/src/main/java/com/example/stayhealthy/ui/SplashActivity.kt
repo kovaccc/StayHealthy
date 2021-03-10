@@ -5,18 +5,18 @@ import android.os.Bundle
 import com.example.stayhealthy.R
 import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.PersistableBundle
 import android.util.Log
 import org.koin.android.ext.android.inject
 import com.example.stayhealthy.model.User
 import kotlinx.coroutines.*
-import org.koin.core.qualifier.named
 import java.util.*
 
 
 private const val TAG = "SplashActivity"
+
 private const val COROUTINE_STATE = "CoroutineState"
+
 class SplashActivity : AppCompatActivity() {
     private val userViewModel: UserViewModel by inject()
 
@@ -26,8 +26,6 @@ class SplashActivity : AppCompatActivity() {
 
     private var coroutineState:Boolean = false
 
-    private val dateSharedPreferences : SharedPreferences by inject(named("datePrefs"))
-
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -36,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
 
-        dateSharedPreferences.edit().putLong(DATE_MEAL_PLAN,GregorianCalendar(Locale.getDefault()).timeInMillis).apply() // put current date every time app is launching
+
 
         userViewModel.currentUserLD.observe(this, {
             Log.d(TAG, "onCreate: observing user with value $it")

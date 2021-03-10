@@ -1,6 +1,6 @@
 package com.example.stayhealthy.repository.implementation
 
-import android.content.ContentValues.TAG
+
 import android.content.Context
 import android.util.Log
 import com.example.stayhealthy.model.User
@@ -14,7 +14,10 @@ import com.google.firebase.auth.AuthResult
 import com.example.stayhealthy.extension.await
 import com.example.stayhealthy.repository.UsersContract
 import com.google.firebase.auth.*
-
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 
 
 private const val TAG = "UserRepositoryImpl"
@@ -136,6 +139,8 @@ class UserRepositoryImpl : UserRepository {
             return Result.Error(exception)
         }
     }
+
+
     override suspend fun signInWithCredential(authCredential: AuthCredential): Result<AuthResult?>
     {
         return firebaseAuth.signInWithCredential(authCredential).await()
@@ -150,6 +155,36 @@ class UserRepositoryImpl : UserRepository {
         catch (exception: Exception)
         {
             Result.Error(exception)
+        }
+    }
+
+
+    @ExperimentalCoroutinesApi
+    override suspend fun listenOnUserChanged(userId: String): Flow<Result<User>?> {
+
+        Log.d(TAG, "listenOnUserChanged starts")
+        return callbackFlow { //  -> Kotlin Flows
+            val listenerRegistration = userCollection
+                    .document(userId)
+                    .addSnapshotListener { snapshot, e ->
+                        if (e != null) {
+                            Log.w(TAG, "Listen failed.", e)
+                            offer(Result.Error(e))
+                        }
+                        if (snapshot != null && snapshot.exists()) {
+                            val user = snapshot.toObject(User::class.java)!!
+                            Log.d(TAG, "listenOnUserChanged: listen success with $user")
+                            offer(Result.Success(user)) // offer values to the channel that will be collected in ViewModel
+                        } else {
+                            Log.d(TAG, "Current data: null")
+                        }
+                    }
+            //Finally if collect is not in use or collecting any data cancel this channel to prevent any leak and remove the subscription listener to the database
+            awaitClose {
+                Log.d(TAG, "Cancelling user listener")
+                listenerRegistration.remove()
+            }
+            Log.d(TAG, "listenOnUserChanged ends")
         }
     }
 

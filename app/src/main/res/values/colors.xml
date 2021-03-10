@@ -8,4 +8,7 @@
     <color name="secondaryDarkColor">#ca9b52</color>
     <color name="primaryTextColor">#fafafa</color>
     <color name="secondaryTextColor">#fafafa</color>
+
+    <color name="swipe_brown">#d2691e</color>
+    <color name="swipe_red">#ff3c30</color>
 </resources>

@@ -21,7 +21,7 @@ import org.koin.dsl.module
 // here we define how to create these dependencies
 val viewModelModule = module {
 
-    single { UserViewModel(UserRepositoryImpl()) } // singleton created only once in lifecycle
+    single { UserViewModel(UserRepositoryImpl()) } // singleton created only once in lifecycle / one instance in the whole app
 
     viewModel{ FoodPlannerViewModel(get(named("datePrefs")), MealPlanRepositoryImpl(), UserRepositoryImpl())} //inject it in constructor like this or you can extend Koin component in view model and use it with by inject
     // this viewmodel scope bind viewmodel component to android component lifecycle, it can also be shared across fragments
@@ -44,16 +44,25 @@ val repositoryModule = module {
 val preferencesModule = module {
     single(named("datePrefs")) { provideDatePreferences(androidApplication()) }
 
-    single  (named("appStartPrefs")) { provideAppStartingPreferences(androidApplication())}
+    single(named("appStartPrefs")) { provideAppStartingPreferences(androidApplication())}
 }
 
 
-const val DATE_PREFERENCES_FILE_KEY = "com.example.date_preferences"
+private const val DATE_PREFERENCES_FILE_KEY = "com.example.date_preferences"
 private fun provideDatePreferences(app: Application): SharedPreferences =
         app.getSharedPreferences(DATE_PREFERENCES_FILE_KEY, Context.MODE_PRIVATE)
 
+// keys
+const val DATE_MEAL_PLAN = "MealPlanDate" // use for datePrefs
 
-const val APP_START_PREFERENCES_FILE_KEY = "com.example.app_start_preferences"
+
+
+private const val APP_START_PREFERENCES_FILE_KEY = "com.example.app_start_preferences"
 private fun provideAppStartingPreferences(app: Application): SharedPreferences =
-    app.getSharedPreferences(APP_START_PREFERENCES_FILE_KEY, Context.MODE_PRIVATE)
+        app.getSharedPreferences(APP_START_PREFERENCES_FILE_KEY, Context.MODE_PRIVATE)
+
+// keys
+const val APP_START_FIRST_LOGIN = "FirstLogin" // use for appStartPrefs
+
+
 

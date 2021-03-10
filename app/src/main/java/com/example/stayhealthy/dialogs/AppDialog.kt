@@ -1,4 +1,4 @@
-package com.example.stayhealthy
+package com.example.stayhealthy.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -7,6 +7,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatDialogFragment
+import com.example.stayhealthy.R
 
 private const val TAG = "AppDialog"
 

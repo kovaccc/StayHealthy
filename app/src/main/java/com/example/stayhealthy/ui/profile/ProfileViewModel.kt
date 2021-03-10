@@ -14,6 +14,7 @@ import com.example.stayhealthy.utils.Result
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.collect
 
 
 private const val TAG = "ProfileViewModel"
@@ -44,6 +45,7 @@ class ProfileViewModel(var userRepository: UserRepository) : ViewModel() {
             if(user != null) {
                 getUserCalorieNeeds(user)
                 getUserBMI(user)
+                subscribeUserForChanges(currentFirebaseUser.uid) //TODO find better solution for ignoreChanges in ProfileFragment because this subscribing won't reflect on values and orientation change move cursor to the beginning of EditText(add button and app dialog for saving instead textwatcher)
             }
         }
     }
@@ -79,7 +81,7 @@ class ProfileViewModel(var userRepository: UserRepository) : ViewModel() {
     suspend fun updateUserInFirestore(user: User, activity: Activity) { // firestore will save in local cache if there is no connection
         Log.d(TAG, "updateUserInFirestore starts with - $user")
         viewModelScope.launch {
-            when(val result = userRepository.updateUserInFirestore(user))
+            when(val result = withContext(IO){userRepository.updateUserInFirestore(user)}) // switch to IO dispatcher for network call
             {
                 is Result.Success -> {
                     Log.d(TAG, "updateUserInFirestore is Result.Success - $user")
@@ -102,7 +104,7 @@ class ProfileViewModel(var userRepository: UserRepository) : ViewModel() {
     {
         Log.d(TAG, "checkUserLoggedIn: starts")
 
-        val mFirebaseUser = userRepository.checkUserLoggedIn()
+        val mFirebaseUser = withContext(IO){userRepository.checkUserLoggedIn()}
 
         Log.d(TAG, "checkUserLoggedIn: ends, user is ${mFirebaseUser?.uid}")
         return mFirebaseUser
@@ -115,6 +117,29 @@ class ProfileViewModel(var userRepository: UserRepository) : ViewModel() {
             _currentUserCalorieNeedsMLD.value = calculationMethods.calculateCaloriesForOptimizingBMI()
             Log.d(TAG, "getUserCalorieNeeds: ends with ${_currentUserCalorieNeedsMLD.value}")
 
+    }
+
+    private suspend fun subscribeUserForChanges(userId: String) { // changing data in firebase or another device will reflect on liveData
+
+        Log.d(TAG, "subscribeUser: starts with $userId")
+        userRepository.listenOnUserChanged(userId).collect { result ->
+            when (result) {
+                is Result.Success -> {
+                    val mUser = result.data
+                    _currentUserMLD.value = mUser
+                    Log.d(TAG, "subscribeUser is Result.Success, user is ${_currentUserMLD.value}")
+                }
+                is Result.Error -> {
+                    Log.e(TAG, "${result.exception.message}")
+                    _toast.value = result.exception.message
+                }
+                is Result.Canceled -> {
+                    Log.e(TAG, "${result.exception!!.message}")
+                    _toast.value = "Request canceled"
+                }
+            }
+        }
+        Log.d(TAG, "subscribeUser: ends, user is ${_currentUserMLD.value}")
     }
 
 
