@@ -47,9 +47,11 @@ class MealPlanAdapter(
 
 
         //swipe functionality
-        viewBinderHelper.setOpenOnlyOne(true)
-        viewBinderHelper.bind(holder.swipe_layout, mealplanItem.toString()) // string that identifies viewHolder item
-        viewBinderHelper.closeLayout(mealplanItem.toString())
+        viewBinderHelper.apply {
+            setOpenOnlyOne(true)
+            bind(holder.swipe_layout, mealplanItem.toString()) // string that identifies viewHolder item
+            closeLayout(mealplanItem.toString())
+        }
 
 
         holder.bind(mealplanItem, listener)

@@ -173,9 +173,11 @@ class ProfileFragment : Fragment() {
                         val user = userFromUi() // with lifecycle.launchWhenResumed it will only execute when it get in resume state so you fix crashing with etName == null
                         if(user != currentUser) { // check if user is the same
 
-                                profileViewModel.updateUserInFirestore(user, requireActivity())
-                                profileViewModel.getUserBMI(user)
-                                profileViewModel.getUserCalorieNeeds(user)
+                                profileViewModel.apply {
+                                    updateUserInFirestore(user, requireActivity())
+                                    getUserBMI(user)
+                                    getUserCalorieNeeds(user)
+                                }
                             }
                     }
             }

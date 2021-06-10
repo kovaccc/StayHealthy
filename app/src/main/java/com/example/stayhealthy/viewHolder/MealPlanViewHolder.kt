@@ -24,6 +24,5 @@ class MealPlanViewHolder(override val containerView: View) : RecyclerView.ViewHo
         tli_delete.setOnClickListener {
             listener.onDeleteClick(this)
         }
-
     }
 }

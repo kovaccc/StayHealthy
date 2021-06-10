@@ -11,12 +11,12 @@ import com.example.stayhealthy.module.DATE_MEAL_PLAN
 import com.example.stayhealthy.repository.*
 import com.example.stayhealthy.utils.Result
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.firestore.DocumentSnapshot
 import com.example.stayhealthy.repository.MenuContract
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.collect
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -196,19 +196,19 @@ class FoodPlannerViewModel(private val dateSharedPreferences: SharedPreferences,
 
 
 
-    private suspend fun getMealPlanFromFirestore(userId: String, date: Long) : List<DocumentSnapshot>? {
+    private suspend fun getMealPlanFromFirestore(userId: String, date: Long) :  ArrayList<MealPlanItem> {
 
         Log.d(TAG, "getMealPlanFromFirestore: starts with $userId AND $date")
 
-        var meals : List<DocumentSnapshot>? = null
+        var meals = ArrayList<MealPlanItem>()
 
 
         val startTime = getStartTimeOfDate(date)
         val endTime = getEndTimeOfDate(date)
 
-        when (val result = withContext(IO){mealPlanRepository.getMealPlanQuery(userId, startTime,endTime )}) { //background thread for heavy network operation
+        when (val result = withContext(IO){mealPlanRepository.getMealPlanQuery(userId, startTime,endTime)}) { //background thread for heavy network operation
             is Result.Success -> {
-                meals = result.data
+                meals = result.data!!
 
                 Log.d(TAG, "getMealPlanFromFirestore is Result.Success, meal plan is ${result.data}")
 
@@ -237,7 +237,7 @@ class FoodPlannerViewModel(private val dateSharedPreferences: SharedPreferences,
         Log.d(TAG, "updateCalories: ends with $currentUser and ${_selectedDateMLD.value!!}")
     }
 
-    private suspend fun mealPlanCalories(meals : List<DocumentSnapshot>?) {
+    private suspend fun mealPlanCalories(meals : ArrayList<MealPlanItem>?) {
         Log.d(TAG, "mealPlanCalories: starts")
 
         withContext(Default) { // Heavy work so it is done in different thread,Default used for complex operations like list traversal or mathematical operations
@@ -247,16 +247,17 @@ class FoodPlannerViewModel(private val dateSharedPreferences: SharedPreferences,
             var proteinsCalories = 0
 
             if (meals != null) {
-                for (document in meals) {
-                    val mealPlanItem = document.toObject(MealPlanItem::class.java)
+
+                meals.forEach { mealPlanItem ->
                     Log.d(TAG, "mealPlanCalories: mealPlanItem object is $mealPlanItem")
-                    when (mealPlanItem?.category) {
+                    when (mealPlanItem.category) {
                         MenuContract.FRUITS_NODE_NAME -> fruitsCalories += mealPlanItem.calories.toInt()
                         MenuContract.VEGETABLES_NODE_NAME -> vegetablesCalories += mealPlanItem.calories.toInt()
                         MenuContract.PROTEINS_NODE_NAME -> proteinsCalories += mealPlanItem.calories.toInt()
                         MenuContract.GRAINS_PASTA_NODE_NAME -> grainsPastaCalories += mealPlanItem.calories.toInt()
                     }
                 }
+
                 val totalCalories = fruitsCalories + vegetablesCalories + grainsPastaCalories + proteinsCalories
                 val calculationMethods = CalculationMethods(currentUser!!)
                 _vegetableMLD.postValue((calculationMethods.calculateFoodCalorieNeeds(MenuContract.VEGETABLES_NODE_NAME) - vegetablesCalories).toString())
@@ -272,7 +273,38 @@ class FoodPlannerViewModel(private val dateSharedPreferences: SharedPreferences,
     }
 
 
-    fun onToastShown()
+    //TODO put withContext(IO) before mealplanrepository you dont want this on main thread and according to documentation flow runs on coroutine parent context
+    private suspend fun subscribeMealPlanForChanges(userId: String, date: Long) {
+
+        Log.d(TAG, "subscribeMealPlanForChanges starts with $userId and date $date")
+
+        val startTime = getStartTimeOfDate(date)
+        val endTime = getEndTimeOfDate(date)
+
+            mealPlanRepository.listenOnMealPlanChanged(userId,startTime,endTime).collect { result->
+
+                when (result) {
+                    is Result.Success -> {
+                        val meals = result.data!!
+                        mealPlanCalories(meals)
+                        Log.d(TAG, "subscribeMealPlanForChanges is Result.Success, meal plan is ${result.data}")
+
+                    }
+                    is Result.Error -> {
+                        Log.e(TAG, "${result.exception.message}")
+                        _toast.value = result.exception.message
+                    }
+                    is Result.Canceled -> {
+                        Log.e(TAG, "${result.exception!!.message}")
+                        _toast.value = "Request canceled"
+                    }
+                }
+
+            }
+    }
+
+
+        fun onToastShown()
     {
         _toast.value = null
     }
