@@ -1,11 +1,9 @@
 package com.example.stayhealthy.utils
 
-// It allows us to know if our operation succeed or not and get the eventual error message Firestore returns
-sealed class Result<out R>
-{
-    data class Success<out T>(val data: T) : Result<T>() // Status success and data of the result
-    data class Error(val exception: Exception) : Result<Nothing>() // Status Error an error message
-    data class Canceled(val exception: Exception?) : Result<Nothing>() // Status Canceled
+sealed class Result<out R> {
+    data class Success<out T>(val data: T) : Result<T>()
+    data class Error(val exception: Exception) : Result<Nothing>()
+    data class Canceled(val exception: Exception?) : Result<Nothing>()
 
     // string method to display a result for debugging
     override fun toString(): String {

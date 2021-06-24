@@ -8,13 +8,13 @@
     <application
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
-        android:name=".MyApp"
+        android:name=".App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.SplashActivity"
+        <activity android:name=".ui.activities.SplashActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,35 +22,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.FoodMenuActivity"
+        <activity android:name=".ui.activities.FoodMenuActivity"
                   android:label="@string/title_activity_food_menu"
-                  android:parentActivityName=".ui.HomeActivity"
+                  android:parentActivityName=".ui.activities.HomeActivity"
                   android:theme="@style/AppTheme.NoActionBar"
             >
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.HomeActivity"/>
+                android:value=".ui.activities.HomeActivity"/>
 
         </activity>
 
-
-        <!--  android:configChanges and screenOrientation - used to avoid crashing when orientation of home activity happens TODO find better solution because with this you need to manually take care of config changes -->
         <activity
-            android:name=".ui.HomeActivity"
+            android:name=".ui.activities.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.ParameterActivity"
+            android:name=".ui.activities.ParameterActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar"
             >
 
 
         </activity>
-        <activity android:name=".ui.LoginActivity" android:screenOrientation="portrait" />
-        <activity android:name=".ui.RegisterActivity" android:screenOrientation="portrait" />
-        <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.activities.LoginActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.activities.RegisterActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.activities.MainActivity"/>
 
         <!--Facebook-->
         <meta-data android:name="com.facebook.sdk.ApplicationId"

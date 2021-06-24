@@ -1,0 +1,217 @@
+package com.example.stayhealthy.utils
+
+import android.util.Log
+import com.example.stayhealthy.common.contracts.MealPlanContract
+import com.example.stayhealthy.common.contracts.MenuContract
+import com.example.stayhealthy.common.contracts.UsersContract
+import com.example.stayhealthy.common.extensions.await
+import com.example.stayhealthy.data.models.domain.MealPlanItem
+import com.example.stayhealthy.data.models.domain.User
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+
+
+private const val TAG = "FirebaseStorageManager"
+
+class FirebaseStorageManager {
+
+    private val firebaseInstance = FirebaseDatabase.getInstance()
+    private val firestoreInstance = FirebaseFirestore.getInstance()
+
+    fun createFoodQuery(category: String): Query {
+        return firebaseInstance.getReference(MenuContract.ROOT_NAME).child(category)
+    }
+
+    fun createFoodQuerySearchCondition(category: String, searchCondition: String): Query {
+        return firebaseInstance.getReference(MenuContract.ROOT_NAME).child(category).orderByChild(
+                MenuContract.Columns.MENU_ITEM_NAME
+        ).startAt(searchCondition).endAt(searchCondition + "\uf8ff")
+    }
+
+    fun createMealPlanQuery(
+            userId: String,
+            startDate: Long,
+            endDate: Long
+    ): com.google.firebase.firestore.Query { // firestore adapter is listening to firestore query so just return configuration
+
+        return firestoreInstance.collection(UsersContract.COLLECTION_NAME).document(userId)
+                .collection(
+                        MealPlanContract.COLLECTION_NAME
+                ).whereGreaterThanOrEqualTo(MealPlanContract.Columns.MEAL_ITEM_DATE, startDate)
+                .whereLessThan(
+                        MealPlanContract.Columns.MEAL_ITEM_DATE, endDate
+                )
+
+    }
+
+    suspend fun addMealPlanItem(userId: String, mealPlanItem: MealPlanItem): Result<Void?> {
+        return try {
+            val documentRef =
+                    firestoreInstance.collection(UsersContract.COLLECTION_NAME).document(userId)
+                            .collection(
+                                    MealPlanContract.COLLECTION_NAME
+                            ).document()
+            mealPlanItem.id = documentRef.id
+            firestoreInstance.collection(UsersContract.COLLECTION_NAME).document(userId).collection(
+                    MealPlanContract.COLLECTION_NAME
+            ).document(mealPlanItem.id).set(mealPlanItem).await()
+        } catch (exception: java.lang.Exception) {
+            Result.Error(exception)
+        }
+    }
+
+
+    suspend fun getMealPlanQuery(
+            userId: String,
+            startDate: Long,
+            endDate: Long
+    ): Result<ArrayList<MealPlanItem>?> {
+
+        try {
+            return when (val querySnapshot =
+                    firestoreInstance.collection(UsersContract.COLLECTION_NAME).document(userId)
+                            .collection(
+                                    MealPlanContract.COLLECTION_NAME
+                            ).whereGreaterThanOrEqualTo(MealPlanContract.Columns.MEAL_ITEM_DATE, startDate)
+                            .whereLessThan(
+                                    MealPlanContract.Columns.MEAL_ITEM_DATE, endDate
+                            ).get().await()) {
+                is Result.Success -> {
+                    val query = querySnapshot.data.documents
+                    val meals = ArrayList<MealPlanItem>()
+                    for (document in query) {
+                        document.toObject(MealPlanItem::class.java)?.let { meals.add(it) }
+                    }
+                    Result.Success(meals)
+                }
+                is Result.Error -> Result.Error(querySnapshot.exception)
+                is Result.Canceled -> Result.Canceled(querySnapshot.exception)
+            }
+        } catch (exception: Exception) {
+            return Result.Error(exception)
+        }
+    }
+
+    suspend fun updateMealPlanItem(userId: String, mealPlanItem: MealPlanItem): Result<Void?> {
+        return try {
+            firestoreInstance.collection(UsersContract.COLLECTION_NAME).document(userId).collection(
+                    MealPlanContract.COLLECTION_NAME
+            ).document(mealPlanItem.id).set(mealPlanItem).await()
+        } catch (exception: java.lang.Exception) {
+            Result.Error(exception)
+        }
+    }
+
+
+    @ExperimentalCoroutinesApi
+    suspend fun listenOnMealPlanChanged(
+            userId: String,
+            startDate: Long,
+            endDate: Long
+    ): Flow<Result<ArrayList<MealPlanItem>?>> {
+        Log.d(TAG, "listenOnMealPlanChanged starts")
+        return callbackFlow {
+            val listenerRegistration = firestoreInstance.collection(UsersContract.COLLECTION_NAME)
+                    .document(userId).collection(MealPlanContract.COLLECTION_NAME)
+                    .whereGreaterThanOrEqualTo(MealPlanContract.Columns.MEAL_ITEM_DATE, startDate)
+                    .whereLessThan(MealPlanContract.Columns.MEAL_ITEM_DATE, endDate)
+                    .addSnapshotListener { querySnapshot, e ->
+                        if (e != null) {
+                            Log.w(TAG, "Listen failed.", e)
+                            offer(Result.Error(e))
+                        }
+                        if (querySnapshot != null && !querySnapshot.isEmpty) {
+
+                            val meals = ArrayList<MealPlanItem>()
+                            for (document in querySnapshot) {
+                                meals.add(document.toObject(MealPlanItem::class.java))
+                            }
+                            Log.d(TAG, "listenOnMealPlanChanged: listen success with $meals")
+                            offer(Result.Success(meals)) // offer values to the channel that will be collected in ViewModel
+                        } else {
+                            Log.d(TAG, "Current data: null")
+                        }
+                    }
+            //Finally if collect is not in use or collecting any data cancel this channel to prevent any leak and remove the subscription listener to the database
+            awaitClose {
+                Log.d(TAG, "Cancelling meal plan listener")
+                listenerRegistration.remove()
+            }
+            Log.d(TAG, "listenOnMealPlanChanged ends")
+        }
+    }
+
+
+    suspend fun createUserInFirestore(user: User): Result<Void?> {
+        return try {
+            firestoreInstance.collection(UsersContract.COLLECTION_NAME).document(user.id).set(user)
+                    .await()
+        } catch (exception: java.lang.Exception) {
+            Result.Error(exception)
+        }
+    }
+
+    suspend fun getUserFromFirestore(userId: String): Result<User> {
+        return try {
+            when (val resultDocumentSnapshot =
+                    firestoreInstance.collection(UsersContract.COLLECTION_NAME).document(userId).get()
+                            .await()) {
+                is Result.Success -> {
+                    val user = resultDocumentSnapshot.data.toObject(User::class.java)!!
+                    Result.Success(user)
+                }
+                is Result.Error -> Result.Error(resultDocumentSnapshot.exception)
+                is Result.Canceled -> Result.Canceled(resultDocumentSnapshot.exception)
+            }
+        } catch (exception: java.lang.Exception) {
+            Result.Error(exception)
+        }
+    }
+
+
+    suspend fun updateUserInFirestore(user: User): Result<Void?> {
+        return try {
+            firestoreInstance.collection(UsersContract.COLLECTION_NAME).document(user.id).set(user)
+                    .await()
+        } catch (exception: java.lang.Exception) {
+            Result.Error(exception)
+        }
+    }
+
+
+    @ExperimentalCoroutinesApi
+    suspend fun listenOnUserChanged(userId: String): Flow<Result<User>?> {
+
+        Log.d(TAG, "listenOnUserChanged starts")
+        return callbackFlow { //  -> Kotlin Flows
+            val listenerRegistration = firestoreInstance.collection(UsersContract.COLLECTION_NAME)
+                    .document(userId)
+                    .addSnapshotListener { snapshot, e ->
+                        if (e != null) {
+                            Log.w(TAG, "Listen failed.", e)
+                            offer(Result.Error(e))
+                        }
+                        if (snapshot != null && snapshot.exists()) {
+                            val user = snapshot.toObject(User::class.java)!!
+                            Log.d(TAG, "listenOnUserChanged: listen success with $user")
+                            offer(Result.Success(user)) // offer values to the channel that will be collected in ViewModel
+                        } else {
+                            Log.d(TAG, "Current data: null")
+                        }
+                    }
+            //Finally if collect is not in use or collecting any data cancel this channel to prevent any leak and remove the subscription listener to the database
+            awaitClose {
+                Log.d(TAG, "Cancelling user listener")
+                listenerRegistration.remove()
+            }
+            Log.d(TAG, "listenOnUserChanged ends")
+        }
+    }
+
+
+}

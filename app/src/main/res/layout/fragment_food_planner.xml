@@ -22,9 +22,6 @@
      android:shadowDx="1"
      android:shadowDy="1"
      android:shadowRadius="2"
-
-     tools:text="Date"
-
      android:textColor="@color/colorPrimaryDark"
      android:textSize="@dimen/textsize_large"
      android:typeface="sans"

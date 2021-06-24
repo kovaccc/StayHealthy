@@ -169,4 +169,13 @@
     <string name="category_proteins">Proteins</string>
     <string name="calories">Calories</string>
 
+
+    <string name="enter_valid_email">Enter a valid email</string>
+    <string name="use_at_least_6_characters">Use at least 6 characters</string>
+    <string name="enter_valid_password">Enter a valid email</string>
+    <string name="fill_all_parameters">Fill all parameters!</string>
+    <string name="check_email_to_reset_pass">Check email to reset your password!</string>
+
+    <string name="got_it">GOT IT</string>
+
 </resources>

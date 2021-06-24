@@ -15,8 +15,6 @@
      android:layout_centerHorizontal="true"
      android:layout_margin="@dimen/margin_large"
      android:background="@drawable/corner_date_edittext"
-     android:clickable="true"
-     android:editable="false"
      android:focusable="false"
      android:gravity="center"
      android:padding="@dimen/padding_small"
@@ -24,9 +22,6 @@
      android:shadowDx="1"
      android:shadowDy="1"
      android:shadowRadius="2"
-
-     tools:text="Date"
-
      android:textColor="@color/colorPrimaryDark"
      android:textSize="15sp"
      android:typeface="sans"
