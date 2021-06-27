@@ -63,7 +63,6 @@
     <string name="age_measure_unit">years</string>
 
 
-
     <!-- knowledge base -->
     <string name="desrciptionWaterKB"> Drink water, tea or coffee (with little or no sugar). Limit your intake of milk/dairy drinks (1-2 cup/day) and juices (1 cup per day).</string>
 
@@ -169,6 +168,14 @@
     <string name="category_proteins">Proteins</string>
     <string name="calories">Calories</string>
 
+    //Inputs
+    <string-array name="food_categories">
+        <item>Grains\u0026Pasta</item>
+        <item>@string/category_vegetables</item>
+        <item>@string/category_proteins</item>
+        <item>@string/category_fruits</item>
+    </string-array>
+
 
     <string name="enter_valid_email">Enter a valid email</string>
     <string name="use_at_least_6_characters">Use at least 6 characters</string>
@@ -177,5 +184,27 @@
     <string name="check_email_to_reset_pass">Check email to reset your password!</string>
 
     <string name="got_it">GOT IT</string>
+
+    <string name="menu_add_food">Add food</string>
+    <string name="menu_app_food">App food</string>
+    <string name="menu_my_food">My food</string>
+
+    <string name="accept_permissions">Accept permissions to enable this feature</string>
+
+    <string name="enter_food_name">Food name</string>
+    <string name="enter_food_calories">Food calories (kcal)</string>
+    <string name="enter_food_quantity">Food quantity (g) </string>
+
+    //Validation
+    <string name="validation_error_required">Input required</string>
+    <string name="invalid_pattern">Invalid pattern</string>
+    <string name="too_short">Too short</string>
+
+
+    <string name="check_your_connection">Check your connection and try again</string>
+
+    <string name="app_food">App food</string>
+    <string name="my_food">My food</string>
+
 
 </resources>

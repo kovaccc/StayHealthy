@@ -27,6 +27,7 @@ import java.util.*
 import android.view.Menu
 import android.widget.TextView
 import com.example.stayhealthy.data.PrefsHelper
+import com.example.stayhealthy.data.models.domain.User
 import com.example.stayhealthy.ui.dialogs.*
 import com.example.stayhealthy.data.models.persistance.DBUser
 import com.example.stayhealthy.viewmodels.UserViewModel
@@ -49,7 +50,7 @@ class HomeActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     private var mDate: Long? = null
 
-    private var currentUser: DBUser? = null
+    private var currentUser: User? = null
 
     private val prefsHelper: PrefsHelper by inject()
     private val userViewModel: UserViewModel by inject()

@@ -36,6 +36,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -89,6 +94,9 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:7.1.1'
     implementation 'com.google.firebase:firebase-firestore:23.0.1'
     implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'
+    implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 
 
     // Lifecycle components
@@ -110,6 +118,8 @@ dependencies {
     //Koin
     implementation "org.koin:koin-android:2.0.1"
     implementation "org.koin:koin-android-viewmodel:2.0.1"
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+
 
     //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
@@ -144,6 +154,8 @@ dependencies {
     //worker
     implementation "androidx.work:work-runtime-ktx:$work_version"
 
+
+    implementation 'com.github.GrenderG:Toasty:1.4.1'
 
 }
 

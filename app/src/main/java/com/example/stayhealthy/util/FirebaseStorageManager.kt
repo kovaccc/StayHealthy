@@ -1,15 +1,20 @@
-package com.example.stayhealthy.utils
+package com.example.stayhealthy.util
 
+import android.net.Uri
 import android.util.Log
 import com.example.stayhealthy.common.contracts.MealPlanContract
 import com.example.stayhealthy.common.contracts.MenuContract
 import com.example.stayhealthy.common.contracts.UsersContract
 import com.example.stayhealthy.common.extensions.await
+import com.example.stayhealthy.common.extensions.capitalizeAllFirst
+import com.example.stayhealthy.config.FIREBASE_STORAGE_BASE
 import com.example.stayhealthy.data.models.domain.MealPlanItem
 import com.example.stayhealthy.data.models.domain.User
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.Query
+import com.example.stayhealthy.data.models.domain.UserFood
+import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -22,6 +27,7 @@ class FirebaseStorageManager {
 
     private val firebaseInstance = FirebaseDatabase.getInstance()
     private val firestoreInstance = FirebaseFirestore.getInstance()
+    private val dbStorage = Firebase.storage
 
     fun createFoodQuery(category: String): Query {
         return firebaseInstance.getReference(MenuContract.ROOT_NAME).child(category)
@@ -32,6 +38,7 @@ class FirebaseStorageManager {
                 MenuContract.Columns.MENU_ITEM_NAME
         ).startAt(searchCondition).endAt(searchCondition + "\uf8ff")
     }
+
 
     fun createMealPlanQuery(
             userId: String,
@@ -213,5 +220,66 @@ class FirebaseStorageManager {
         }
     }
 
+    suspend fun uploadFoodImage(userId: String, image: Uri): Result<Uri?> {
+        val storageRef = dbStorage.reference
+        val imageRef = storageRef.child(FIREBASE_STORAGE_BASE)
+        val userImageRef = imageRef.child(userId).child(image.lastPathSegment!!) // we want user id in path
+
+        return try {
+            when (val uploadResult = userImageRef.putFile(image).await()) {
+                is Result.Success -> {
+                    uploadResult.data.storage.downloadUrl.await()
+                }
+                is Result.Error -> Result.Error(uploadResult.exception)
+                is Result.Canceled -> Result.Canceled(uploadResult.exception)
+            }
+        } catch (exception: java.lang.Exception) {
+            Result.Error(exception)
+        }
+
+    }
+
+    suspend fun addUserFood(userId: String, userFood: UserFood): Result<Void?> {
+
+        return try {
+
+            val food = HashMap<String, Any>()
+            food.apply {
+                put(MenuContract.Columns.MENU_ITEM_NAME, userFood.name.capitalizeAllFirst()) // so you can query easier later
+                put(MenuContract.Columns.MENU_ITEM_CALORIES, userFood.calories)
+                put(MenuContract.Columns.MENU_ITEM_QUANTITY, userFood.quantity)
+                put(MenuContract.Columns.MENU_ITEM_IMAGE, userFood.image)
+            }
+
+            val usersFoodRef = firebaseInstance.getReference(MenuContract.ROOT_NAME)
+                .child(MenuContract.USERS_FOOD_CHILD).child(userFood.category)
+                .child(userId).push()
+
+            usersFoodRef.setValue(food).await()
+
+        } catch (exception: java.lang.Exception) {
+            Result.Error(exception)
+        }
+    }
+
+    fun createUserFoodQuery(
+        userId: String,
+        category: String
+    ): Query {
+
+        return firebaseInstance.getReference(MenuContract.ROOT_NAME)
+            .child(MenuContract.USERS_FOOD_CHILD).child(category)
+            .child(userId)
+
+    }
+
+    fun createUserFoodQuerySearchCondition(userId: String, category: String, searchCondition: String): Query {
+
+        return firebaseInstance.getReference(MenuContract.ROOT_NAME)
+            .child(MenuContract.USERS_FOOD_CHILD).child(category).child(userId)
+            .orderByChild(
+            MenuContract.Columns.MENU_ITEM_NAME
+        ).startAt(searchCondition).endAt(searchCondition + "\uf8ff")
+    }
 
 }

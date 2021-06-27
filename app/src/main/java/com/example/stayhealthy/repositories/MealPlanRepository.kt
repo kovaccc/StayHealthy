@@ -3,7 +3,7 @@ package com.example.stayhealthy.repositories
 
 import com.example.stayhealthy.data.models.domain.MealPlanItem
 import com.google.firebase.firestore.Query
-import com.example.stayhealthy.utils.Result
+import com.example.stayhealthy.util.Result
 import kotlinx.coroutines.flow.Flow
 
 interface MealPlanRepository {

@@ -46,6 +46,41 @@
     </style>
 
 
+    <style name="InputTil" parent="@android:style/TextAppearance">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">@color/inputTextColor</item>
+        <item name="android:layout_marginTop">@dimen/margin_small</item>
+        <item name="android:colorControlNormal">@color/grayDisabled</item>
+        <item name="android:colorControlActivated">@color/grayDarkBackground</item>
+        <item name="android:colorControlHighlight">@color/grayDarkBackground</item>
+    </style>
+
+    <style name="InputEditText" parent="@android:style/TextAppearance">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/grayDarkBackground</item>
+        <item name="android:textColorHint">@color/grayDisabled</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:colorControlNormal">@color/grayDisabled</item>
+        <item name="android:colorControlActivated">@color/grayDarkBackground</item>
+        <item name="android:colorControlHighlight">@color/grayDarkBackground</item>
+    </style>
+
+
+    <style name="InputButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/imagesize_small</item>
+        <item name="android:layout_marginTop">@dimen/margin_3xlarge</item>
+        <item name="android:background">@drawable/shape_rounded_filled_noborder</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/textsize_large</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 
 
 </resources>

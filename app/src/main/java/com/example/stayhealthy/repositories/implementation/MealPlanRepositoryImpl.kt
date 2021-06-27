@@ -2,8 +2,8 @@ package com.example.stayhealthy.repositories.implementation
 
 import com.example.stayhealthy.data.models.domain.MealPlanItem
 import com.example.stayhealthy.repositories.MealPlanRepository
-import com.example.stayhealthy.utils.FirebaseStorageManager
-import com.example.stayhealthy.utils.Result
+import com.example.stayhealthy.util.FirebaseStorageManager
+import com.example.stayhealthy.util.Result
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow

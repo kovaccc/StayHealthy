@@ -7,7 +7,7 @@ import com.example.stayhealthy.common.CalculationMethods
 import com.example.stayhealthy.ui.dialogs.DATE_DEFAULT
 import com.example.stayhealthy.data.models.domain.MealPlanItem
 import com.example.stayhealthy.repositories.*
-import com.example.stayhealthy.utils.Result
+import com.example.stayhealthy.util.Result
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.example.stayhealthy.common.contracts.MenuContract
 import com.example.stayhealthy.config.KEY_DATE_MEAL_PLAN
@@ -15,7 +15,6 @@ import com.example.stayhealthy.data.PrefsHelper
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.collect
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.foodMenu.FoodMenuFragment"
+    tools:context=".ui.activities.FoodMenuActivity"
     android:background="@color/secondaryColor">
 
     <LinearLayout

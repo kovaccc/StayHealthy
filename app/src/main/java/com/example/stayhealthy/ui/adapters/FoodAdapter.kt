@@ -3,7 +3,9 @@ package com.example.stayhealthy.ui.adapters
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import com.example.stayhealthy.R
+import com.example.stayhealthy.common.extensions.setImageWithURI
 import com.example.stayhealthy.ui.viewHolders.FoodViewHolder
 import com.example.stayhealthy.data.models.domain.Food
 import com.firebase.ui.database.FirebaseRecyclerAdapter
@@ -30,10 +32,8 @@ class FoodAdapter(options: FirebaseRecyclerOptions<Food>?, private val listener:
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int, foodItem: Food) {
         Log.d(TAG, "onBindViewHolder: new view requested")
 
-        Picasso.with(holder.food_image.context).load(foodItem.Image)
-                .error(R.drawable.placeholder)
-                .placeholder(R.drawable.placeholder)
-                .into(holder.food_image)
+
+        holder.food_image.setImageWithURI(foodItem.Image.toUri())
 
         holder.bind(foodItem, listener)
     }

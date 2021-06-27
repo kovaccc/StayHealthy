@@ -20,6 +20,6 @@ val viewModelModule = module {
         )
     }
     viewModel { ProfileViewModel(UserRepositoryImpl(get(), get(), get())) }
-    viewModel { FoodMenuViewModel(FoodRepositoryImpl(get())) }
+    viewModel { FoodMenuViewModel(FoodRepositoryImpl(get(), get()), UserRepositoryImpl(get(), get(), get())) }
     viewModel { MealPlanViewModel(MealPlanRepositoryImpl(get())) }
 }

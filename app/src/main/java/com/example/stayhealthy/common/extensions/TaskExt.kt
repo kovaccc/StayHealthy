@@ -3,7 +3,7 @@ package com.example.stayhealthy.common.extensions
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.suspendCancellableCoroutine
-import com.example.stayhealthy.utils.Result
+import com.example.stayhealthy.util.Result
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.resume
 

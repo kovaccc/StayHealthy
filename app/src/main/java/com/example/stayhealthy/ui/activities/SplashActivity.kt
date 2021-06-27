@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
 
         userViewModel.currentUserLD.observe(this, {
             Log.d(TAG, "onCreate: observing user with value $it")
-            user = it?.asDomain()
+            user = it
         })
 
 //        userViewModel.logOutUser() //TODO delete this after testing

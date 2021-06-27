@@ -7,6 +7,7 @@ object MenuContract {
 
 
     internal const val ROOT_NAME = "Menu"
+    internal const val USERS_FOOD_CHILD = "UsersFood"
     internal const val FRUITS_NODE_NAME = "Fruits"
     internal const val GRAINS_PASTA_NODE_NAME = "Grains&Pasta"
     internal const val PROTEINS_NODE_NAME = "Proteins"

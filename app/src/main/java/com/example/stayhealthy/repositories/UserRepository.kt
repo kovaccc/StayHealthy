@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.stayhealthy.data.models.domain.User
 import com.example.stayhealthy.data.models.persistance.DBUser
 import com.google.firebase.auth.FirebaseUser
-import com.example.stayhealthy.utils.Result
+import com.example.stayhealthy.util.Result
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.flow.Flow

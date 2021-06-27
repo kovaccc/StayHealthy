@@ -11,4 +11,9 @@
 
     <color name="swipe_brown">#d2691e</color>
     <color name="swipe_red">#ff3c30</color>
+
+
+    <color name="grayDarkBackground">#333333</color>
+    <color name="grayDisabled">#c4c4c4</color>
+    <color name="inputTextColor">#000001</color>
 </resources>

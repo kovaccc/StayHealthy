@@ -11,11 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stayhealthy.data.models.domain.Food
 import com.example.stayhealthy.R
+import com.example.stayhealthy.common.extensions.capitalizeAllFirst
 import com.example.stayhealthy.ui.adapters.FoodAdapter
 import com.example.stayhealthy.viewmodels.FoodMenuViewModel
 import kotlinx.android.synthetic.main.fragment_food_menu.*
 import kotlinx.android.synthetic.main.fragment_food_menu.view.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 private const val TAG = "FoodMenuFragment"
@@ -35,8 +36,7 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
 
     var category: String? = null
 
-    private val foodMenuViewModel: FoodMenuViewModel by viewModel()
-
+    private val foodMenuViewModel by sharedViewModel<FoodMenuViewModel>()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -100,16 +100,18 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
                     TAG,
                     "onCreate: observing options with value $options, and first init $isFirstInit"
             )
-            if (isFirstInit) {
-                mAdapter = FoodAdapter(options, this)
-                recycler_food.adapter = mAdapter
-                isFirstInit = false
-                mAdapter?.startListening()
+                    mAdapter = FoodAdapter(options, this)
+                    recycler_food.adapter = mAdapter
+                    isFirstInit = false
+                    mAdapter?.startListening()
+        })
 
-            } else {
-                mAdapter?.updateOptions(options)
-                recycler_food.adapter = mAdapter
-            }
+        foodMenuViewModel.isUserFoodLD.observe(this, { options ->
+            Log.d(
+                TAG,
+                "onCreate: isUserFoodLD is $options"
+            )
+            foodMenuViewModel.getFoodOptionsCategory(category!!)
         })
 
         Log.d(TAG, "onCreate: ends")
@@ -119,7 +121,7 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
 
         category?.let { category ->
             if (string.isNotEmpty()) {
-                val stringAllUpper = capitalizeAllFirst(string)
+                val stringAllUpper = string.capitalizeAllFirst()
                 foodMenuViewModel.getFoodOptionsSearchCondition(category, stringAllUpper)
             } else {
                 foodMenuViewModel.getFoodOptionsCategory(category)
@@ -129,22 +131,7 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
     }
 
 
-    private fun capitalizeAllFirst(value: String): String { // to avoid case sensitive
-        val array = value.toCharArray()
 
-        // Uppercase first letter.
-        array[0] = Character.toUpperCase(array[0])
-
-        // Uppercase all letters that follow a whitespace character.
-        for (i in 1 until array.size) {
-            if (Character.isWhitespace(array[i - 1])) {
-                array[i] = Character.toUpperCase(array[i])
-            } else {
-                array[i] = Character.toLowerCase(array[i])
-            }
-        }
-        return String(array)
-    }
 
     override fun onAddClick(foodItem: Food) { // open dialog in activity better then here
         (activity as OnFoodAdd?)?.onFoodAdd(foodItem, category!!)
@@ -158,7 +145,6 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
     override fun onStop() {
         super.onStop()
         mAdapter?.stopListening()
-
     }
 
     companion object {
@@ -175,5 +161,7 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
                     }
                 }
     }
+
+
 
 }

@@ -1,4 +1,4 @@
-package com.example.stayhealthy.utils
+package com.example.stayhealthy.util
 
 import android.content.Context
 import android.util.Log

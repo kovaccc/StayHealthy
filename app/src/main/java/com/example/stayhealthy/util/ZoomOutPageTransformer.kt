@@ -1,4 +1,4 @@
-package com.example.stayhealthy.utils
+package com.example.stayhealthy.util
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2

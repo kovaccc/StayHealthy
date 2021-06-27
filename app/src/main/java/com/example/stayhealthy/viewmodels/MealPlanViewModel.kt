@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stayhealthy.data.models.domain.MealPlanItem
 import com.example.stayhealthy.repositories.MealPlanRepository
-import com.example.stayhealthy.utils.Result
+import com.example.stayhealthy.util.Result
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

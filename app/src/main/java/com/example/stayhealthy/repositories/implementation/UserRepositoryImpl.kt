@@ -6,14 +6,14 @@ import android.util.Log
 import com.example.stayhealthy.data.models.domain.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.example.stayhealthy.utils.Result
+import com.example.stayhealthy.util.Result
 import com.example.stayhealthy.repositories.UserRepository
 import java.lang.Exception
 import com.google.firebase.auth.AuthResult
 import com.example.stayhealthy.common.extensions.await
 import com.example.stayhealthy.data.database.StayHealthyDB
 import com.example.stayhealthy.data.database.storage.ProfileStorage
-import com.example.stayhealthy.utils.FirebaseStorageManager
+import com.example.stayhealthy.util.FirebaseStorageManager
 import com.google.firebase.auth.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow

@@ -21,10 +21,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
-import com.example.stayhealthy.utils.Result
+import com.example.stayhealthy.util.Result
 import com.example.stayhealthy.R
 import com.example.stayhealthy.data.PrefsHelper
-import com.example.stayhealthy.data.models.persistance.DBUser
 import com.example.stayhealthy.repositories.UserRepository
 import com.example.stayhealthy.ui.activities.HomeActivity
 import com.example.stayhealthy.ui.activities.ParameterActivity
@@ -54,8 +53,9 @@ class UserViewModel(
     val spinnerLD: LiveData<Boolean>
         get() = spinnerMLD
 
-    val currentUserLD: LiveData<DBUser?> = userRepository.getLocalUserLiveData().asLiveData()
-
+    private val _currentUserMLD = MutableLiveData<User?>()
+    val currentUserLD: LiveData<User?>
+        get() = _currentUserMLD
 
     var mFirebaseUser: User? = null // for checking logs
 
@@ -83,7 +83,7 @@ class UserViewModel(
 
                         toastMLD.value = activity.getString(R.string.registration_successful)
 
-                        mFirebaseUser = currentUserLD.value?.asDomain()
+                        mFirebaseUser = currentUserLD.value
 
                         startActivity(activity, ParameterActivity())
 
@@ -132,6 +132,8 @@ class UserViewModel(
             is Result.Success -> {
                 Log.d(TAG, "${result.data}")
 
+                _currentUserMLD.value = result.data
+
                 Log.d(
                         TAG,
                         "getUserFromFirestore is Result.Success, user is ${currentUserLD.value?.id}"
@@ -167,6 +169,7 @@ class UserViewModel(
         Log.d(TAG, "logOutUser: starts")
         viewModelScope.launch {
             userRepository.logOutUser()
+            _currentUserMLD.postValue(null)
             prefsHelper.saveSelectedMealPlanDate(GregorianCalendar(Locale.getDefault()).timeInMillis)
         }
         Log.d(TAG, "logOutUser: ends")
@@ -186,6 +189,7 @@ class UserViewModel(
         Log.d(TAG, "createUserInFirestore starts with  - ${user.name}")
         when (val result = userRepository.createUserInFirestore(user)) {
             is Result.Success -> {
+                _currentUserMLD.value = user
                 Log.d(TAG, "createUserInFirestore is Result.Success - $user")
             }
             is Result.Error -> {
@@ -205,6 +209,7 @@ class UserViewModel(
             when (val result =
                     withContext(IO) { userRepository.updateUserInFirestore(user) }) { //for network operation switch dispatcher
                 is Result.Success -> {
+                    _currentUserMLD.value = user
                     Log.d(TAG, "updateUserInFirestore is Result.Success - $user")
                 }
                 is Result.Error -> {
@@ -237,7 +242,7 @@ class UserViewModel(
 
                         getUserFromFirestore(firebaseUser.uid, activity)
 
-                        mFirebaseUser = currentUserLD.value?.asDomain()
+                        mFirebaseUser = _currentUserMLD.value
 
                         Log.d(
                                 TAG,
@@ -345,7 +350,7 @@ class UserViewModel(
                                                     createUserInFirestore(mUser, activity)
                                                     startActivity(activity, ParameterActivity())
                                                 } else { // if user exists in firestore checking parameters fulfillment
-                                                    mFirebaseUser = currentUserLD.value!!.asDomain()
+                                                    mFirebaseUser = currentUserLD.value!!
 
                                                     if (checkParametersFulfillment()) {
                                                         startActivity(activity, HomeActivity())
@@ -456,12 +461,12 @@ class UserViewModel(
 
                                     getUserFromFirestore(user.uid, activity)
 
-                                    if (currentUserLD.value == null) {
+                                    if (_currentUserMLD.value == null) {
                                         createUserInFirestore(mUser, activity)
                                         startActivity(activity, ParameterActivity())
 
                                     } else { // if user exists in firestore checking parameters fullfilment
-                                        mFirebaseUser = currentUserLD.value!!.asDomain()
+                                        mFirebaseUser = currentUserLD.value
 
                                         if (checkParametersFulfillment()) {
                                             startActivity(activity, HomeActivity())

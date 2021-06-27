@@ -8,7 +8,7 @@ import com.example.stayhealthy.common.CalculationMethods
 import com.example.stayhealthy.data.models.domain.User
 import com.example.stayhealthy.data.models.persistance.DBUser
 import com.example.stayhealthy.repositories.UserRepository
-import com.example.stayhealthy.utils.Result
+import com.example.stayhealthy.util.Result
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
