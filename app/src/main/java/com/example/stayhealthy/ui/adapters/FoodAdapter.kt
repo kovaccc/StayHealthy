@@ -10,7 +10,6 @@ import com.example.stayhealthy.ui.viewHolders.FoodViewHolder
 import com.example.stayhealthy.data.models.domain.Food
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.food_item.*
 
 

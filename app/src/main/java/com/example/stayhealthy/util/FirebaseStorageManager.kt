@@ -2,6 +2,7 @@ package com.example.stayhealthy.util
 
 import android.net.Uri
 import android.util.Log
+import com.example.stayhealthy.common.contracts.KnowledgeBaseContract
 import com.example.stayhealthy.common.contracts.MealPlanContract
 import com.example.stayhealthy.common.contracts.MenuContract
 import com.example.stayhealthy.common.contracts.UsersContract
@@ -271,6 +272,10 @@ class FirebaseStorageManager {
                 .orderByChild(
                         MenuContract.Columns.MENU_ITEM_NAME
                 ).startAt(searchCondition).endAt(searchCondition + "\uf8ff")
+    }
+
+    fun createKnowledgeBaseQuery(): Query {
+        return firebaseInstance.getReference(KnowledgeBaseContract.ROOT_NAME)
     }
 
 }

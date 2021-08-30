@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="knowledgeBaseItem"
+            type="com.example.stayhealthy.data.models.domain.KnowledgeBaseItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryDarkColor"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:padding="@dimen/padding_large"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvKnowledgeItemDescription"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/descriptionTextSizeKB"
+            android:typeface="sans"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/margin_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivKnowledgeItemImage"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{knowledgeBaseItem.description}"
+            tools:text="@tools:sample/lorem" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivKnowledgeItemImage"
+            android:layout_width="@dimen/imagesize_medium"
+            android:layout_height="@dimen/imagesize_medium"
+            android:src="@drawable/placeholder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
