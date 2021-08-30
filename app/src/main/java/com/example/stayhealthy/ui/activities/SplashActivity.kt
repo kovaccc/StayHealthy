@@ -7,6 +7,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.PersistableBundle
 import android.util.Log
+import android.widget.Toast
 import org.koin.android.ext.android.inject
 import com.example.stayhealthy.data.models.domain.User
 import com.example.stayhealthy.viewmodels.UserViewModel
@@ -37,6 +38,14 @@ class SplashActivity : AppCompatActivity() {
         userViewModel.currentUserLD.observe(this, {
             Log.d(TAG, "onCreate: observing user with value $it")
             user = it
+        })
+
+
+        userViewModel.toastLD.observe(this, { message ->
+            message?.let {
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                userViewModel.onToastShown()
+            }
         })
 
 //        userViewModel.logOutUser() //TODO delete this after testing

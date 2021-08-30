@@ -23,13 +23,13 @@ import java.io.File
 private const val TAG = "FoodMenuViewModel"
 
 class FoodMenuViewModel(
-    private val foodRepository: FoodRepository,
-    private val userRepository: UserRepository
+        private val foodRepository: FoodRepository,
+        private val userRepository: UserRepository
 ) : ViewModel() {
 
-    private val _currentFoodMLD = MutableLiveData<FirebaseRecyclerOptions<Food>>()
-    val currentFoodLD: LiveData<FirebaseRecyclerOptions<Food>>
-        get() = _currentFoodMLD
+    private val _currentFoodOptionsMLD = MutableLiveData<FirebaseRecyclerOptions<Food>>()
+    val currentFoodOptionsLD: LiveData<FirebaseRecyclerOptions<Food>>
+        get() = _currentFoodOptionsMLD
 
     val isUserFoodMLD = MutableLiveData(false)
     val isUserFoodLD: LiveData<Boolean>
@@ -43,56 +43,65 @@ class FoodMenuViewModel(
 
     val toast = SingleEventLiveData<String?>()
 
-    var selectedFoodCategory = MutableLiveData<String>()
+    var spinnerSelectedFoodCategory = MutableLiveData<String>()
+
+    var tabSelectedFoodCategoryMLD = MutableLiveData<String>()
+    val tabSelectedFoodCategoryLD: LiveData<String>
+        get() = tabSelectedFoodCategoryMLD
 
     val onFoodCategorySelected = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            selectedFoodCategory.value = parent?.getItemAtPosition(position).toString()
+            spinnerSelectedFoodCategory.value = parent?.getItemAtPosition(position).toString()
         }
 
         override fun onNothingSelected(parent: AdapterView<*>?) {
         }
     }
 
-    fun getFoodOptionsCategory(category: String) {
-        Log.d(TAG, "getFoodOptionsFromFirebase: starts with $category")
+    fun getFoodOptionsCategory() {
+        Log.d(TAG, "getFoodOptionsFromFirebase: starts with ${tabSelectedFoodCategoryMLD.value}")
 
-        val query = if (isUserFoodMLD.value == false) {
-            foodRepository.createFoodQuery(category)
+        tabSelectedFoodCategoryMLD.value?.let { category ->
+            val query = if (isUserFoodMLD.value == false) {
+                foodRepository.createFoodQuery(category)
+            } else {
+                foodRepository.createUserFoodQuery(currentUser.id, category)
+            }
+            val options = FirebaseRecyclerOptions.Builder<Food>()
+                    .setQuery(query, Food::class.java)
+                    .build() // creating configurations for firebase adapter
+            _currentFoodOptionsMLD.value = options
 
-        } else {
-            foodRepository.createUserFoodQuery(currentUser.id, category)
         }
-        val options = FirebaseRecyclerOptions.Builder<Food>()
-            .setQuery(query, Food::class.java)
-            .build() // creating configurations for firebase adapter
-        _currentFoodMLD.value = options
     }
 
 
-    fun getFoodOptionsSearchCondition(category: String, searchCondition: String) {
+    fun getFoodOptionsSearchCondition(searchCondition: String) {
 
         Log.d(
-            TAG,
-            "getFoodOptionsSearchCondition: starts with $category, condition $searchCondition"
+                TAG,
+                "getFoodOptionsSearchCondition: starts with ${tabSelectedFoodCategoryMLD.value}, condition $searchCondition"
         )
-        val query = if (isUserFoodMLD.value == false) {
-            foodRepository.createFoodQuerySearchCondition(category, searchCondition)
 
-        } else {
-            foodRepository.createUserFoodQuerySearchCondition(
-                currentUser.id,
-                category,
-                searchCondition
-            )
+        tabSelectedFoodCategoryMLD.value?.let { category ->
+
+            val query = if (isUserFoodMLD.value == false) {
+                foodRepository.createFoodQuerySearchCondition(category, searchCondition)
+
+            } else {
+                foodRepository.createUserFoodQuerySearchCondition(
+                        currentUser.id,
+                        category,
+                        searchCondition
+                )
+            }
+
+            val options = FirebaseRecyclerOptions.Builder<Food>()
+                    .setQuery(query, Food::class.java).build()
+            _currentFoodOptionsMLD.value = options
+
+            Log.d(TAG, "getFoodOptionsSearchCondition: ends with $category, $query, $options")
         }
-
-        val options = FirebaseRecyclerOptions.Builder<Food>()
-            .setQuery(query, Food::class.java).build()
-        _currentFoodMLD.value = options
-
-        Log.d(TAG, "getFoodOptionsSearchCondition: ends with $category, $query, $options")
-
     }
 
     override fun onCleared() {
@@ -108,36 +117,37 @@ class FoodMenuViewModel(
 
     suspend fun addUserFood(uri: Uri) {
         val userFoodRequest = addFoodForm.request
+        var userFood: UserFood
         userFoodRequest.apply {
-            val userFood = UserFood(
-                name = name,
-                quantity = quantity,
-                calories = calories,
-                category = selectedFoodCategory.value!!
+            userFood = UserFood(
+                    name = name,
+                    quantity = quantity,
+                    calories = calories,
+                    category = spinnerSelectedFoodCategory.value!!
             )
+        }
 
-            when (val result = withContext(Dispatchers.IO) {
-                foodRepository.addUserFood(
+        when (val result = withContext(Dispatchers.IO) {
+            foodRepository.addUserFood(
                     userRepository.getLocalUserAsync().id,
                     userFood,
                     uri
-                )
-            }) {
-                is Result.Success -> {
+            )
+        }) {
+            is Result.Success -> {
 
-                    Log.d(
+                Log.d(
                         TAG,
                         "addUserFood is Result.Success"
-                    )
-                }
-                is Result.Error -> {
-                    Log.e(TAG, "${result.exception.message}")
-                    toast.value = result.exception.message
-                }
-                is Result.Canceled -> {
-                    Log.e(TAG, "${result.exception!!.message}")
-                    toast.value = "Request canceled"
-                }
+                )
+            }
+            is Result.Error -> {
+                Log.e(TAG, "${result.exception.message}")
+                toast.value = result.exception.message
+            }
+            is Result.Canceled -> {
+                Log.e(TAG, "${result.exception!!.message}")
+                toast.value = "Request canceled"
             }
         }
     }

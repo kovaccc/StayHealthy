@@ -10,8 +10,6 @@ interface FoodRepository {
 
     fun createFoodQuery(category: String): Query
 
-//    fun createUserFoodQuery(userId: String, category: String): com.google.firebase.firestore.Query
-
     fun createUserFoodQuery(userId: String, category: String): Query
 
     fun createFoodQuerySearchCondition(category: String, searchCondition: String): Query

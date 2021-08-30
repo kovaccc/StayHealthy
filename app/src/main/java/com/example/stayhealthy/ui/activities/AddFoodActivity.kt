@@ -3,6 +3,7 @@ package com.example.stayhealthy.ui.activities
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.stayhealthy.R
@@ -13,7 +14,6 @@ import com.example.stayhealthy.ui.dialogs.DialogHelper
 import com.example.stayhealthy.util.ConnectionManager
 import com.example.stayhealthy.viewmodels.FoodMenuViewModel
 import kotlinx.android.synthetic.main.activity_add_food.*
-import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,12 +29,12 @@ class AddFoodActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding =
-            DataBindingUtil.setContentView<ActivityAddFoodBinding>(this, R.layout.activity_add_food)
-                .apply {
-                    viewModel = foodMenuViewModel
-                    lifecycleOwner = this@AddFoodActivity
-                    executePendingBindings()
-                }
+                DataBindingUtil.setContentView<ActivityAddFoodBinding>(this, R.layout.activity_add_food)
+                        .apply {
+                            viewModel = foodMenuViewModel
+                            lifecycleOwner = this@AddFoodActivity
+                            executePendingBindings()
+                        }
 
 
         foodFileUri?.let {
@@ -51,9 +51,9 @@ class AddFoodActivity : AppCompatActivity() {
                     finish()
                 } else {
                     Toast.makeText(
-                        this@AddFoodActivity,
-                        getString(R.string.check_your_connection),
-                        Toast.LENGTH_SHORT
+                            this@AddFoodActivity,
+                            getString(R.string.check_your_connection),
+                            Toast.LENGTH_SHORT
                     ).show()
                 }
             }
@@ -65,6 +65,17 @@ class AddFoodActivity : AppCompatActivity() {
             }
         })
 
+        setCategorySpinnerAdapter()
+    }
+
+    private fun setCategorySpinnerAdapter() {
+        val adapter: ArrayAdapter<*> = ArrayAdapter.createFromResource(
+                this,
+                R.array.food_categories,
+                R.layout.spinner_item
+        )
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        binding.spCategory.adapter  = adapter
     }
 
 }

@@ -142,7 +142,7 @@ class FoodPlannerFragment : Fragment(), MealPlanAdapter.OnMealPlanItemClickListe
             val changedMealPlanItem = args.getParcelable(EDIT_MEAL_DIALOG_MEAL_ITEM) as MealPlanItem?
             val itemPosition = args.getInt(EDIT_MEAL_DIALOG_MEAL_ITEM_POSITION)
             Log.d(TAG, "onEditDialogResult: called with dialogId $dialogId, mealItem $changedMealPlanItem and $itemPosition")
-            mAdapter?.updateItem(changedMealPlanItem!!, itemPosition)
+            changedMealPlanItem?.let { mAdapter?.updateItem(it, itemPosition) }
 
             foodPlannerViewModel.updateCalories()
         }

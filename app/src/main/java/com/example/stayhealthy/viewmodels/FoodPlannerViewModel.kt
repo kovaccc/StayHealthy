@@ -25,7 +25,7 @@ class FoodPlannerViewModel(
         private val dateSharedPreferences: SharedPreferences,
         prefsHelper: PrefsHelper,
         private val mealPlanRepository: MealPlanRepository,
-        userRepository: UserRepository
+        private val userRepository: UserRepository
 ) : ViewModel() {
 
 //    private var subscriptionJob = Job()
@@ -224,7 +224,7 @@ class FoodPlannerViewModel(
 
         Log.d(TAG, "updateCalories: starts with $currentUser and ${_selectedDateMLD.value!!}")
         viewModelScope.launch {
-            val meals = getMealPlanFromFirestore(currentUser.id, _selectedDateMLD.value!!)
+            val meals = getMealPlanFromFirestore(userRepository.getLocalUserAsync().id, _selectedDateMLD.value!!)
             mealPlanCalories(meals)
         }
         Log.d(TAG, "updateCalories: ends with $currentUser and ${_selectedDateMLD.value!!}")

@@ -21,5 +21,4 @@ class MenuSlidePagerAdapter(fragmentActivity: FragmentActivity, private val node
     override fun createFragment(position: Int): Fragment {
         return FoodMenuFragment.newInstance(nodes[position])
     }
-
 }

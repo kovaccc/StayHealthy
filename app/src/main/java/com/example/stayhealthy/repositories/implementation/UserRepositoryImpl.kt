@@ -116,8 +116,15 @@ class UserRepositoryImpl(
 
 
     override suspend fun createUserInFirestore(user: User): Result<Void?> {
-        profileStorage.persistUser(user)
-        return firebaseStorageManager.createUserInFirestore(user)
+        val result = firebaseStorageManager.createUserInFirestore(user)
+        when (result) {
+            is Result.Success -> {
+                profileStorage.persistUser(user)
+            }
+            else -> {
+            }
+        }
+        return result
     }
 
     override suspend fun getUserFromFirestore(userId: String): Result<User> {
@@ -134,8 +141,15 @@ class UserRepositoryImpl(
 
 
     override suspend fun updateUserInFirestore(user: User): Result<Void?> {
-        profileStorage.persistUser(user)
-        return firebaseStorageManager.updateUserInFirestore(user)
+        val result = firebaseStorageManager.updateUserInFirestore(user)
+        when (result) {
+            is Result.Success -> {
+                profileStorage.persistUser(user)
+            }
+            else -> {
+            }
+        }
+        return result
     }
 
 

@@ -29,7 +29,6 @@ import android.widget.TextView
 import com.example.stayhealthy.data.PrefsHelper
 import com.example.stayhealthy.data.models.domain.User
 import com.example.stayhealthy.ui.dialogs.*
-import com.example.stayhealthy.data.models.persistance.DBUser
 import com.example.stayhealthy.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.content_home.*
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
@@ -69,8 +68,10 @@ class HomeActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
             val intent = Intent(this@HomeActivity, FoodMenuActivity::class.java)
-            intent.putExtra(MEAL_DATE_TRANSFER, mDate)
-            intent.putExtra(CURRENT_USER_ID_TRANSFER, currentUser?.id)
+            intent.apply {
+                putExtra(MEAL_DATE_TRANSFER, mDate)
+                putExtra(CURRENT_USER_ID_TRANSFER, currentUser?.id)
+            }
             startActivity(intent)
         }
 

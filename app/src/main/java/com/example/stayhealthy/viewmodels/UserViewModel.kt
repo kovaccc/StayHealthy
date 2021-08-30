@@ -153,7 +153,7 @@ class UserViewModel(
     }
 
 
-    fun checkUserLoggedIn(): FirebaseUser? {
+    suspend fun checkUserLoggedIn(): FirebaseUser? {
         Log.d(TAG, "checkUserLoggedIn: starts")
         var mFirebaseUser: FirebaseUser? = null
         viewModelScope.launch {
@@ -433,9 +433,6 @@ class UserViewModel(
         Log.d(TAG, "handleSignInResult starts")
         launchDataLoad(activity) {
 
-            val dialog = DialogHelper.createLoadingDialog(activity)
-            dialog.show()
-
             try {
 
                 val account: GoogleSignInAccount? =
@@ -498,8 +495,6 @@ class UserViewModel(
                 Toast.makeText(activity.applicationContext, "Sign In Failed", Toast.LENGTH_SHORT)
                         .show()
             }
-
-            dialog.dismiss()
 
         }
 

@@ -6,8 +6,7 @@ import com.example.stayhealthy.common.contracts.MealPlanContract
 import com.example.stayhealthy.common.contracts.MenuContract
 import com.example.stayhealthy.common.contracts.UsersContract
 import com.example.stayhealthy.common.extensions.await
-import com.example.stayhealthy.common.extensions.capitalizeAllFirst
-import com.example.stayhealthy.config.FIREBASE_STORAGE_BASE
+import com.example.stayhealthy.config.FIREBASE_STORAGE_BASE_URL
 import com.example.stayhealthy.data.models.domain.MealPlanItem
 import com.example.stayhealthy.data.models.domain.User
 import com.example.stayhealthy.data.models.domain.UserFood
@@ -222,7 +221,7 @@ class FirebaseStorageManager {
 
     suspend fun uploadFoodImage(userId: String, image: Uri): Result<Uri?> {
         val storageRef = dbStorage.reference
-        val imageRef = storageRef.child(FIREBASE_STORAGE_BASE)
+        val imageRef = storageRef.child(FIREBASE_STORAGE_BASE_URL)
         val userImageRef = imageRef.child(userId).child(image.lastPathSegment!!) // we want user id in path
 
         return try {
@@ -243,17 +242,10 @@ class FirebaseStorageManager {
 
         return try {
 
-            val food = HashMap<String, Any>()
-            food.apply {
-                put(MenuContract.Columns.MENU_ITEM_NAME, userFood.name.capitalizeAllFirst()) // so you can query easier later
-                put(MenuContract.Columns.MENU_ITEM_CALORIES, userFood.calories)
-                put(MenuContract.Columns.MENU_ITEM_QUANTITY, userFood.quantity)
-                put(MenuContract.Columns.MENU_ITEM_IMAGE, userFood.image)
-            }
-
+            val food = userFood.asFood()
             val usersFoodRef = firebaseInstance.getReference(MenuContract.ROOT_NAME)
-                .child(MenuContract.USERS_FOOD_CHILD).child(userFood.category)
-                .child(userId).push()
+                    .child(MenuContract.USERS_FOOD_CHILD).child(userId).child(userFood.category)
+                    .push()
 
             usersFoodRef.setValue(food).await()
 
@@ -263,23 +255,22 @@ class FirebaseStorageManager {
     }
 
     fun createUserFoodQuery(
-        userId: String,
-        category: String
+            userId: String,
+            category: String
     ): Query {
 
         return firebaseInstance.getReference(MenuContract.ROOT_NAME)
-            .child(MenuContract.USERS_FOOD_CHILD).child(category)
-            .child(userId)
+                .child(MenuContract.USERS_FOOD_CHILD).child(userId).child(category)
 
     }
 
     fun createUserFoodQuerySearchCondition(userId: String, category: String, searchCondition: String): Query {
 
         return firebaseInstance.getReference(MenuContract.ROOT_NAME)
-            .child(MenuContract.USERS_FOOD_CHILD).child(category).child(userId)
-            .orderByChild(
-            MenuContract.Columns.MENU_ITEM_NAME
-        ).startAt(searchCondition).endAt(searchCondition + "\uf8ff")
+                .child(MenuContract.USERS_FOOD_CHILD).child(userId).child(category)
+                .orderByChild(
+                        MenuContract.Columns.MENU_ITEM_NAME
+                ).startAt(searchCondition).endAt(searchCondition + "\uf8ff")
     }
 
 }

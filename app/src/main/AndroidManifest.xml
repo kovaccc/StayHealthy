@@ -29,11 +29,14 @@
 
         <activity
             android:name=".ui.activities.AddFoodActivity"
+            android:label="@string/menu_add_food"
             android:parentActivityName=".ui.activities.FoodMenuActivity">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activities.FoodMenuActivity" />
+
+
         </activity>
         <activity android:name=".ui.activities.SplashActivity">
             <intent-filter>
@@ -44,12 +47,23 @@
         </activity>
         <activity
             android:name=".ui.activities.FoodMenuActivity"
-            android:label="@string/title_activity_food_menu"
+            android:label="@string/app_food"
             android:parentActivityName=".ui.activities.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activities.HomeActivity" />
+
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+
+
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
         </activity>
         <activity
             android:name=".ui.activities.HomeActivity"
@@ -58,7 +72,7 @@
         <activity
             android:name=".ui.activities.ParameterActivity"
             android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activities.LoginActivity"
             android:screenOrientation="portrait" />

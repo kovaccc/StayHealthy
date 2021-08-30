@@ -82,5 +82,14 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="Spinner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/imagesize_small</item>
+        <item name="android:layout_marginTop">@dimen/margin_3xlarge</item>
+        <item name="android:background">@drawable/shape_rounded_filled_noborder</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/textsize_large</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 
 </resources>

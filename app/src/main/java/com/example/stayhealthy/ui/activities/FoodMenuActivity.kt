@@ -1,6 +1,8 @@
 package com.example.stayhealthy.ui.activities
 
 import android.app.Activity
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -10,16 +12,18 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
 import com.example.stayhealthy.*
+import com.example.stayhealthy.common.contracts.MenuContract
+import com.example.stayhealthy.common.extensions.capitalizeAllFirst
 import com.example.stayhealthy.ui.dialogs.*
 import com.example.stayhealthy.ui.adapters.MenuSlidePagerAdapter
 import com.example.stayhealthy.data.models.domain.Food
 import com.example.stayhealthy.data.models.domain.MealPlanItem
-import com.example.stayhealthy.common.contracts.MenuContract
 import com.example.stayhealthy.common.extensions.hasPermissions
 import com.example.stayhealthy.common.extensions.toast
 import com.example.stayhealthy.config.ADD_FOOD_URI
@@ -33,6 +37,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_food_menu.*
 import kotlinx.android.synthetic.main.content_food_menu.*
+import kotlinx.android.synthetic.main.fragment_food_menu.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 private const val TAG = "FoodMenuActivity"
@@ -44,6 +49,8 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
 
     private var date: Long? = null
     private var userId: String? = null
+
+    private var searchView: SearchView? = null
 
     private val mealPlanViewModel: MealPlanViewModel by viewModel()
     private val foodMenuViewModel: FoodMenuViewModel by viewModel()
@@ -61,13 +68,18 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
             userId = intent.extras?.getString(CURRENT_USER_ID_TRANSFER)
         }
 
-
         mealPlanViewModel.toastLD.observe(this, { message ->
             message?.let {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 mealPlanViewModel.onToastShown()
             }
         })
+
+        foodMenuViewModel.tabSelectedFoodCategoryLD.observe(this, { category ->
+            Log.d(TAG, "onCreate: search hint is $category")
+            searchView?.queryHint = getString(R.string.search_food_hint, category)
+        })
+
 
         Log.d(TAG, "onCreate: intent date is $date, userid is $userId")
         setUpPager()
@@ -76,14 +88,7 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
 
     private fun setUpPager() {
 
-        val menuNodesList = arrayListOf(
-                MenuContract.FRUITS_NODE_NAME,
-                MenuContract.GRAINS_PASTA_NODE_NAME,
-                MenuContract.PROTEINS_NODE_NAME,
-                MenuContract.VEGETABLES_NODE_NAME
-        )
-
-        val pagerAdapter = MenuSlidePagerAdapter(this, menuNodesList)
+        val pagerAdapter = MenuSlidePagerAdapter(this, MenuContract.menuNodesList)
         viewPager_food_menu.adapter = pagerAdapter
         viewPager_food_menu.setPageTransformer(ZoomOutPageTransformer())
 
@@ -91,9 +96,18 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
             tab.text = pagerAdapter.getTitle(position)
         }.attach()
 
+        foodMenuViewModel.tabSelectedFoodCategoryMLD.value =
+                MenuContract.menuNodesList[viewPager_food_menu.currentItem]
+
         tab_food_menu.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-               foodMenuViewModel.getFoodOptionsCategory(category = menuNodesList[tab?.position!!])
+                foodMenuViewModel.tabSelectedFoodCategoryMLD.value = MenuContract.menuNodesList[tab?.position!!]
+                searchView?.query?.let { query ->
+                    if (query.isNotEmpty()) {
+                        search(query.toString())
+                    }
+                }
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -148,7 +162,39 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_food, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView = menu?.findItem(R.id.app_bar_search)?.actionView as SearchView
+        searchView?.maxWidth = Integer.MAX_VALUE
+        val searchableInfo = searchManager.getSearchableInfo(componentName)
+        searchView?.setSearchableInfo(searchableInfo)
+        searchView?.queryHint = getString(R.string.search_food_hint,
+                foodMenuViewModel.tabSelectedFoodCategoryMLD.value)
+
+
+
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d(TAG, ".onQueryTextChange: called")
+                search(newText)
+                return false
+            }
+        })
+
         return true
+    }
+
+    private fun search(string: String?) {
+        if (string?.isNotEmpty() == true) {
+            val stringAllUpper = string.capitalizeAllFirst()
+            foodMenuViewModel.getFoodOptionsSearchCondition(stringAllUpper)
+        } else {
+            foodMenuViewModel.getFoodOptionsCategory()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

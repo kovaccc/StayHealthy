@@ -6,12 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stayhealthy.data.models.domain.Food
 import com.example.stayhealthy.R
-import com.example.stayhealthy.common.extensions.capitalizeAllFirst
 import com.example.stayhealthy.ui.adapters.FoodAdapter
 import com.example.stayhealthy.viewmodels.FoodMenuViewModel
 import kotlinx.android.synthetic.main.fragment_food_menu.*
@@ -30,12 +28,6 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
 
     private var mAdapter: FoodAdapter? = null
 
-    private var isFirstInit: Boolean = true
-
-    var date: String? = null
-
-    var category: String? = null
-
     private val foodMenuViewModel by sharedViewModel<FoodMenuViewModel>()
 
     override fun onCreateView(
@@ -49,16 +41,16 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
 
         root.searchFood.isFocusable = false
 
-        root.searchFood.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                search(newText)
-                return true
-            }
-        })
+//        root.searchFood.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(newText: String): Boolean {
+//                search(newText)
+//                return true
+//            }
+//        })
 
         Log.d(TAG, "onCreateView ends")
         return root
@@ -68,11 +60,7 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
         Log.d(TAG, "onViewCreated starts")
         super.onViewCreated(view, savedInstanceState)
         recycler_food.layoutManager = LinearLayoutManager(context)
-        if (category != null) {
-            searchFood.queryHint = getString(R.string.search_food_hint, category)
-        }
         Log.d(TAG, "onViewCreated ends")
-
     }
 
 
@@ -89,52 +77,29 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
         Log.d(TAG, "onCreate: called")
         super.onCreate(savedInstanceState)
 
-
-        category = arguments?.getString(ARG_FOOD_CATEGORY)
-        Log.d(TAG, "onCreate: arguments are category: $category")
-
-        category?.let { foodMenuViewModel.getFoodOptionsCategory(it) }
-
-        foodMenuViewModel.currentFoodLD.observe(this, { options ->
-            Log.d(
-                    TAG,
-                    "onCreate: observing options with value $options, and first init $isFirstInit"
-            )
-                    mAdapter = FoodAdapter(options, this)
-                    recycler_food.adapter = mAdapter
-                    isFirstInit = false
-                    mAdapter?.startListening()
+        foodMenuViewModel.currentFoodOptionsLD.observe(this, { options ->
+            mAdapter = FoodAdapter(options, this)
+            recycler_food.adapter = mAdapter
+            mAdapter?.startListening()
         })
 
-        foodMenuViewModel.isUserFoodLD.observe(this, { options ->
-            Log.d(
-                TAG,
-                "onCreate: isUserFoodLD is $options"
-            )
-            foodMenuViewModel.getFoodOptionsCategory(category!!)
+        foodMenuViewModel.isUserFoodLD.observe(this, {
+            foodMenuViewModel.getFoodOptionsCategory()
+        })
+
+        foodMenuViewModel.tabSelectedFoodCategoryLD.observe(this, { category ->
+            foodMenuViewModel.getFoodOptionsCategory()
+            category?.let { it -> searchFood.queryHint = getString(R.string.search_food_hint, it) }
         })
 
         Log.d(TAG, "onCreate: ends")
-    }
-
-    private fun search(string: String) {
-
-        category?.let { category ->
-            if (string.isNotEmpty()) {
-                val stringAllUpper = string.capitalizeAllFirst()
-                foodMenuViewModel.getFoodOptionsSearchCondition(category, stringAllUpper)
-            } else {
-                foodMenuViewModel.getFoodOptionsCategory(category)
-            }
-
-        }
     }
 
 
 
 
     override fun onAddClick(foodItem: Food) { // open dialog in activity better then here
-        (activity as OnFoodAdd?)?.onFoodAdd(foodItem, category!!)
+        foodMenuViewModel.tabSelectedFoodCategoryMLD.value?.let { (activity as OnFoodAdd?)?.onFoodAdd(foodItem, it) }
     }
 
     override fun onStart() {
@@ -145,6 +110,7 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
     override fun onStop() {
         super.onStop()
         mAdapter?.stopListening()
+
     }
 
     companion object {
@@ -161,7 +127,5 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
                     }
                 }
     }
-
-
 
 }

@@ -5,13 +5,14 @@ import android.content.res.Resources
 import android.net.Uri
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.stayhealthy.R
 import com.google.android.material.textfield.TextInputEditText
 
-fun View.validateEmail() : Boolean {
+fun View.validateEmail(): Boolean {
     val email = (this as TextInputEditText).text.toString().trim()
     return if (!email.contains("@") && !email.contains(".")) {
         this.error = Resources.getSystem().getString(R.string.enter_valid_email)
@@ -23,7 +24,6 @@ fun View.validateEmail() : Boolean {
         true
     }
 }
-
 
 
 fun View.validatePassword(): Boolean {
@@ -46,10 +46,16 @@ fun View.hideKeyboard() {
 
 fun ImageView.setImageWithURI(uri: Uri?) {
     Glide.with(this)
-        .load(uri)
-        .centerCrop()
-        .transition(DrawableTransitionOptions.withCrossFade())
-        .error(R.drawable.placeholder)
-        .into(this)
+            .load(uri)
+            .centerCrop()
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .error(R.drawable.placeholder)
+            .into(this)
 }
 
+fun EditText.setTextWithDifferenceChecking(textToSet: String?) {
+    if (this.text.toString() != textToSet) {
+        this.setText(textToSet)
+    }
+
+}

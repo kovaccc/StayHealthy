@@ -17,4 +17,4 @@ const val CAMERA_REQUEST_CODE = 9002
 const val ADD_FOOD_URI = "add_food_uri"
 
 
-const val FIREBASE_STORAGE_BASE = "images/"
+const val FIREBASE_STORAGE_BASE_URL = "images/"

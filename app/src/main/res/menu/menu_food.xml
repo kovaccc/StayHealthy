@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/app_bar_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:orderInCategory="5"
+        android:title="@string/app_name"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/menu_add_food"
@@ -22,6 +29,8 @@
         android:orderInCategory="30"
         android:title="@string/menu_app_food"
         app:showAsAction="never"/>
+
+
 
 
 </menu>

@@ -1,6 +1,7 @@
 package com.example.stayhealthy.ui.fragments
 
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,7 +16,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.stayhealthy.R
+import com.example.stayhealthy.common.extensions.setTextWithDifferenceChecking
 import com.example.stayhealthy.data.models.domain.User
+import com.example.stayhealthy.ui.dialogs.DialogHelper
 import com.example.stayhealthy.viewmodels.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.android.synthetic.main.fragment_my_profile.etAge
@@ -36,11 +39,13 @@ class ProfileFragment : Fragment() {
 
     private var adapter: ArrayAdapter<CharSequence?>? = null
 
-    private var ignoreChanges: Boolean = false
-
     private var timer: Timer? = null
 
     private val profileViewModel: ProfileViewModel by viewModel()
+
+    private val loadingDialog: AlertDialog by lazy {
+        DialogHelper.createLoadingDialog(requireActivity())
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -53,6 +58,7 @@ class ProfileFragment : Fragment() {
         root.rgGender_profile_fragment.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.rbMale_profile_fragment -> {
+
                     updateUser()
                 }
                 R.id.rbFemale_profile_fragment -> {
@@ -117,28 +123,30 @@ class ProfileFragment : Fragment() {
         profileViewModel.currentUserLD.observe(this, { user ->
             Log.d(
                     TAG,
-                    "onCreate: observing user with value ${user?.name} and ignoreChanges $ignoreChanges"
+                    "onCreate: observing user with value ${user?.name}"
             )
-
-            if (!ignoreChanges) {
-                etName.setText(user?.name)
-                etAge.setText(user?.age.toString())
-                etWeight.setText(user?.weight.toString())
-                etHeight.setText(user?.height.toString())
+            etName.setTextWithDifferenceChecking(user?.name)
+            etAge.setTextWithDifferenceChecking(user?.age.toString())
+            etWeight.setTextWithDifferenceChecking(user?.weight.toString())
+            etHeight.setTextWithDifferenceChecking(user?.height.toString())
+            if (spinnerActivityLevel.selectedItem.toString() != user?.activityLevel) {
                 val spinnerPosition = adapter?.getPosition(user?.activityLevel)
                 spinnerPosition?.let { spinnerActivityLevel.setSelection(it) }
-                when (user?.gender) {
-                    getString(R.string.sex_male) -> {
+            }
+
+            when (user?.gender) {
+                getString(R.string.sex_male) -> {
+                    if (!rbMale_profile_fragment.isChecked) {
                         rbMale_profile_fragment.isChecked = true
                     }
-                    getString(R.string.sex_female) -> {
+                }
+                getString(R.string.sex_female) -> {
+                    if (!rbFemale_profile_fragment.isChecked) {
                         rbFemale_profile_fragment.isChecked = true
                     }
                 }
             }
 
-            ignoreChanges =
-                    true // after first observing with live data there is no need to observe changes in editText / also avoiding infinite loop with editText on change
             currentUser = user?.asDomain()
         })
 
@@ -156,6 +164,14 @@ class ProfileFragment : Fragment() {
             message?.let {
                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
                 profileViewModel.onToastShown()
+            }
+        })
+
+        profileViewModel.isLoadingLD.observe(this, { isLoading ->
+            if (isLoading) {
+                loadingDialog.show()
+            } else {
+                loadingDialog.dismiss()
             }
         })
 

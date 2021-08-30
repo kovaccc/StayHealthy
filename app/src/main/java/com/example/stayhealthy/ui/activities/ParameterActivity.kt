@@ -39,6 +39,14 @@ class ParameterActivity : AppCompatActivity() {
             user?.id?.let { prefsHelper.saveUserFirstLogin(it, true) }
         })
 
+
+        userViewModel.toastLD.observe(this, { message ->
+            message?.let {
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                userViewModel.onToastShown()
+            }
+        })
+
         setActivityLevelAdapter()
         addListenerOnButton()
         Log.d(TAG, "onCreate: ends")

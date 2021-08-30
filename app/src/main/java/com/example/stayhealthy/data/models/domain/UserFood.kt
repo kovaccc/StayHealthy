@@ -1,6 +1,7 @@
 package com.example.stayhealthy.data.models.domain
 
 import android.os.Parcelable
+import com.example.stayhealthy.common.extensions.capitalizeAllFirst
 import kotlinx.android.parcel.Parcelize
 
 
@@ -21,7 +22,7 @@ data class UserFood(
 
     fun asFood(): Food {
         return Food(
-            Name = name,
+            Name = name.capitalizeAllFirst(),
             Quantity = quantity.toLong(),
             Image = image,
             Calories = calories.toLong()
