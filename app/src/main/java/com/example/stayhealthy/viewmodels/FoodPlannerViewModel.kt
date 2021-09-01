@@ -12,6 +12,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.example.stayhealthy.common.contracts.MenuContract
 import com.example.stayhealthy.config.KEY_DATE_MEAL_PLAN
 import com.example.stayhealthy.data.PrefsHelper
+import com.example.stayhealthy.util.TimeHelper
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
@@ -123,8 +124,8 @@ class FoodPlannerViewModel(
                     "getMealPlanOptionsFromFirestore: starts with $currentUser, date ${_selectedDateMLD.value!!}"
             )
 
-            val startTime = getStartTimeOfDate(_selectedDateMLD.value!!)
-            val endTime = getEndTimeOfDate(_selectedDateMLD.value!!)
+            val startTime = TimeHelper.getStartTimeOfDate(_selectedDateMLD.value!!)
+            val endTime = TimeHelper.getEndTimeOfDate(_selectedDateMLD.value!!)
 
             Log.d(
                     TAG,
@@ -145,37 +146,10 @@ class FoodPlannerViewModel(
         }
     }
 
-    private fun getStartTimeOfDate(date: Long): Long {
-
-        val calendar = GregorianCalendar()
-
-        calendar.timeInMillis = date
-        calendar.set(GregorianCalendar.HOUR_OF_DAY, 0)
-        calendar.set(GregorianCalendar.MINUTE, 0)
-        calendar.set(GregorianCalendar.SECOND, 0)
-        calendar.set(GregorianCalendar.MILLISECOND, 0)
-        return calendar.timeInMillis
-
-    }
 
 
-    private fun getEndTimeOfDate(date: Long): Long {
-
-        val calendar = GregorianCalendar()
-
-        calendar.timeInMillis = date
-        calendar.set(GregorianCalendar.HOUR_OF_DAY, 23)
-        calendar.set(GregorianCalendar.MINUTE, 59)
-        calendar.set(GregorianCalendar.SECOND, 59)
-        calendar.set(
-                GregorianCalendar.MILLISECOND,
-                59
-        ) // needed to put milliseconds because storing objects in milliseconds
-
-        return calendar.timeInMillis
 
 
-    }
 
     private suspend fun getMealPlanFromFirestore(
             userId: String,
@@ -187,8 +161,8 @@ class FoodPlannerViewModel(
         var meals = ArrayList<MealPlanItem>()
 
 
-        val startTime = getStartTimeOfDate(date)
-        val endTime = getEndTimeOfDate(date)
+        val startTime = TimeHelper.getStartTimeOfDate(date)
+        val endTime = TimeHelper.getEndTimeOfDate(date)
 
         when (val result = withContext(IO) {
             mealPlanRepository.getMealPlanQuery(

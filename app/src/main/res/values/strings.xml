@@ -206,5 +206,12 @@
     <string name="app_food">App food</string>
     <string name="my_food">My food</string>
 
+    <string name="time_to_eat">Time to eat</string>
+    <string name="it_is_lunch_time">It is lunch time!</string>
+    <string name="it_is_dinner_time">It is dinner time!</string>
+    <string name="it_is_breakfast_time">It is breakfast time!</string>
+
+    <string name="you_exceed_required_calories">You exceed required calories for %1s kcal? Do you really want to continue with adding meal item?</string>
+
 
 </resources>

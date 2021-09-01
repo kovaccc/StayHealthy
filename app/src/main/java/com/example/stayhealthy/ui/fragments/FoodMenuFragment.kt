@@ -13,7 +13,6 @@ import com.example.stayhealthy.R
 import com.example.stayhealthy.ui.adapters.FoodAdapter
 import com.example.stayhealthy.viewmodels.FoodMenuViewModel
 import kotlinx.android.synthetic.main.fragment_food_menu.*
-import kotlinx.android.synthetic.main.fragment_food_menu.view.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -38,8 +37,6 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
 
         Log.d(TAG, "onCreateView starts")
         val root = inflater.inflate(R.layout.fragment_food_menu, container, false)
-
-        root.searchFood.isFocusable = false
 
 //        root.searchFood.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 //            override fun onQueryTextSubmit(query: String?): Boolean {
@@ -89,7 +86,6 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
 
         foodMenuViewModel.tabSelectedFoodCategoryLD.observe(this, { category ->
             foodMenuViewModel.getFoodOptionsCategory()
-            category?.let { it -> searchFood.queryHint = getString(R.string.search_food_hint, it) }
         })
 
         Log.d(TAG, "onCreate: ends")

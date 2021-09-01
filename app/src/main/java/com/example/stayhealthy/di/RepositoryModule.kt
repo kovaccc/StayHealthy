@@ -1,5 +1,6 @@
 package com.example.stayhealthy.di
 
+import com.example.stayhealthy.repositories.ResourceRepository
 import com.example.stayhealthy.repositories.implementation.FoodRepositoryImpl
 import com.example.stayhealthy.repositories.implementation.KnowledgeRepositoryImpl
 import com.example.stayhealthy.repositories.implementation.MealPlanRepositoryImpl
@@ -12,4 +13,5 @@ val repositoryModule = module {
     single { MealPlanRepositoryImpl(get()) }
     single { FoodRepositoryImpl(get(), get()) }
     single { KnowledgeRepositoryImpl(get()) }
+    single { ResourceRepository(get()) }
 }

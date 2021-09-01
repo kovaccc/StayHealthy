@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.activities.FoodMenuActivity"
     android:background="@color/secondaryColor">
 
@@ -11,17 +10,6 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
-    <SearchView
-        android:layout_width="match_parent"
-        android:id="@+id/searchFood"
-        android:background="@drawable/corner_date_edittext"
-        android:iconifiedByDefault="false"
-        android:layout_height="?attr/actionBarSize"
-        android:padding="@dimen/padding_small"
-        android:layout_margin="@dimen/margin_extrasmall"
-        app:queryHint="@string/query_hint_search"
-        android:focusable="true"
-        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
