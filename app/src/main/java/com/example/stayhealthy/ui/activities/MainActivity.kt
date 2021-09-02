@@ -16,6 +16,7 @@ private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
+
     private val prefsHelper: PrefsHelper by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {

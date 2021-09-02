@@ -28,7 +28,6 @@ private const val TAG = "AlarmReceiver"
 class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
     private val res: ResourceRepository by inject()
-    private val workManager: WorkManager by inject()
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
@@ -78,7 +77,7 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
                             )
                     )
                     .build()
-            workManager.enqueueUniqueWork("NotificationWorker", ExistingWorkPolicy.KEEP, uploadWork)
+            WorkManager.getInstance(context).enqueueUniqueWork("NotificationWorker", ExistingWorkPolicy.KEEP, uploadWork)
         }
 
     }

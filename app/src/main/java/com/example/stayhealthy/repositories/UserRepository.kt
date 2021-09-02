@@ -18,6 +18,8 @@ interface UserRepository {
 
     suspend fun getLocalUserAsync(): User
 
+    fun getUserNullable(): User?
+
     suspend fun logInUserFromAuthWithEmailAndPassword(
             email: String,
             password: String

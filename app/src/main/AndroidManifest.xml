@@ -102,7 +102,7 @@
         </activity>
 
 
-        <receiver android:name="com.example.stayhealthy.service.alarm.mealalarm.AlarmReceiver" />
+        <receiver android:name=".service.alarm.AlarmReceiver" />
         <receiver
             android:name=".service.alarm.AlarmBootReceiver"
             android:enabled="false">

@@ -91,10 +91,12 @@ class HomeActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
             when (destination.id) {
                 R.id.nav_log_out -> {
+
                     userViewModel.logOutUser()
                     val intent = Intent(this@HomeActivity, MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
+
                 }
                 R.id.nav_food_planner -> {
                     fab.show()

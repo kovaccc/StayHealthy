@@ -39,6 +39,10 @@ class UserRepositoryImpl(
         return profileStorage.getUserAsync()
     }
 
+    override fun getUserNullable(): User? {
+        return profileStorage.getUserNullable()
+    }
+
     override suspend fun logInUserFromAuthWithEmailAndPassword(
             email: String,
             password: String

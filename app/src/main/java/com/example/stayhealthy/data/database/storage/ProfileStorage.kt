@@ -12,6 +12,8 @@ class ProfileStorage(private val userDao: UserDao) {
     val user: User
         get() = userDao.getUser().asDomain()
 
+    fun getUserNullable() = userDao.getUserNullable()?.asDomain()
+
     suspend fun persistUser(user: User) {
         userDao.insert(user.asDatabase())
     }
