@@ -25,3 +25,4 @@ fun Activity.toast(resId: Int) {
     Toasty.info(this, resId, Toast.LENGTH_SHORT, true).show()
 }
 
+

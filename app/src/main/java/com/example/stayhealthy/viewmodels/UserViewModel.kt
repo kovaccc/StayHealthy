@@ -171,6 +171,7 @@ class UserViewModel(
         viewModelScope.launch {
             userRepository.logOutUser()
             _currentUserMLD.postValue(null)
+            prefsHelper.saveSelectedMealPlanDate(GregorianCalendar(Locale.getDefault()).timeInMillis)
         }
 
         Log.d(TAG, "logOutUser: ends")

@@ -35,11 +35,9 @@ class NotificationWorker(private val context: Context, parameters: WorkerParamet
 
         val notificationString = inputData.getString(BUNDLE_KEY_NOTIFICATION)
         val notification = Gson().fromJson(notificationString, NotificationRequest::class.java)
-        Log.d("IVAN", "I A M IN SERVICE ${userRepository.checkUserLoggedIn()}")
+
         failableCall {
-            Log.d("IVAN", "I A M IN SERVICE ${userRepository.checkUserLoggedIn()}")
             if (withContext(IO) { userRepository.checkUserLoggedIn() != null }) {
-                Log.d("IVAN", "user is logged in ")
                 var pendingIntent: PendingIntent? = null
                 when (notification.id) {
                     ALARM_TYPE_RTC_BREAKFAST, ALARM_TYPE_RTC_LUNCH, ALARM_TYPE_RTC_DINNER -> {
@@ -50,13 +48,12 @@ class NotificationWorker(private val context: Context, parameters: WorkerParamet
                     }
                 }
 
+                pendingIntent = createMealAlarmNotificationPendingIntent(context, notification.id)
                 showNotification(
                         context, notification.title, notification.body, pendingIntent,
                         notification.id
                 )
-
             }
-
         }
 
         return Result.success()

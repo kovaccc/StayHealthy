@@ -97,7 +97,9 @@ class FoodPlannerViewModel(
                         )
 
                         _selectedDateMLD.value = date.time
-                        loadMealPlan()
+                        if(userRepository.getUserNullable() != null) {
+                            loadMealPlan()
+                        }
 
                         Log.d(TAG, "dateListener: now date is ${_selectedDateMLD.value}")
                     }

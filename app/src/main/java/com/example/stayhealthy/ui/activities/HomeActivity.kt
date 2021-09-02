@@ -55,9 +55,9 @@ class HomeActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private val userViewModel: UserViewModel by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         Log.d(TAG, "onCreate: starts")
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_home)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)

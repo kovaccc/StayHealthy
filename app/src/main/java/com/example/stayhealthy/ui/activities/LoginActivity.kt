@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() { // only portrait mode is allowed
         Log.d(TAG, "onCreate: starts")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
-        
+
         userViewModel.toastLD.observe(this, { message ->
             message?.let {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
