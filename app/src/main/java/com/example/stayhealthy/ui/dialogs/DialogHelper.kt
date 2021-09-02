@@ -12,27 +12,27 @@ object DialogHelper {
 
     fun createLoadingDialog(activity: Activity): AlertDialog {
         return AlertDialog.Builder(activity).setCancelable(false)
-            .setView(R.layout.layout_loading_dialog).create()
+                .setView(R.layout.layout_loading_dialog).create()
     }
 
 
     fun promptDialog(
-        context: Context,
-        message: String,
-        callback: () -> Unit,
-        positiveText: Int = R.string.ok,
-        negativeText: Int = R.string.cancel,
-        title: Int = 0,
-        canShow: Boolean = true
+            context: Context,
+            message: String,
+            callback: () -> Unit,
+            positiveText: Int = R.string.ok,
+            negativeText: Int = R.string.cancel,
+            title: Int = 0,
+            canShow: Boolean = true
     ) {
         this.canShow = canShow
         safeShow {
             val builder = AlertDialog.Builder(context)
-                .setMessage(message)
-                .setNegativeButton(negativeText, null)
-                .setPositiveButton(positiveText) { _, _ ->
-                    callback()
-                }.setCancelable(false)
+                    .setMessage(message)
+                    .setNegativeButton(negativeText, null)
+                    .setPositiveButton(positiveText) { _, _ ->
+                        callback()
+                    }.setCancelable(false)
             if (title != 0) builder.setTitle(title)
             builder
         }
@@ -43,9 +43,9 @@ object DialogHelper {
         return if (canShow) {
             canShow = false
             return builder()
-                .setOnDismissListener { canShow = true }
-                .create()
-                .also { it.show() }
+                    .setOnDismissListener { canShow = true }
+                    .create()
+                    .also { it.show() }
         } else null
     }
 

@@ -11,8 +11,8 @@ import java.io.File
 
 
 class FoodRepositoryImpl(
-    private val firebaseStorageManager: FirebaseStorageManager,
-    private val imageFileHelper: ImageFileHelper
+        private val firebaseStorageManager: FirebaseStorageManager,
+        private val imageFileHelper: ImageFileHelper
 ) : FoodRepository {
 
     override fun createFoodQuery(category: String): Query {
@@ -28,14 +28,14 @@ class FoodRepositoryImpl(
     }
 
     override fun createUserFoodQuerySearchCondition(
-        userId: String,
-        category: String,
-        searchCondition: String
+            userId: String,
+            category: String,
+            searchCondition: String
     ): Query {
         return firebaseStorageManager.createUserFoodQuerySearchCondition(
-            userId,
-            category,
-            searchCondition
+                userId,
+                category,
+                searchCondition
         )
     }
 

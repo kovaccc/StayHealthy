@@ -1,6 +1,6 @@
 package com.example.stayhealthy.common.base
 
-interface DomainData <DatabaseType> {
+interface DomainData<DatabaseType> {
     fun asDatabase(): DatabaseType
 }
 

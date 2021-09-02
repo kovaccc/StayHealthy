@@ -10,12 +10,9 @@ import android.util.Log
 import android.widget.Toast
 import org.koin.android.ext.android.inject
 import com.example.stayhealthy.data.models.domain.User
-import com.example.stayhealthy.util.TimeHelper
 import com.example.stayhealthy.viewmodels.UserViewModel
 import kotlinx.coroutines.*
-import java.text.SimpleDateFormat
 import java.util.*
-
 
 private const val TAG = "SplashActivity"
 

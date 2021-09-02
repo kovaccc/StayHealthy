@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.FoodMenuActivity"
     android:background="@color/primaryColor"
     android:padding="?attr/dialogPreferredPadding"
-    >
+    tools:context=".ui.activities.FoodMenuActivity">
 
 
     <Button
         android:id="@+id/cancelButton"
         style="?attr/buttonBarPositiveButtonStyle"
         android:layout_width="wrap_content"
-        android:layout_marginEnd="32dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="@+id/okButton"
         app:layout_constraintEnd_toStartOf="@+id/okButton" />
@@ -66,25 +65,25 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tiet_add_quantity"
-            android:layout_weight="2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:hintEnabled="false"
-            app:errorEnabled="true">
+            android:layout_weight="2"
+            app:errorEnabled="true"
+            app:hintEnabled="false">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etAddQuantity"
-            android:hint="@string/hint_food_quantity"
-            android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAddQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            android:layout_height="wrap_content"
+                android:background="@drawable/round_corner_edittext"
 
-            android:background="@drawable/round_corner_edittext"
-            android:inputType="number"
-            android:maxLength="6"
-            android:padding="@dimen/padding_small">
+                android:hint="@string/hint_food_quantity"
+                android:inputType="number"
+                android:maxLength="6"
+                android:padding="@dimen/padding_small">
 
-        </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputEditText>
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -6,18 +6,19 @@ import com.example.stayhealthy.data.models.requests.AddFoodRequest
 import com.example.stayhealthy.util.validation.InputText
 import com.example.stayhealthy.util.validation.InputType
 
-class AddFoodForm: ValidatableForm<AddFoodRequest> {
+class AddFoodForm : ValidatableForm<AddFoodRequest> {
 
     val quantity = InputText(InputType.QUANTITY)
     val calories = InputText(InputType.CALORIES)
     val name = InputText(InputType.FOOD_NAME)
 
-    override val request get() = AddFoodRequest (
-            quantity = quantity.unwrappedValue.toInt(),
-            calories = calories.unwrappedValue.toInt(),
-            name = name.unwrappedValue
+    override val request
+        get() = AddFoodRequest(
+                quantity = quantity.unwrappedValue.toInt(),
+                calories = calories.unwrappedValue.toInt(),
+                name = name.unwrappedValue
 
-    )
+        )
 
     override val mandatoryFields: List<InputText>
         get() = listOf(name, calories, quantity)

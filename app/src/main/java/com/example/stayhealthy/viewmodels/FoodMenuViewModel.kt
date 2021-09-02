@@ -135,7 +135,6 @@ class FoodMenuViewModel(
             )
         }) {
             is Result.Success -> {
-
                 Log.d(
                         TAG,
                         "addUserFood is Result.Success"

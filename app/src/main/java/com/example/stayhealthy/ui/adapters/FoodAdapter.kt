@@ -31,7 +31,6 @@ class FoodAdapter(options: FirebaseRecyclerOptions<Food>?, private val listener:
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int, foodItem: Food) {
         Log.d(TAG, "onBindViewHolder: new view requested")
 
-
         holder.food_image.setImageWithURI(foodItem.Image.toUri())
 
         holder.bind(foodItem, listener)

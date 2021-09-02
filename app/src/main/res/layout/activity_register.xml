@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondaryColor"
-    tools:context=".ui.RegisterActivity"
-    >
+    tools:context=".ui.activities.RegisterActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal"
@@ -24,33 +23,33 @@
 
     <ImageView
         android:id="@+id/iv_signup_myplate"
-        android:contentDescription="@string/image_my_plate"
-        android:scaleType="fitCenter"
         android:layout_width="@dimen/imagesize_medium"
         android:layout_height="@dimen/imagesize_medium"
         android:layout_margin="@dimen/margin_large"
+        android:contentDescription="@string/image_my_plate"
+        android:scaleType="fitCenter"
         android:src="@drawable/image_app"
-        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/guideline_horizontal"
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tv_signup_create_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="1"
+
+
+        android:shadowDy="1"
+        android:shadowRadius="2"
         android:text="@string/create_account"
         android:textColor="@color/primaryTextColor"
-
+        android:textSize="@dimen/textsize_xxlarge"
 
         android:typeface="sans"
-        android:shadowColor="@android:color/black"
-        android:shadowRadius="2"
-        android:shadowDx="1"
-        android:shadowDy="1"
-
-        android:textSize="@dimen/textsize_xxlarge"
         app:layout_constraintLeft_toLeftOf="@+id/guideline_vertical"
         app:layout_constraintRight_toRightOf="@+id/guideline_vertical"
         app:layout_constraintTop_toBottomOf="@id/iv_signup_myplate" />
@@ -69,16 +68,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_signup_create_account">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:background="@drawable/round_corner_edittext"
-            android:padding="@dimen/padding_small"
-
             android:id="@+id/tiet_signup_name"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
+            android:background="@drawable/round_corner_edittext"
             android:drawableStart="@drawable/ic_person"
             android:drawablePadding="@dimen/margin_small"
-            android:inputType="text"
             android:hint="@string/hint_name"
+            android:inputType="text"
+            android:padding="@dimen/padding_small"
             android:textSize="@dimen/textsize_large" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,16 +95,16 @@
         app:layout_constraintTop_toBottomOf="@+id/til_signup_name">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:background="@drawable/round_corner_edittext"
-            android:padding="@dimen/padding_small"
-
             android:id="@+id/tiet_singup_email"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
+            android:background="@drawable/round_corner_edittext"
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="@dimen/margin_small"
-            android:inputType="textEmailAddress"
             android:hint="@string/hint_email"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/padding_small"
             android:textSize="@dimen/textsize_large" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,15 +127,15 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiet_signup_password"
 
-            android:background="@drawable/round_corner_edittext"
-            android:padding="@dimen/padding_small"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            android:background="@drawable/round_corner_edittext"
             android:drawableStart="@drawable/ic_lock"
             android:drawablePadding="@dimen/margin_medium"
             android:hint="@string/password"
             android:inputType="textPassword"
+            android:padding="@dimen/padding_small"
             android:textSize="@dimen/textsize_large" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -178,8 +177,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_signup_signup" />
-
-
 
 
     <!--iv_register_facebook-->
@@ -236,8 +233,8 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/tvHaveAccount"
-        app:layout_constraintTop_toBottomOf="@id/tv_signup_orregisterwith"
         app:layout_constraintLeft_toRightOf="@id/iv_register_facebook"
-        app:layout_constraintRight_toLeftOf="@id/iv_register_google" />
+        app:layout_constraintRight_toLeftOf="@id/iv_register_google"
+        app:layout_constraintTop_toBottomOf="@id/tv_signup_orregisterwith" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

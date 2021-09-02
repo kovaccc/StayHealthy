@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondaryColor"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
 
 
     <androidx.core.widget.NestedScrollView
@@ -31,10 +29,9 @@
                 android:layout_height="wrap_content"
 
 
-
-                android:layout_marginBottom="@dimen/margin_large"
                 android:layout_marginStart="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
+                android:layout_marginBottom="@dimen/margin_large"
 
                 android:orientation="horizontal">
 
@@ -60,8 +57,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
-                    android:hint="@string/hint_enter_name"
                     android:background="@drawable/round_corner_edittext"
+                    android:hint="@string/hint_enter_name"
                     android:padding="@dimen/padding_small">
 
                 </EditText>
@@ -167,10 +164,10 @@
 
                     android:id="@+id/etAge"
                     android:layout_width="0dp"
-                    android:hint="@string/age_measure_unit"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:background="@drawable/round_corner_edittext"
+                    android:hint="@string/age_measure_unit"
                     android:inputType="number"
                     android:maxLength="3"
                     android:padding="@dimen/padding_small">
@@ -209,9 +206,9 @@
                     android:id="@+id/etWeight"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:hint="@string/weight_measure_unit"
                     android:layout_weight="3"
                     android:background="@drawable/round_corner_edittext"
+                    android:hint="@string/weight_measure_unit"
                     android:inputType="number"
                     android:maxLength="4"
                     android:padding="@dimen/padding_small">
@@ -251,10 +248,10 @@
                 <EditText
                     android:id="@+id/etHeight"
                     android:layout_width="0dp"
-                    android:hint="@string/height_measure_unit"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:background="@drawable/round_corner_edittext"
+                    android:hint="@string/height_measure_unit"
                     android:inputType="number"
                     android:maxLength="3"
                     android:padding="@dimen/padding_small">
@@ -318,9 +315,9 @@
                         android:id="@+id/ivSpinnerArrow"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:contentDescription="@string/spinner_arrow_content_description"
                         android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:contentDescription="@string/spinner_arrow_content_description"
                         android:src="@drawable/ic_action_dropdown" />
 
                 </LinearLayout>
@@ -375,8 +372,7 @@
                     android:shadowRadius="2"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/textsize_large"
-                    android:typeface="sans"
-                    >
+                    android:typeface="sans">
 
                 </TextView>
             </LinearLayout>
@@ -485,8 +481,6 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

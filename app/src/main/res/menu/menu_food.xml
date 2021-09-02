@@ -8,29 +8,27 @@
         android:orderInCategory="5"
         android:title="@string/app_name"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menu_add_food"
         android:icon="@android:drawable/ic_menu_add"
         android:orderInCategory="10"
         android:title="@string/menu_add_food"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
 
     <item
         android:id="@+id/menu_my_food"
         android:orderInCategory="20"
         android:title="@string/menu_my_food"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_app_food"
         android:orderInCategory="30"
         android:title="@string/menu_app_food"
-        app:showAsAction="never"/>
-
-
+        app:showAsAction="never" />
 
 
 </menu>

@@ -6,12 +6,10 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.databinding.BindingAdapter
-import com.example.stayhealthy.R
 import com.google.android.material.textfield.TextInputLayout
 
 object BindingAdapters {
@@ -74,8 +72,8 @@ object BindingAdapters {
     @BindingAdapter("onItemSelected")
     @JvmStatic
     fun setSpinnerItemsListener(
-        spinner: AppCompatSpinner,
-        onItemSelectedListener: AdapterView.OnItemSelectedListener?
+            spinner: AppCompatSpinner,
+            onItemSelectedListener: AdapterView.OnItemSelectedListener?
     ) {
         onItemSelectedListener?.let { it ->
             spinner.onItemSelectedListener = it

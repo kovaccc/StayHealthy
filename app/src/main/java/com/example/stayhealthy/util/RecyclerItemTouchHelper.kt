@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
 
-
 private const val TAG = "RecyclerItemTouch"
 
-class RecyclerItemTouchHelper(context: Context, recyclerView: RecyclerView, private val listener: OnRecyclerTouchListener) : RecyclerView.SimpleOnItemTouchListener()   {
+class RecyclerItemTouchHelper(context: Context, recyclerView: RecyclerView, private val listener: OnRecyclerTouchListener) : RecyclerView.SimpleOnItemTouchListener() {
 
     interface OnRecyclerTouchListener {
         fun onSwipe(viewHolder: RecyclerView.ViewHolder)
@@ -21,7 +20,7 @@ class RecyclerItemTouchHelper(context: Context, recyclerView: RecyclerView, priv
 
     }
 
-   private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
         override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
             return false
         }
@@ -43,7 +42,7 @@ class RecyclerItemTouchHelper(context: Context, recyclerView: RecyclerView, priv
             Log.d(TAG, ".onDoubleTap: starts")
             val childView = recyclerView.findChildViewUnder(e.x, e.y) // if you don't click on recycler item childView will have null value
 
-            if(childView != null) {
+            if (childView != null) {
                 Log.d(TAG, ".onDoubleTap calling listener.onItemDoubleClick")
                 listener.onItemDoubleClick(childView, recyclerView.getChildAdapterPosition(childView))
             }
@@ -60,7 +59,6 @@ class RecyclerItemTouchHelper(context: Context, recyclerView: RecyclerView, priv
 //        return super.onInterceptTouchEvent(rv, e)
         return result
     }
-
 
 
 }

@@ -6,12 +6,12 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Food(
-     var Name: String = "",
-     var Image: String = "",
-     var Quantity: Long = 0,
-     var Calories: Long = 0
+        var Name: String = "",
+        var Image: String = "",
+        var Quantity: Long = 0,
+        var Calories: Long = 0
 ) :
-    Parcelable {
+        Parcelable {
 
     override fun toString(): String { // used for logs
         return "${this.Name}, ${this.Image}, ${this.Quantity}, ${this.Calories}"

@@ -15,10 +15,11 @@ import kotlinx.android.synthetic.main.meal_plan_item.*
 
 
 private const val TAG = "MealPlanAdapter"
+
 class MealPlanAdapter(
-    options: FirestoreRecyclerOptions<MealPlanItem>?,
-    private val listener: OnMealPlanItemClickListener
-) : FirestoreRecyclerAdapter<MealPlanItem, MealPlanViewHolder>(options!!){
+        options: FirestoreRecyclerOptions<MealPlanItem>?,
+        private val listener: OnMealPlanItemClickListener
+) : FirestoreRecyclerAdapter<MealPlanItem, MealPlanViewHolder>(options!!) {
 
 
     interface OnMealPlanItemClickListener {
@@ -31,17 +32,17 @@ class MealPlanAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealPlanViewHolder {
         Log.d(TAG, "onCreateViewHolder: new view requested")
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.meal_plan_item,
-            parent,
-            false
+                R.layout.meal_plan_item,
+                parent,
+                false
         )
         return MealPlanViewHolder(view)
     }
 
     override fun onBindViewHolder(
-        holder: MealPlanViewHolder,
-        position: Int,
-        mealplanItem: MealPlanItem
+            holder: MealPlanViewHolder,
+            position: Int,
+            mealplanItem: MealPlanItem
     ) {
         Log.d(TAG, "onBindViewHolder: new view requested")
 

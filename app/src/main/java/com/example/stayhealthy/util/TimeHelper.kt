@@ -38,8 +38,8 @@ object TimeHelper {
         calendar.set(GregorianCalendar.MINUTE, 59)
         calendar.set(GregorianCalendar.SECOND, 59)
         calendar.set(
-            GregorianCalendar.MILLISECOND,
-            59
+                GregorianCalendar.MILLISECOND,
+                59
         ) // needed to put milliseconds because storing objects in milliseconds
 
         return calendar.timeInMillis

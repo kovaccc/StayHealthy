@@ -87,9 +87,7 @@ class LoginActivity : AppCompatActivity() { // only portrait mode is allowed
         finish()
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
         Log.d(TAG, "onActivityResult: starts")
         super.onActivityResult(requestCode, resultCode, data)
         userViewModel.onActivityResult(requestCode, resultCode, data, this@LoginActivity)

@@ -75,7 +75,7 @@ class AddFoodActivity : AppCompatActivity() {
                 R.layout.spinner_item
         )
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
-        binding.spCategory.adapter  = adapter
+        binding.spCategory.adapter = adapter
     }
 
 }

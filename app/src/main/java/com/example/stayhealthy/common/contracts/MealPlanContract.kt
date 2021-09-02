@@ -4,9 +4,7 @@ import android.provider.BaseColumns
 
 object MealPlanContract {
 
-
     internal const val COLLECTION_NAME = "meal plan"
-
 
     object Columns {
         const val ID = BaseColumns._ID

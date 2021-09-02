@@ -14,23 +14,23 @@ val viewModelModule = module {
     single { UserViewModel(UserRepositoryImpl(get(), get(), get()), get()) }
     viewModel {
         FoodPlannerViewModel(
-            get(named("datePrefs")),
-            get(),
-            MealPlanRepositoryImpl(get()),
-            UserRepositoryImpl(get(), get(), get())
+                get(named("datePrefs")),
+                get(),
+                MealPlanRepositoryImpl(get()),
+                UserRepositoryImpl(get(), get(), get())
         )
     }
     viewModel { ProfileViewModel(UserRepositoryImpl(get(), get(), get())) }
     viewModel {
         FoodMenuViewModel(
-            FoodRepositoryImpl(get(), get()),
-            UserRepositoryImpl(get(), get(), get())
+                FoodRepositoryImpl(get(), get()),
+                UserRepositoryImpl(get(), get(), get())
         )
     }
     viewModel {
         MealPlanViewModel(
-            MealPlanRepositoryImpl(get()),
-            UserRepositoryImpl(get(), get(), get())
+                MealPlanRepositoryImpl(get()),
+                UserRepositoryImpl(get(), get(), get())
         )
     }
     viewModel { KnowledgeViewModel(KnowledgeRepositoryImpl(get())) }

@@ -37,18 +37,6 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
 
         Log.d(TAG, "onCreateView starts")
         val root = inflater.inflate(R.layout.fragment_food_menu, container, false)
-
-//        root.searchFood.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(newText: String): Boolean {
-//                search(newText)
-//                return true
-//            }
-//        })
-
         Log.d(TAG, "onCreateView ends")
         return root
     }
@@ -90,8 +78,6 @@ class FoodMenuFragment : Fragment(), FoodAdapter.OnFoodClickListener {
 
         Log.d(TAG, "onCreate: ends")
     }
-
-
 
 
     override fun onAddClick(foodItem: Food) { // open dialog in activity better then here

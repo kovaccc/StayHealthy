@@ -5,13 +5,13 @@ import com.example.stayhealthy.data.models.persistance.DBUser
 
 
 data class User(
-    var id: String = "",
-    var name: String = "",
-    var gender: String = "",
-    var age: Long = 0,
-    var height: Long = 0,
-    var weight: Long = 0,
-    var activityLevel: String = ""
+        var id: String = "",
+        var name: String = "",
+        var gender: String = "",
+        var age: Long = 0,
+        var height: Long = 0,
+        var weight: Long = 0,
+        var activityLevel: String = ""
 ) : DomainData<DBUser> {
 
 
@@ -21,13 +21,13 @@ data class User(
 
     override fun asDatabase(): DBUser {
         return DBUser(
-            id,
-            name,
-            gender,
-            age,
-            height,
-            weight,
-            activityLevel
+                id,
+                name,
+                gender,
+                age,
+                height,
+                weight,
+                activityLevel
         )
     }
 }

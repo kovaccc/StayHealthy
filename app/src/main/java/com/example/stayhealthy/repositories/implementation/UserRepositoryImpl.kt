@@ -1,6 +1,5 @@
 package com.example.stayhealthy.repositories.implementation
 
-
 import android.content.Context
 import android.util.Log
 import com.example.stayhealthy.data.models.domain.User
@@ -17,7 +16,6 @@ import com.example.stayhealthy.util.FirebaseStorageManager
 import com.google.firebase.auth.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
-
 
 private const val TAG = "UserRepositoryImpl"
 

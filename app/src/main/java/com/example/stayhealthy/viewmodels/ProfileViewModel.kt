@@ -26,10 +26,9 @@ class ProfileViewModel(var userRepository: UserRepository) : ViewModel() {
     val toast: LiveData<String?>
         get() = _toast
 
-    private val isLoadingMLD = MutableLiveData<Boolean>(false)
+    private val isLoadingMLD = MutableLiveData(false)
     val isLoadingLD: LiveData<Boolean>
         get() = isLoadingMLD
-
 
     private val _currentUserCalorieNeedsMLD = MutableLiveData<Int>()
     val currentUserCalorieNeedsLD: LiveData<Int>
@@ -76,7 +75,7 @@ class ProfileViewModel(var userRepository: UserRepository) : ViewModel() {
 
             isLoadingMLD.value = true
 
-            when (val result = withContext(IO) { userRepository.updateUserInFirestore(user).also { isLoadingMLD.postValue(false)  } }) // switch to IO dispatcher for network call
+            when (val result = withContext(IO) { userRepository.updateUserInFirestore(user).also { isLoadingMLD.postValue(false) } }) // switch to IO dispatcher for network call
             {
                 is Result.Success -> {
                     Log.d(TAG, "updateUserInFirestore is Result.Success - $user")

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:gravity="start"
-    android:padding="@dimen/padding_small"
-    android:drawableEnd="@drawable/ic_action_dropdown"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textSize="@dimen/textsize_large"
+    android:drawableEnd="@drawable/ic_action_dropdown"
+    android:gravity="start"
+    android:padding="@dimen/padding_small"
+    android:textAllCaps="false"
     android:textColor="@android:color/white"
-    android:textAllCaps="false" />
+    android:textSize="@dimen/textsize_large" />

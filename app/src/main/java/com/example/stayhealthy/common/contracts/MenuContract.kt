@@ -14,10 +14,10 @@ object MenuContract {
     internal const val VEGETABLES_NODE_NAME = "Vegetables"
 
     val menuNodesList = arrayListOf(
-        FRUITS_NODE_NAME,
-        GRAINS_PASTA_NODE_NAME,
-        PROTEINS_NODE_NAME,
-        VEGETABLES_NODE_NAME
+            FRUITS_NODE_NAME,
+            GRAINS_PASTA_NODE_NAME,
+            PROTEINS_NODE_NAME,
+            VEGETABLES_NODE_NAME
     )
 
 

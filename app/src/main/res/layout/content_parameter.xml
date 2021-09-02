@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondaryColor"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-   >
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollViewParameter"
-        android:paddingBottom="@dimen/padding_xxlarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_xxlarge"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirmData"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -159,12 +157,12 @@
 
                 <EditText
 
-                    android:hint="@string/age_measure_unit"
                     android:id="@+id/etAge"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:background="@drawable/round_corner_edittext"
+                    android:hint="@string/age_measure_unit"
                     android:inputType="number"
                     android:maxLength="3"
                     android:padding="@dimen/padding_small">
@@ -200,13 +198,13 @@
 
 
                 <EditText
-                    android:hint="@string/weight_measure_unit"
-
                     android:id="@+id/etWeight"
+
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:background="@drawable/round_corner_edittext"
+                    android:hint="@string/weight_measure_unit"
                     android:inputType="number"
                     android:maxLength="4"
                     android:padding="@dimen/padding_small">
@@ -245,13 +243,13 @@
 
                 <EditText
 
-                    android:hint="@string/height_measure_unit"
-
                     android:id="@+id/etHeight"
+
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:background="@drawable/round_corner_edittext"
+                    android:hint="@string/height_measure_unit"
                     android:inputType="number"
                     android:maxLength="3"
                     android:padding="@dimen/padding_small">
@@ -307,8 +305,6 @@
                         android:entries="@array/activity_level_arrays"
 
 
-
-
                         android:gravity="center"
                         android:prompt="@string/activity_level_prompt"
                         android:spinnerMode="dropdown"
@@ -316,11 +312,11 @@
 
                     <ImageView
                         android:id="@+id/ivSpinnerArrow"
-                        android:contentDescription="@string/spinner_arrow_content_description"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:contentDescription="@string/spinner_arrow_content_description"
                         android:src="@drawable/ic_action_dropdown" />
 
                 </LinearLayout>

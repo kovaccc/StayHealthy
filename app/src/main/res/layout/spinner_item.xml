@@ -4,8 +4,7 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textSize="@dimen/textsize_large"
-    android:textColor="@android:color/white"
-    android:gravity="center"
     android:height="@dimen/spinnersize_large"
-    />
+    android:gravity="center"
+    android:textColor="@android:color/white"
+    android:textSize="@dimen/textsize_large" />

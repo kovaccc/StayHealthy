@@ -19,29 +19,27 @@
             android:id="@+id/tli_edit"
             android:layout_width="@dimen/imagesize_medium"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_baseline_edit_white_24dp"
-            android:gravity="center"
             android:background="@color/swipe_brown"
             android:contentDescription="@string/edit_button_description"
+            android:gravity="center"
+            android:src="@drawable/ic_baseline_edit_white_24dp"
 
-           />
+            />
 
         <ImageButton
             android:id="@+id/tli_delete"
-            android:src="@drawable/ic_delete_white_24dp"
             android:layout_width="@dimen/imagesize_medium"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:background="@color/swipe_red"
             android:contentDescription="@string/delete_button_description"
-            />
+            android:gravity="center"
+            android:src="@drawable/ic_delete_white_24dp" />
 
     </LinearLayout>
 
 
     <!-- Main Layout -->
-    <androidx.cardview.widget.CardView
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="@dimen/margin_extrasmall">

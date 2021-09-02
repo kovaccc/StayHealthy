@@ -21,9 +21,8 @@ import java.util.*
 private const val TAG = "MealPlanViewModel"
 
 class MealPlanViewModel(
-    private val mealPlanRepository: MealPlanRepository,
-    private val userRepository: UserRepository
-
+        private val mealPlanRepository: MealPlanRepository,
+        private val userRepository: UserRepository
 ) : ViewModel() {
 
     private val _toastMLD = MutableLiveData<String?>()
@@ -32,15 +31,15 @@ class MealPlanViewModel(
 
     fun createMealPlanItemInFirestore(userId: String, mealPlanItem: MealPlanItem) {
         Log.d(
-            TAG,
-            "createMealPlanItemInFirestore starts with  - ${userId}, mealPlanItem $mealPlanItem"
+                TAG,
+                "createMealPlanItemInFirestore starts with  - ${userId}, mealPlanItem $mealPlanItem"
         )
 
         viewModelScope.launch {
             when (val result = withContext(IO) {
                 mealPlanRepository.addMealPlanItem(
-                    userId,
-                    mealPlanItem
+                        userId,
+                        mealPlanItem
                 )
             }) { //switch to IO dispatcher for network call
                 is Result.Success -> {
@@ -59,50 +58,48 @@ class MealPlanViewModel(
     }
 
     suspend fun getCurrentCategoryCalorieNeeds(
-        date: Long,
-        category: String
+            date: Long,
+            category: String
     ): Int {
-        val meals = getMealPlanFromFirestore(userRepository.getLocalUserAsync().id, date)
+        val currentUser = userRepository.getLocalUserAsync()
+        val meals = getMealPlanFromFirestore(currentUser.id, date)
         var categoryCalories = 0
         withContext(Dispatchers.Default) {
             categoryCalories =
-                meals.filter { it.category == category }
-                    .map { it.calories.toInt() }
-                    .sum()
+                    meals.filter { it.category == category }
+                            .map { it.calories.toInt() }
+                            .sum()
         }
-
-        val currentUser = userRepository.getLocalUserAsync()
         val calculationMethods = CalculationMethods(currentUser)
         return calculationMethods.calculateFoodCalorieNeeds(category) - categoryCalories
     }
 
 
     private suspend fun getMealPlanFromFirestore(
-        userId: String,
-        date: Long
+            userId: String,
+            date: Long
     ): ArrayList<MealPlanItem> {
 
         Log.d(TAG, "getMealPlanFromFirestore: starts with $userId AND $date")
 
         var meals = ArrayList<MealPlanItem>()
 
-
         val startTime = TimeHelper.getStartTimeOfDate(date)
         val endTime = TimeHelper.getEndTimeOfDate(date)
 
         when (val result = withContext(IO) {
             mealPlanRepository.getMealPlanQuery(
-                userId,
-                startTime,
-                endTime
+                    userId,
+                    startTime,
+                    endTime
             )
         }) { //background thread for heavy network operation
             is Result.Success -> {
                 result.data?.let { meals = it }
 
                 Log.d(
-                    TAG,
-                    "getMealPlanFromFirestore is Result.Success, meal plan is ${result.data}"
+                        TAG,
+                        "getMealPlanFromFirestore is Result.Success, meal plan is ${result.data}"
                 )
 
             }

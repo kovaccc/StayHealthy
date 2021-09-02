@@ -7,5 +7,6 @@ package com.example.stayhealthy.util
 inline fun failableCall(call: () -> Unit) {
     try {
         call()
-    } catch (e: Throwable) {}
+    } catch (e: Throwable) {
+    }
 }

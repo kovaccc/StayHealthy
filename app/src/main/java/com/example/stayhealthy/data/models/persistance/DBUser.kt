@@ -9,23 +9,23 @@ import com.example.stayhealthy.data.models.domain.User
 
 @Entity(tableName = TABLE_USER)
 data class DBUser(
-    @PrimaryKey val id: String,
-    val name: String,
-    val gender: String,
-    val age: Long,
-    val height: Long,
-    val weight: Long,
-    val activityLevel: String
+        @PrimaryKey val id: String,
+        val name: String,
+        val gender: String,
+        val age: Long,
+        val height: Long,
+        val weight: Long,
+        val activityLevel: String
 ) : Persistable<User> {
     override fun asDomain(): User {
         return User(
-            id,
-            name,
-            gender,
-            age,
-            height,
-            weight,
-            activityLevel
+                id,
+                name,
+                gender,
+                age,
+                height,
+                weight,
+                activityLevel
         )
     }
 }

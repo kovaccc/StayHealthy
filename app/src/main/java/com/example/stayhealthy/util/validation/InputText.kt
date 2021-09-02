@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 
-open class InputText(private val inputType: InputType? = null, errorDebounce: Long = 200L): Input<String> {
+open class InputText(private val inputType: InputType? = null, errorDebounce: Long = 200L) : Input<String> {
 
     override val input: MutableLiveData<String> get() = liveData
 
@@ -18,7 +18,9 @@ open class InputText(private val inputType: InputType? = null, errorDebounce: Lo
 
     override var value: String?
         get() = liveData.value
-        set(value) { value?.let { liveData.value = it } }
+        set(value) {
+            value?.let { liveData.value = it }
+        }
 
     override val error: LiveData<Int?>
         get() = errorLiveData
@@ -40,7 +42,7 @@ open class InputText(private val inputType: InputType? = null, errorDebounce: Lo
             liveData.postValue("")
         }
 
-        return inputType?.let { errorValue == null && value != null} ?: true
+        return inputType?.let { errorValue == null && value != null } ?: true
     }
 
     fun resetInput() {

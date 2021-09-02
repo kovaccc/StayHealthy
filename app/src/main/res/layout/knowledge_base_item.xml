@@ -14,24 +14,23 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primaryDarkColor"
         android:layout_marginBottom="@dimen/margin_small"
-        android:padding="@dimen/padding_large"
-        >
+        android:background="@color/primaryDarkColor"
+        android:padding="@dimen/padding_large">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvKnowledgeItemDescription"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_small"
+            android:text="@{knowledgeBaseItem.description}"
             android:textColor="@android:color/white"
             android:textSize="@dimen/descriptionTextSizeKB"
             android:typeface="sans"
-            android:layout_height="0dp"
-            android:layout_width="0dp"
-            android:layout_marginStart="@dimen/margin_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivKnowledgeItemImage"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@{knowledgeBaseItem.description}"
             tools:text="@tools:sample/lorem" />
 
         <androidx.appcompat.widget.AppCompatImageView

@@ -50,7 +50,7 @@ private const val TAG = "FoodMenuActivity"
 private const val DIALOG_CHANGE_QUANTITY = 1
 
 class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
-    ChangeFoodQuantityDialog.ChangeQuantityDialogEvents {
+        ChangeFoodQuantityDialog.ChangeQuantityDialogEvents {
 
     private var date: Long? = null
     private var userId: String? = null
@@ -102,15 +102,14 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
         }.attach()
 
         foodMenuViewModel.tabSelectedFoodCategoryMLD.value =
-            MenuContract.menuNodesList[viewPager_food_menu.currentItem]
+                MenuContract.menuNodesList[viewPager_food_menu.currentItem]
 
         tab_food_menu.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 foodMenuViewModel.tabSelectedFoodCategoryMLD.value =
-                    MenuContract.menuNodesList[tab?.position!!]
+                        MenuContract.menuNodesList[tab?.position!!]
                 searchView?.setQuery("", false)
                 searchView?.clearFocus()
-
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -144,18 +143,18 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
             val food = args.getParcelable(CHANGE_QUANTITY_DIALOG_FOOD) as Food?
             val category = args.getString(CHANGE_QUANTITY_DIALOG_FOOD_CATEGORY)
             Log.d(
-                TAG,
-                "onAddDialogResult: called with dialogId $dialogId, user $userId, date $date with food item $food, category $category"
+                    TAG,
+                    "onAddDialogResult: called with dialogId $dialogId, user $userId, date $date with food item $food, category $category"
             )
 
             food?.let {
                 val mealPlanItem = MealPlanItem(
-                    id = "",
-                    food.Name,
-                    food.Quantity,
-                    food.Calories,
-                    category ?: "",
-                    date ?: 0
+                        id = "",
+                        food.Name,
+                        food.Quantity,
+                        food.Calories,
+                        category ?: "",
+                        date ?: 0
                 )
 
                 addMealPlanItem(mealPlanItem)
@@ -167,24 +166,24 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
     private fun addMealPlanItem(mealPlanItem: MealPlanItem) {
         CoroutineScope(Main).launch {
             val caloriesDifference = mealPlanViewModel.getCurrentCategoryCalorieNeeds(
-                mealPlanItem.date,
-                mealPlanItem.category
+                    mealPlanItem.date,
+                    mealPlanItem.category
             ) - mealPlanItem.calories
             if (caloriesDifference < 0) {
                 DialogHelper.promptDialog(
-                    context = this@FoodMenuActivity,
-                    message = getString(
-                        R.string.you_exceed_required_calories,
-                        caloriesDifference.absoluteValue.toString()
-                    ),
-                    positiveText = R.string.add,
-                    negativeText = R.string.cancel,
-                    callback = {
-                        mealPlanViewModel.createMealPlanItemInFirestore(
-                            userId ?: "",
-                            mealPlanItem
-                        )
-                    }
+                        context = this@FoodMenuActivity,
+                        message = getString(
+                                R.string.you_exceed_required_calories,
+                                caloriesDifference.absoluteValue.toString()
+                        ),
+                        positiveText = R.string.add,
+                        negativeText = R.string.cancel,
+                        callback = {
+                            mealPlanViewModel.createMealPlanItemInFirestore(
+                                    userId ?: "",
+                                    mealPlanItem
+                            )
+                        }
                 )
             } else {
                 mealPlanViewModel.createMealPlanItemInFirestore(userId ?: "", mealPlanItem)
@@ -202,8 +201,8 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
         val searchableInfo = searchManager.getSearchableInfo(componentName)
         searchView?.setSearchableInfo(searchableInfo)
         searchView?.queryHint = getString(
-            R.string.search_food_hint,
-            foodMenuViewModel.tabSelectedFoodCategoryMLD.value
+                R.string.search_food_hint,
+                foodMenuViewModel.tabSelectedFoodCategoryMLD.value
         )
 
 
@@ -261,30 +260,30 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
             foodMenuViewModel.createImageFileFood()
             foodMenuViewModel.photoFoodFile?.also { file ->
                 val photoURI: Uri = if (
-                    Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                        Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                     FileProvider.getUriForFile(
-                        this,
-                        BuildConfig.APPLICATION_ID,
-                        file
+                            this,
+                            BuildConfig.APPLICATION_ID,
+                            file
                     )
                 } else {
                     Uri.fromFile(foodMenuViewModel.photoFoodFile)
                 }
 
                 takePictureIntent.putExtra(
-                    MediaStore.EXTRA_OUTPUT,
-                    photoURI
+                        MediaStore.EXTRA_OUTPUT,
+                        photoURI
                 )
                 startActivityForResult(
-                    takePictureIntent,
-                    CAMERA_REQUEST_CODE
+                        takePictureIntent,
+                        CAMERA_REQUEST_CODE
                 )
             }
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(
-                    permissions,
-                    CAMERA_REQUEST_CODE
+                        permissions,
+                        CAMERA_REQUEST_CODE
                 )
             }
         }
@@ -308,15 +307,15 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             CAMERA_REQUEST_CODE -> {
                 if (!((grantResults.isNotEmpty() &&
-                            grantResults[0] == PackageManager.PERMISSION_GRANTED))
+                                grantResults[0] == PackageManager.PERMISSION_GRANTED))
                 ) {
                     toast(R.string.accept_permissions)
                 } else {
@@ -325,28 +324,26 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
                     foodMenuViewModel.createImageFileFood()
                     foodMenuViewModel.photoFoodFile?.also { file ->
                         val photoURI: Uri = if (
-                            Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                                Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                             FileProvider.getUriForFile(
-                                this,
-                                BuildConfig.APPLICATION_ID,
-                                file
+                                    this,
+                                    BuildConfig.APPLICATION_ID,
+                                    file
                             )
                         } else {
                             Uri.fromFile(foodMenuViewModel.photoFoodFile)
                         }
                         takePictureIntent.putExtra(
-                            MediaStore.EXTRA_OUTPUT,
-                            photoURI
+                                MediaStore.EXTRA_OUTPUT,
+                                photoURI
                         )
                         startActivityForResult(
-                            takePictureIntent,
-                            CAMERA_REQUEST_CODE
+                                takePictureIntent,
+                                CAMERA_REQUEST_CODE
                         )
                     }
                 }
             }
         }
     }
-
-
 }

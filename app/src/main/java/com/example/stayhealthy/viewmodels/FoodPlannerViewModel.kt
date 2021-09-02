@@ -29,38 +29,26 @@ class FoodPlannerViewModel(
         private val userRepository: UserRepository
 ) : ViewModel() {
 
-//    private var subscriptionJob = Job()
-//    private var subscriptionScope = CoroutineScope(Dispatchers.Main + subscriptionJob)
-//    private val errorHandler = CoroutineExceptionHandler { _, throwable ->
-//        Log.e(TAG, "caught exception $throwable")
-//    }
-
-
     private val _currentMealPlanMLD = MutableLiveData<FirestoreRecyclerOptions<MealPlanItem>>()
     val currentMealPlanLD: LiveData<FirestoreRecyclerOptions<MealPlanItem>>
         get() = _currentMealPlanMLD
 
-
     private val _selectedDateMLD =
-            MutableLiveData<Long?>() // working with Long values since it is preferred way for storing Date in database
+            MutableLiveData<Long?>()
     val selectedDateLD: LiveData<Long?>
         get() = _selectedDateMLD
-
 
     private val _fruitsMLD = MutableLiveData<String>()
     val fruitsLD: LiveData<String>
         get() = _fruitsMLD
 
-
     private val _proteinsMLD = MutableLiveData<String>()
     val proteinsLD: LiveData<String>
         get() = _proteinsMLD
 
-
     private val _grainsPastaMLD = MutableLiveData<String>()
     val grainsPastaLD: LiveData<String>
         get() = _grainsPastaMLD
-
 
     private var _vegetableMLD = MutableLiveData<String>()
     val vegetableLD: LiveData<String>
@@ -70,19 +58,15 @@ class FoodPlannerViewModel(
     val mealCaloriesLD: LiveData<String>
         get() = _mealCaloriesMLD
 
-
     private val toastMLD = MutableLiveData<String?>()
     val toastLD: LiveData<String?>
         get() = toastMLD
-
 
     // using this for logs
     private val myFormat = "EEEE, dd/MM/yy, hh:mm:ss"
     private val sdf = SimpleDateFormat(myFormat, Locale.getDefault())
 
-
     private val currentUser = userRepository.user
-
 
     private val dateListener =
             SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
@@ -97,7 +81,7 @@ class FoodPlannerViewModel(
                         )
 
                         _selectedDateMLD.value = date.time
-                        if(userRepository.getUserNullable() != null) {
+                        if (userRepository.getUserNullable() != null) {
                             loadMealPlan()
                         }
 
@@ -147,10 +131,6 @@ class FoodPlannerViewModel(
 
         }
     }
-
-
-
-
 
 
     private suspend fun getMealPlanFromFirestore(
@@ -283,12 +263,6 @@ class FoodPlannerViewModel(
 //        }
 //    }
 //
-//    private fun resetSubscriptionScope() {
-//        subscriptionScope.cancel()
-//        subscriptionJob.cancel()
-//        subscriptionJob = Job()
-//        subscriptionScope = CoroutineScope(Dispatchers.Main + subscriptionJob)
-//    }
 
 
     fun onToastShown() {

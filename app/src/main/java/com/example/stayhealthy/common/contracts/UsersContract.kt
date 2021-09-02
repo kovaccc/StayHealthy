@@ -5,7 +5,6 @@ import android.provider.BaseColumns
 
 object UsersContract {
 
-
     internal const val COLLECTION_NAME = "users"
 
     // Users fields

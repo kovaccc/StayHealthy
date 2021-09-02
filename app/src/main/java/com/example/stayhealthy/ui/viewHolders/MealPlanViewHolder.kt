@@ -12,10 +12,9 @@ class MealPlanViewHolder(override val containerView: View) : RecyclerView.ViewHo
 
     fun bind(mealPlanItem: MealPlanItem, listener: MealPlanAdapter.OnMealPlanItemClickListener) {
         tvMealPlanItemName.text = mealPlanItem.name
-        tvMealPlanItemCalories.text = this.itemView.context.getString(R.string.food_calorie_value,mealPlanItem.calories.toString())
+        tvMealPlanItemCalories.text = this.itemView.context.getString(R.string.food_calorie_value, mealPlanItem.calories.toString())
         tvMealPlanItemCategory.text = mealPlanItem.category
         tvMealPlanItemQuantity.text = this.itemView.context.getString(R.string.food_quantity_value, mealPlanItem.quantity.toString())
-
 
         tli_edit.setOnClickListener {
             listener.onEditClick(mealPlanItem, this)

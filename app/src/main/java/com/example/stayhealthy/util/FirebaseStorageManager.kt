@@ -49,7 +49,6 @@ class FirebaseStorageManager {
     }
 
 
-
     fun createMealPlanQuery(
             userId: String,
             startDate: Long,

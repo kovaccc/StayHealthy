@@ -8,7 +8,7 @@ import com.example.stayhealthy.data.models.persistance.DBUser
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface UserDao: BaseDao<DBUser> {
+interface UserDao : BaseDao<DBUser> {
 
     @Query("Select * from $TABLE_USER limit 1")
     fun isLoggedIn(): DBUser?
