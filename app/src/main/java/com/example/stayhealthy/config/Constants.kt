@@ -23,6 +23,9 @@ const val FIREBASE_STORAGE_BASE_URL = "images/"
 const val CHANNEL_ID_NOTIFICATIONS = "99541"
 const val CHANNEL_NAME = "StayHealthy"
 
+const val BUNDLE_KEY_ALARM_TYPE = "alarmType"
+const val BUNDLE_KEY_NOTIFICATION = "notification"
 const val BREAKFAST_TIME_HOUR = 8
-const val LUNCH_TIME_HOUR = 12
+const val LUNCH_TIME_HOUR = 14 //TODO
 const val DINNER_TIME_HOUR = 19
+

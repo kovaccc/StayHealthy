@@ -102,9 +102,9 @@
         </activity>
 
 
-        <receiver android:name=".service.mealalarm.AlarmReceiver" />
+        <receiver android:name="com.example.stayhealthy.service.alarm.mealalarm.AlarmReceiver" />
         <receiver
-            android:name=".service.mealalarm.AlarmBootReceiver"
+            android:name=".service.alarm.AlarmBootReceiver"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

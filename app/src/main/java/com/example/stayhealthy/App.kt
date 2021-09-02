@@ -8,7 +8,7 @@ import android.os.Build
 import com.example.stayhealthy.config.CHANNEL_ID_NOTIFICATIONS
 import com.example.stayhealthy.config.CHANNEL_NAME
 import com.example.stayhealthy.di.*
-import com.example.stayhealthy.service.mealalarm.MealTimeNotificationHelper
+import com.example.stayhealthy.service.notifications.MealTimeNotificationHelper
 import com.google.firebase.database.FirebaseDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
