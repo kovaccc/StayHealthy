@@ -122,7 +122,6 @@
             style="@style/InputButton"
             android:enabled="false"
             android:text="@string/menu_add_food"
-            android:textColor="@android:color/white"
             app:inputFieldFirstError="@{viewModel.addFoodForm.name.error}"
             app:inputFieldFirstText="@{viewModel.addFoodForm.name.input}"
             app:inputFieldSecondError="@{viewModel.addFoodForm.quantity.error}"

@@ -3,7 +3,6 @@ package com.example.stayhealthy.service.notifications
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
@@ -21,7 +20,6 @@ import com.example.stayhealthy.ui.activities.HomeActivity
 import com.example.stayhealthy.util.failableCall
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -48,7 +46,6 @@ class NotificationWorker(private val context: Context, parameters: WorkerParamet
                     }
                 }
 
-                pendingIntent = createMealAlarmNotificationPendingIntent(context, notification.id)
                 showNotification(
                         context, notification.title, notification.body, pendingIntent,
                         notification.id

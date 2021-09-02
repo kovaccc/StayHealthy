@@ -39,6 +39,16 @@ class FirebaseStorageManager {
         ).startAt(searchCondition).endAt(searchCondition + "\uf8ff")
     }
 
+    fun createUserFoodQuerySearchCondition(userId: String, category: String, searchCondition: String): Query {
+
+        return firebaseInstance.getReference(MenuContract.ROOT_NAME)
+                .child(MenuContract.USERS_FOOD_CHILD).child(userId).child(category)
+                .orderByChild(
+                        MenuContract.Columns.MENU_ITEM_NAME
+                ).startAt(searchCondition).endAt(searchCondition + "\uf8ff")
+    }
+
+
 
     fun createMealPlanQuery(
             userId: String,
@@ -244,11 +254,18 @@ class FirebaseStorageManager {
         return try {
 
             val food = userFood.asFood()
+            val foodToSave = HashMap<String, Any>()
+            foodToSave.apply {
+                put(MenuContract.Columns.MENU_ITEM_NAME, food.Name)
+                put(MenuContract.Columns.MENU_ITEM_CALORIES, food.Calories)
+                put(MenuContract.Columns.MENU_ITEM_QUANTITY, food.Quantity)
+                put(MenuContract.Columns.MENU_ITEM_IMAGE, food.Image)
+            }
             val usersFoodRef = firebaseInstance.getReference(MenuContract.ROOT_NAME)
                     .child(MenuContract.USERS_FOOD_CHILD).child(userId).child(userFood.category)
                     .push()
 
-            usersFoodRef.setValue(food).await()
+            usersFoodRef.setValue(foodToSave).await()
 
         } catch (exception: java.lang.Exception) {
             Result.Error(exception)
@@ -265,14 +282,6 @@ class FirebaseStorageManager {
 
     }
 
-    fun createUserFoodQuerySearchCondition(userId: String, category: String, searchCondition: String): Query {
-
-        return firebaseInstance.getReference(MenuContract.ROOT_NAME)
-                .child(MenuContract.USERS_FOOD_CHILD).child(userId).child(category)
-                .orderByChild(
-                        MenuContract.Columns.MENU_ITEM_NAME
-                ).startAt(searchCondition).endAt(searchCondition + "\uf8ff")
-    }
 
     fun createKnowledgeBaseQuery(): Query {
         return firebaseInstance.getReference(KnowledgeBaseContract.ROOT_NAME)
