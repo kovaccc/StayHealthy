@@ -31,11 +31,9 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        Log.d("IVAN", " received  ")
         val alarmRequestCode = intent?.getIntExtra(BUNDLE_KEY_ALARM_TYPE, 0)
         when (alarmRequestCode) {
             ALARM_TYPE_RTC_BREAKFAST, ALARM_TYPE_RTC_LUNCH, ALARM_TYPE_RTC_DINNER -> {
-                Log.d("IVAN", " handle meal notificaiton")
                 handleMealNotificationAlarm(context)
             }
             else -> {

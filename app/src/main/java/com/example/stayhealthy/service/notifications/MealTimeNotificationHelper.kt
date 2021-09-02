@@ -38,7 +38,7 @@ object MealTimeNotificationHelper {
                         0,
                         0
                 )
-                ALARM_TYPE_RTC_LUNCH -> TimeHelper.getTimeOfCurrentDay(LUNCH_TIME_HOUR, 45, 0, 0) //TODO
+                ALARM_TYPE_RTC_LUNCH -> TimeHelper.getTimeOfCurrentDay(LUNCH_TIME_HOUR, 0, 0, 0)
                 ALARM_TYPE_RTC_DINNER -> TimeHelper.getTimeOfCurrentDay(DINNER_TIME_HOUR, 0, 0, 0)
                 else -> TimeHelper.getTimeOfCurrentDay(BREAKFAST_TIME_HOUR, 0, 0, 0)
             }
