@@ -205,21 +205,19 @@ class UserViewModel(
     }
 
 
-    fun updateUserInFirestore(user: User, activity: Activity) {
+    suspend fun updateUserInFirestore(user: User, activity: Activity) {
         Log.d(TAG, "updateUserInFirestore starts with - $user")
-        viewModelScope.launch { //main dispatcher
-            when (val result =
-                    withContext(IO) { userRepository.updateUserInFirestore(user) }) { //for network operation switch dispatcher
-                is Result.Success -> {
-                    _currentUserMLD.value = user
-                    Log.d(TAG, "updateUserInFirestore is Result.Success - $user")
-                }
-                is Result.Error -> {
-                    toastMLD.value = result.exception.message
-                }
-                is Result.Canceled -> {
-                    toastMLD.value = activity.getString(R.string.request_canceled)
-                }
+        when (val result =
+                withContext(IO) { userRepository.updateUserInFirestore(user) }) { //for network operation switch dispatcher
+            is Result.Success -> {
+                _currentUserMLD.value = user
+                Log.d(TAG, "updateUserInFirestore is Result.Success - $user")
+            }
+            is Result.Error -> {
+                toastMLD.value = result.exception.message
+            }
+            is Result.Canceled -> {
+                toastMLD.value = activity.getString(R.string.request_canceled)
             }
         }
         Log.d(TAG, "updateUserInFirestore ends with - $currentUserLD")

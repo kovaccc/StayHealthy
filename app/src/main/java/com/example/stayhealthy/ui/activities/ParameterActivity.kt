@@ -8,12 +8,16 @@ import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.stayhealthy.R
+import com.example.stayhealthy.common.extensions.toast
 import com.example.stayhealthy.data.PrefsHelper
 import com.example.stayhealthy.data.models.domain.User
+import com.example.stayhealthy.ui.dialogs.DialogHelper
+import com.example.stayhealthy.util.ConnectionManager
 import com.example.stayhealthy.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.activity_parameter.*
 import kotlinx.android.synthetic.main.content_parameter.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.Main
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -90,12 +94,23 @@ class ParameterActivity : AppCompatActivity() {
                             spinnerActivityLevel.selectedItem.toString()
                     )
 
-                    userViewModel.updateUserInFirestore(
-                            user,
-                            this
-                    ) // userViewModel is singleton / coroutines inside won't be cancelled until onCleared() is called
+                    CoroutineScope(Main).launch {
+                        if (ConnectionManager.isInternetAvailable()) {
+                            val dialog = DialogHelper.createLoadingDialog(this@ParameterActivity)
+                            dialog.show()
+                            userViewModel.updateUserInFirestore(
+                                    user,
+                                    this@ParameterActivity
+                            )
+                            dialog.dismiss()
+                            startActivity(HomeActivity())
+                        } else {
+                            toast(R.string.check_your_connection)
+                        }
+                    }
+
                 }
-                startActivity(HomeActivity())
+
             }
         }
     }
