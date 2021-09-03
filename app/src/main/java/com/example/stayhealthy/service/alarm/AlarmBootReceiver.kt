@@ -10,7 +10,9 @@ class AlarmBootReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent) {
         if (intent.action == "android.intent.action.BOOT_COMPLETED") {
             context?.let {
-                MealTimeNotificationHelper.scheduleRepeatingRTCMealTimeNotification(it)
+                if (!MealTimeNotificationHelper.checkIfAlarmsExists(it)) {
+                    MealTimeNotificationHelper.scheduleRepeatingRTCMealTimeNotification(it)
+                }
             }
         }
     }

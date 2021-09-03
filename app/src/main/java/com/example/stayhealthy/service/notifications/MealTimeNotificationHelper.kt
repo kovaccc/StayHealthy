@@ -61,6 +61,21 @@ object MealTimeNotificationHelper {
 
     }
 
+    fun checkIfAlarmsExists(context: Context): Boolean {
+        val intent = Intent(context, AlarmReceiver::class.java)
+        var isExisting = true
+        requestCodeArray.forEach { requestCode ->
+            if (PendingIntent.getBroadcast(
+                            context,
+                            requestCode,
+                            intent,
+                            PendingIntent.FLAG_NO_CREATE
+                    ) == null) {
+                isExisting = false
+            }
+        }
+        return isExisting
+    }
 
     private fun cancelMealTimeAlarmRTC() {
         for (requestCode in requestCodeArray) {

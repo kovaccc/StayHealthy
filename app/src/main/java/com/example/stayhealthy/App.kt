@@ -46,8 +46,10 @@ class App :
 
     private fun scheduleMealAlarms() {
         applicationContext?.let { context ->
-            MealTimeNotificationHelper.scheduleRepeatingRTCMealTimeNotification(context)
-            MealTimeNotificationHelper.enableBootReceiver(context)
+            if (!MealTimeNotificationHelper.checkIfAlarmsExists(context)) {
+                MealTimeNotificationHelper.scheduleRepeatingRTCMealTimeNotification(context)
+                MealTimeNotificationHelper.enableBootReceiver(context)
+            }
         }
     }
 
