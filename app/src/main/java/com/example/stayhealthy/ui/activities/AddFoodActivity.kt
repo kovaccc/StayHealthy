@@ -1,5 +1,6 @@
 package com.example.stayhealthy.ui.activities
 
+import android.app.AlertDialog
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,6 +26,10 @@ class AddFoodActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddFoodBinding
     private val foodFileUri get() = intent.extras?.getParcelable<Uri>(ADD_FOOD_URI)
 
+    private val loadingDialog: AlertDialog by lazy {
+        DialogHelper.createLoadingDialog(this@AddFoodActivity)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,10 +49,7 @@ class AddFoodActivity : AppCompatActivity() {
         buttonAddFood.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
                 if (ConnectionManager.isInternetAvailable()) {
-                    val dialog = DialogHelper.createLoadingDialog(this@AddFoodActivity)
-                    dialog.show()
                     foodFileUri?.let { foodFileUri -> foodMenuViewModel.addUserFood(foodFileUri) }
-                    dialog.dismiss()
                     finish()
                 } else {
                     Toast.makeText(
@@ -62,6 +64,15 @@ class AddFoodActivity : AppCompatActivity() {
         foodMenuViewModel.toast.observe(this, { message ->
             message?.let {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+
+        foodMenuViewModel.isLoadingLD.observe(this, { isLoading ->
+            if (isLoading) {
+                loadingDialog.show()
+            } else {
+                loadingDialog.dismiss()
             }
         })
 

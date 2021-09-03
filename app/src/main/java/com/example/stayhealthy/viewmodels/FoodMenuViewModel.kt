@@ -49,6 +49,11 @@ class FoodMenuViewModel(
     val tabSelectedFoodCategoryLD: LiveData<String>
         get() = tabSelectedFoodCategoryMLD
 
+
+    private val isLoadingMLD = MutableLiveData(false)
+    val isLoadingLD: LiveData<Boolean>
+        get() = isLoadingMLD
+
     val onFoodCategorySelected = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             spinnerSelectedFoodCategory.value = parent?.getItemAtPosition(position).toString()
@@ -127,13 +132,14 @@ class FoodMenuViewModel(
             )
         }
 
+        isLoadingMLD.value = true
         when (val result = withContext(Dispatchers.IO) {
             foodRepository.addUserFood(
                     userRepository.getLocalUserAsync().id,
                     userFood,
                     uri
             )
-        }) {
+        }.also { isLoadingMLD.postValue(false) }) {
             is Result.Success -> {
                 Log.d(
                         TAG,
