@@ -28,6 +28,7 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
     private val res: ResourceRepository by inject()
 
+    // you have only 10 seconds same like FCM push notifications
     override fun onReceive(context: Context?, intent: Intent?) {
 
         val alarmRequestCode = intent?.getIntExtra(BUNDLE_KEY_ALARM_TYPE, 0)
