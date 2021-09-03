@@ -250,4 +250,6 @@ class ProfileFragment : Fragment() {
             getString(R.string.sex_female)
         }
     }
+
+
 }

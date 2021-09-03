@@ -215,4 +215,9 @@ class HomeActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         super.onDestroy()
         Log.d(TAG, "onDestroy: ends")
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }
