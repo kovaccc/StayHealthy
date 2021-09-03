@@ -85,6 +85,13 @@ class FoodMenuActivity : AppCompatActivity(), FoodMenuFragment.OnFoodAdd,
             searchView?.queryHint = getString(R.string.search_food_hint, category)
         })
 
+        foodMenuViewModel.isUserFoodLD.observe(this, {
+            supportActionBar?.title = if (it) {
+                getString(R.string.my_food)
+            } else {
+                getString(R.string.app_food)
+            }
+        })
 
         Log.d(TAG, "onCreate: intent date is $date, userid is $userId")
         setUpPager()
