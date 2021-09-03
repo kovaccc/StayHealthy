@@ -62,6 +62,7 @@ class RegisterActivity : AppCompatActivity() {
 
         }
 
+        // if doesn't work create new SHA-1 and download new google-services.json
         iv_register_google.setOnClickListener {
             userViewModel.signInWithGoogle(this@RegisterActivity)
 

@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "494322098307-crliol560mjvirifv8g1s03mlrmtg8or.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stayhealthy",
+            "certificate_hash": "3caa1f65ac6063a10a94c94e3282b23fe4c3371c"
+          }
+        },
+        {
           "client_id": "494322098307-sl3m0761kr4q8fahk9rilg13l7mufi09.apps.googleusercontent.com",
           "client_type": 3
         }
