@@ -13,6 +13,7 @@ Android application that allows **personalized diet planning** and BMI optimizat
  - Removing food from meal plan 
  - Searching food in different categories 
  - Checking knowledge base
+ - Adding your food to menu
 
 ## Tech-stack
 The project seeks to use the latest practices and libraries in Android development.
@@ -23,7 +24,10 @@ The project seeks to use the latest practices and libraries in Android developme
  - ShowcaseView
  - Picasso 
  - AlarmManager
+ - ViewBinding
+ - DataBinding
  - Glide
+ - Room
  - WorkManager
  - Android KTX
  - Navigation drawer
@@ -39,6 +43,9 @@ The project seeks to use the latest practices and libraries in Android developme
 ![image](https://user-images.githubusercontent.com/75457058/109385132-dc18db00-78f1-11eb-8173-98b94ef00a3c.png)
 ![image](https://user-images.githubusercontent.com/75457058/109385137-ea66f700-78f1-11eb-90ae-5b543183bde3.png)
 ![image](https://user-images.githubusercontent.com/75457058/109385165-28641b00-78f2-11eb-99df-e92d51e5033f.png)
+![image](https://user-images.githubusercontent.com/75457058/132143232-98074457-6f24-41cf-9b6e-f050e4d01dd4.png)
+![image](https://user-images.githubusercontent.com/75457058/132143235-0c6fc732-9f51-4465-bc6e-d75a9541a828.png)
+![image](https://user-images.githubusercontent.com/75457058/132143238-b9771eb3-3eb7-4355-b144-064aff532edd.png)
 
 
 ## Setup
