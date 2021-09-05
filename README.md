@@ -22,6 +22,9 @@ The project seeks to use the latest practices and libraries in Android developme
  - Lifecycle components
  - ShowcaseView
  - Picasso 
+ - AlarmManager
+ - Glide
+ - WorkManager
  - Android KTX
  - Navigation drawer
  - RecyclerView 
